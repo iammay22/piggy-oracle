@@ -216,6 +216,12 @@ summary::before{content:"＋ "} details[open] summary::before{content:"－ "}
 .dg-greet p{position:relative;margin:0;background:var(--dg-surface);color:var(--dg-ink);border:1px solid var(--dg-line);border-radius:16px;padding:8px 14px;font-size:15px;line-height:1.6;min-width:0}
 .dg-greet p::before{content:"";position:absolute;left:-7px;top:50%;width:12px;height:12px;background:var(--dg-surface);border-left:1px solid var(--dg-line);border-bottom:1px solid var(--dg-line);transform:translateY(-50%) rotate(45deg)}
 .dg-greet.inset{margin-left:calc(-1*max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)))}
+.dg-learn{margin-top:14px}
+.dg-learn summary{font-size:16px}
+.dg-learn-b{display:flex;flex-direction:column;gap:12px;margin-top:12px;font-size:15px;line-height:1.85}
+.dg-learn-b p{margin:0}
+.dg-learn-b p>b:first-child{display:block;font-size:15.5px;color:var(--dg-acc);margin-bottom:2px}
+.dg-learn-b b.in{color:var(--dg-ink)}
 .dg-copy{width:100%;margin-top:10px;font:inherit;font-size:14px;padding:10px;border-radius:12px;border:1px solid var(--dg-line);background:var(--dg-surface-2);color:var(--dg-ink)}
 </style>
 <style>
@@ -253,6 +259,16 @@ body{background-image:radial-gradient(90% 50% at 50% 0%,#fbf5e8 0%,transparent 7
 
   <main id="v-cast"></main>
   <main id="v-hist" hidden></main>
+  <details class="panel dg-learn">
+    <summary>第一次玩？易經怎麼讀</summary>
+    <div class="dg-learn-b">
+      <p><b>卦是怎麼組成的</b>易經有 64 個卦，每個卦由六條線組成，叫做「爻」。一條完整的長線是<b class="in">陽爻</b>，中間斷開的是<b class="in">陰爻</b>。六條線<b class="in">由下往上</b>排，最下面是初爻，最上面是上爻。</p>
+      <p><b>擲銅錢怎麼算</b>每次擲三枚銅錢，陽面算 3、陰面算 2，加起來會是 6、7、8 或 9：7 是陽爻，8 是陰爻；9 和 6 也是陽和陰，但它們是「會變的爻」，叫做動爻。擲六次，就排出一個完整的卦。</p>
+      <p><b>本卦和變卦</b>先排出來的卦叫<b class="in">本卦</b>，代表你現在的狀況。如果有動爻，把它們陰陽對調，就會得到<b class="in">變卦</b>，代表事情接下來的發展。沒有動爻的話，就只看本卦。</p>
+      <p><b>結果要先看哪裡</b>每個卦都有卦辭（整個卦的意思）和六句爻辭（每一條線的意思）。該讀哪一句，要看有幾個動爻；結果頁的「這次最該看的」已經依照傳統規則幫你挑好了，先讀那裡就好。</p>
+      <p><b>一件事問一次就好</b>易經說「初筮告，再三瀆」：第一次問就會告訴你，同一件事反覆問，答案反而不準。不喜歡結果時，與其重擲，不如想想它在提醒你什麼。</p>
+    </div>
+  </details>
 </div>
 <div class="toast" id="toast" hidden></div>
 
