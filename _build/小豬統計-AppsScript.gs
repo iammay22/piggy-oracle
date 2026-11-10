@@ -48,6 +48,7 @@ const DETAILS = {
   three: '時間之流', one: '一張指引', advice: '現況與建議', choice: '二選一', relation: '關係牌陣', celtic: '凱爾特十字',
   coin: '擲銅錢', name: '姓名起卦', num: '數字起卦',
   general: '整體', love: '感情', work: '工作', money: '財運',
+  friend: '友情', family: '家人',
   tarot: '塔羅', iching: '易經', lenormand: '雷諾曼', qian: '求籤', random: '讓小豬選', numerology: '生命靈數',
 };
 

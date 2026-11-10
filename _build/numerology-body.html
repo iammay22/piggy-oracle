@@ -440,7 +440,7 @@ function renderSolo(){
   $('soloOut').querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{topic=b.dataset.t;dgT('numerology/topic/'+topic);renderSolo();$('soloOut').querySelectorAll('.pig').forEach(p=>p.classList.remove('pop'))});
   $('shareSolo').onclick=e=>dgShare(soloURL(),`我是生命靈數 ${r.n} 號・${c.n}`,e.currentTarget);
   $('cardSolo').onclick=()=>dgShowCard(soloCard(),`生命靈數${r.n}號`);
-  $('cardGrid').onclick=()=>{dgT('numerology/gridcard');dgShowCard(gridCard(),'生日九宮格')};
+  $('cardGrid').onclick=()=>dgShowCard(gridCard(),'生日九宮格');
   $('toPair').onclick=()=>{setYMD('dA',r.ymd);setMode('pair');$('nA').focus()};
 }
 
@@ -463,18 +463,18 @@ function renderPair(){
   if(!reduce)requestAnimationFrame(()=>requestAnimationFrame(()=>{const i=$('pairOut').querySelector('.meter i');if(i)i.style.width=sc+'%'}));
   $('sharePair').onclick=e=>dgShare(pairURL(),`我們是生命靈數「${R.t}」，合拍度 ${sc}%`,e.currentTarget);
   $('cardPair').onclick=()=>dgShowCard(pairCard(),`生命靈數配對`);
-  $('pairOut').querySelectorAll('[data-pt]').forEach(b=>b.onclick=()=>{ptopic=b.dataset.pt;syncPtopic();dgT('numerology/pairtopic/'+ptopic);renderPair();say(`換成${PTOPICS.find(t=>t[0]===ptopic)[1]}來看，你們是「${rel(pair.a.n,pair.b.n,ptopic).t}」！`);$('pairOut').querySelectorAll('.pig').forEach(x=>x.classList.remove('pop'))});
+  $('pairOut').querySelectorAll('[data-pt]').forEach(b=>b.onclick=()=>{ptopic=b.dataset.pt;syncPtopic();dgT('numerology/topic/'+ptopic);renderPair();say(`換成${PTOPICS.find(t=>t[0]===ptopic)[1]}來看，你們是「${rel(pair.a.n,pair.b.n,ptopic).t}」！`);$('pairOut').querySelectorAll('.pig').forEach(x=>x.classList.remove('pop'))});
 }
 
 async function runSolo(ymd,instant){
   solo={ymd,...lifeNumber(ymd)};
-  if(!instant){say('1、2、3……小豬在數手指（只有四隻）');$('soloOut').hidden=true;await wait(reduce?0:900);dgT('numerology/draw/'+solo.n)}
+  if(!instant){say('1、2、3……小豬在數手指（只有四隻）');$('soloOut').hidden=true;await wait(reduce?0:900);dgT('numerology/done/'+solo.n+'號')}
   say(N[solo.n].pig);renderSolo();$('soloOut').hidden=false;
   if(!instant)$('soloOut').scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
 }
 async function runPair(a,b,na,nb,instant){
   pair={a:{ymd:a,...lifeNumber(a)},b:{ymd:b,...lifeNumber(b)},na,nb};
-  if(!instant){say('小豬正在幫你們牽線……');$('pairOut').hidden=true;await wait(reduce?0:1000);dgT('numerology/pair/'+pair.a.n+'x'+pair.b.n)}
+  if(!instant){say('小豬正在幫你們牽線……');$('pairOut').hidden=true;await wait(reduce?0:1000);dgT('numerology/done/配對'+pair.a.n+'×'+pair.b.n+'號')}
   say(`${pair.a.n} 號配 ${pair.b.n} 號，是「${rel(pair.a.n,pair.b.n,ptopic).t}」耶！`);
   renderPair();$('pairOut').hidden=false;
   if(!instant)$('pairOut').scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
@@ -529,7 +529,7 @@ async function dgMakeCard(spec){
   return new Promise(r=>c.toBlob(b=>r(b),'image/png'));
 }
 async function dgShowCard(spec,name){
-  dgT('numerology/card');
+  dgT('numerology/imgcard/'+name);
   let m=document.querySelector('.dg-modal');if(m)m.remove();
   m=document.createElement('div');m.className='dg-modal';m.innerHTML='<div class="dg-sheet"><p class="dg-wait">小豬正在畫圖卡……</p></div>';document.body.appendChild(m);
   m.addEventListener('click',e=>{if(e.target===m||e.target.closest('.dg-x'))m.remove()});
