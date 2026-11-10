@@ -1,12 +1,12 @@
 {
- "name": "問問地瓜鳥",
- "short_name": "問問地瓜鳥",
- "description": "有煩惱？問問地瓜鳥。免費線上塔羅、易經起卦、雷諾曼占卜，挑一種方式把問題交給牠。",
+ "name": "問問小豬",
+ "short_name": "問問小豬",
+ "description": "有煩惱？問問小豬。免費線上塔羅、易經起卦、雷諾曼占卜，挑一種方式把問題交給牠。",
  "start_url": "./",
  "scope": "./",
  "display": "standalone",
- "background_color": "#f5f2ec",
- "theme_color": "#f5f2ec",
+ "background_color": "#f8f1f0",
+ "theme_color": "#f8f1f0",
  "lang": "zh-Hant-TW",
  "icons": [
   {

@@ -1,15 +1,15 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
-<title>問問地瓜鳥｜塔羅・易經・雷諾曼</title>
+<title>問問小豬｜塔羅・易經・雷諾曼</title>
 <link rel="icon" href="img/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#f5f2ec">
-<meta name="description" content="有煩惱？問問地瓜鳥。免費線上塔羅、易經起卦、雷諾曼占卜，挑一種方式把問題交給牠。">
+<meta name="theme-color" content="#f8f1f0">
+<meta name="description" content="有煩惱？問問小豬。免費線上塔羅、易經起卦、雷諾曼占卜，挑一種方式把問題交給牠。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:site_name" content="問問地瓜鳥">
-<meta property="og:title" content="問問地瓜鳥｜塔羅・易經・雷諾曼">
-<meta property="og:description" content="有煩惱？問問地瓜鳥。免費線上塔羅、易經起卦、雷諾曼占卜，挑一種方式把問題交給牠。">
+<meta property="og:site_name" content="問問小豬">
+<meta property="og:title" content="問問小豬｜塔羅・易經・雷諾曼">
+<meta property="og:description" content="有煩惱？問問小豬。免費線上塔羅、易經起卦、雷諾曼占卜，挑一種方式把問題交給牠。">
 <meta property="og:url" content="https://iammay22.github.io/ask-digua/">
 <meta property="og:image" content="https://iammay22.github.io/ask-digua/og-image.jpg">
 <meta property="og:image:width" content="1200">
@@ -22,10 +22,10 @@
 <script src="stats.js"></script>
 <style>
 /* Layout: one centered card on warm paper — mascot, question, three choices as tappable rows, a quiet footer */
-:root{--bg:#f5f2ec;--surface:#ffffff;--surface-2:#efebe3;--hover:#e7e1d6;--ink:#221f1b;--ink-soft:#6b655c;--line:rgba(34,31,27,.12);--accent:#3c6e5a;--accent-soft:rgba(60,110,90,.12);--potato:#b8652f;--glass:rgba(255,255,255,.65);--shadow:rgba(34,31,27,.2);color-scheme:light;
+:root{--bg:#f8f1f0;--surface:#ffffff;--surface-2:#efebe3;--hover:#e7e1d6;--ink:#221f1b;--ink-soft:#6b655c;--line:rgba(34,31,27,.12);--accent:#b84d6c;--accent-soft:rgba(184,77,108,.1);--potato:#d9607f;--glass:rgba(255,255,255,.65);--shadow:rgba(34,31,27,.2);color-scheme:light;
   --round:"GenSenRounded","PingFang TC","Microsoft JhengHei",sans-serif}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1a18;--surface:#252320;--surface-2:#2e2b27;--hover:#37332e;--ink:#ece7de;--ink-soft:#a8a197;--line:rgba(236,231,222,.12);--accent:#7fb79e;--accent-soft:rgba(127,183,158,.16);--potato:#e0904f;--glass:#252320;--shadow:rgba(0,0,0,.45);color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#1b1a18;--surface:#252320;--surface-2:#2e2b27;--hover:#37332e;--ink:#ece7de;--ink-soft:#a8a197;--line:rgba(236,231,222,.12);--accent:#7fb79e;--accent-soft:rgba(127,183,158,.16);--potato:#e0904f;--glass:#252320;--shadow:rgba(0,0,0,.45);color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1a18;--surface:#252320;--surface-2:#2e2b27;--hover:#37332e;--ink:#ece7de;--ink-soft:#a8a197;--line:rgba(236,231,222,.12);--accent:#f08fab;--accent-soft:rgba(240,143,171,.16);--potato:#f5a0b8;--glass:#252320;--shadow:rgba(0,0,0,.45);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1b1a18;--surface:#252320;--surface-2:#2e2b27;--hover:#37332e;--ink:#ece7de;--ink-soft:#a8a197;--line:rgba(236,231,222,.12);--accent:#f08fab;--accent-soft:rgba(240,143,171,.16);--potato:#f5a0b8;--glass:#252320;--shadow:rgba(0,0,0,.45);color-scheme:dark}
 *{box-sizing:border-box}
 html,body{background:var(--bg);color:var(--ink)}
 body{font-family:var(--round);-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -34,9 +34,9 @@ body{font-family:var(--round);-webkit-font-smoothing:antialiased;overflow-x:hidd
   padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));
   display:flex;flex-direction:column;gap:20px}
 .card{text-align:center;padding:30px 24px 28px;border-radius:28px;background:var(--glass);border:1px solid var(--line);box-shadow:0 30px 70px -36px var(--shadow)}
-.poke{position:relative;display:block;margin:0 auto 4px;padding:0;border:0;background:none;cursor:pointer;width:150px}
+.poke{position:relative;display:block;margin:0 auto 4px;padding:0;border:0;background:none;cursor:pointer;width:160px;min-height:126px}
 .poke:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:16px}
-.mascot{width:150px;height:auto;display:block}
+.mascot{width:140px;height:auto;display:block;margin:0 auto}
 .bubble{position:absolute;left:50%;bottom:calc(100% + 6px);transform:translateX(-50%);width:max-content;max-width:min(280px,78vw);
   background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:16px;padding:10px 14px;font-size:15px;line-height:1.55;
   box-shadow:0 12px 30px -16px var(--shadow);text-wrap:balance}
@@ -64,10 +64,15 @@ h1 em{font-style:normal;color:var(--potato)}
 .opt b{display:block;font-size:17.5px;font-weight:700}
 .opt .d{display:block;font-size:14px;line-height:1.5;color:var(--ink-soft);min-width:0}
 .opt svg{width:18px;height:18px;color:var(--ink-soft)}
+.opt[href="tarot.html"] .ic{background:#e6dff1;color:#6a55b0}
+.opt[href="iching.html"] .ic{background:#f2e8d5;color:#a8322a;box-shadow:inset 0 0 0 1px #ddcfb4}
+.opt[href="lenormand.html"] .ic{background:#f1dfd9;color:#b5566e}
+.opt[href="qian.html"] .ic{background:#f7e3cf;color:#b3261e}
 .opt.soon{background:transparent;border:1.5px dashed var(--line);box-shadow:none;cursor:default}
 .opt.soon:hover{background:transparent}.opt.soon:active{transform:none}
 .opt.soon .ic{background:var(--surface-2);color:var(--ink-soft)}
 .opt.soon .ic svg{width:24px;height:24px}
+.opt .pigic{overflow:hidden;background:#fdf0f3!important}.opt .pigic img{width:44px;height:auto}
 .opt.soon b{color:var(--ink-soft)}
 .badge{font-style:normal;font-size:11.5px;font-weight:700;color:var(--potato);border:1px solid currentColor;border-radius:999px;padding:1px 8px;margin-left:4px;vertical-align:2px;white-space:nowrap}
 .meta{margin-top:16px;font-size:14px;color:var(--ink-soft)}
@@ -96,20 +101,20 @@ footer .by{font-size:12.5px;letter-spacing:.08em;margin-top:4px}
 
 <div class="wrap">
   <section class="card">
-    <button class="poke" id="poke" type="button" aria-label="戳一下地瓜鳥，聽牠說一句話"><span class="bubble" id="bubble" hidden></span><img class="mascot" src="img/digua.webp" width="360" height="243" alt="圓滾滾的地瓜鳥（黑冠麻鷺）"></button>
-    <p class="hint">戳戳看地瓜鳥</p>
+    <button class="poke" id="poke" type="button" aria-label="戳一下小豬，聽牠說一句話"><span class="bubble" id="bubble" hidden></span><img class="mascot" id="pigimg" src="img/pig-hug.webp" width="400" height="363" alt="may22 畫的粉紅小豬，說著抱抱"></button>
+    <p class="hint">戳戳看小豬</p>
     <div class="eyebrow">塔羅 · 易經 · 雷諾曼</div>
-    <h1>有煩惱？<br>問問<em>地瓜鳥</em></h1>
-    <p class="lede">牠站著不動的時候，其實在幫你算命。<br>挑一種方式，把問題交給牠。</p>
+    <h1>有煩惱？<br>問問<em>小豬</em></h1>
+    <p class="lede">先給小豬抱抱，再把問題交給牠。<br>挑一種方式，一起算算看。</p>
     <nav class="opts" aria-label="選擇占卜方式">
       <a class="opt" href="tarot.html"><span class="ic">塔</span><span class="t"><b>塔羅牌</b><span class="d">78 張牌親手抽，看心情、關係和兩個選項</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
       <a class="opt" href="iching.html"><span class="ic">易</span><span class="t"><b>易經起卦</b><span class="d">擲銅錢或用名字起卦，問時機和方向</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
       <a class="opt" href="lenormand.html"><span class="ic">雷</span><span class="t"><b>雷諾曼</b><span class="d">三張牌連成一句話，問最近會發生什麼</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
-      <div class="opt soon" aria-disabled="true"><span class="ic">筊</span><span class="t"><b>擲筊抽籤詩 <em class="badge">即將推出</em></b><span class="d">先擲到聖筊，再抽一支屬於你的籤</span></span></div>
-      <div class="opt soon" aria-disabled="true"><span class="ic">數</span><span class="t"><b>生命靈數 <em class="badge">即將推出</em></b><span class="d">輸入生日，看看你是幾號人</span></span></div>
+      <a class="opt" href="qian.html"><span class="ic">籤</span><span class="t"><b>擲筊求籤</b><span class="d">先擲到聖筊，再抽一支六十甲子籤</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+      <div class="opt soon" aria-disabled="true"><span class="ic pigic"><img src="img/pig-number.webp" alt="" width="400" height="398"></span><span class="t"><b>生命靈數 <em class="badge">即將推出</em></b><span class="d">輸入生日，看看你是幾號人</span></span></div>
     </nav>
     <div class="meta">免費 · 不用註冊 · 紀錄只存在你的手機</div>
-    <button class="alt" id="pick" type="button">讓地瓜鳥幫我選一個</button>
+    <button class="alt" id="pick" type="button">讓小豬幫我選一個</button>
   </section>
 
   <details>
@@ -118,17 +123,18 @@ footer .by{font-size:12.5px;letter-spacing:.08em;margin-top:4px}
       <li><b>塔羅</b>想看清楚自己的心情、關係裡的狀態，或在兩個選項之間比較。</li>
       <li><b>易經</b>想知道時機對不對、該進還是該退，要一個大方向。</li>
       <li><b>雷諾曼</b>想知道接下來具體會發生什麼事，越日常的問題越準。</li>
+      <li><b>求籤</b>想要一句明確的指引，像去廟裡問神明一樣，用一支籤詩回答你。</li>
     </ul>
   </details>
 
   <details class="about">
-    <summary>地瓜鳥是誰？</summary>
-    <p>牠是<b>黑冠麻鷺</b>，常在台灣的校園和公園草地上出現。縮起脖子時圓滾滾的，像一顆地瓜，所以大家叫牠地瓜鳥。牠抓蚯蚓時會一動也不動站很久，看起來像在思考人生。</p>
+    <summary>小豬是誰？</summary>
+    <p>牠是 may22 畫的 LINE 貼圖角色，一隻粉紅色的小豬。最喜歡抱抱和貼貼，偶爾會哼一聲、喊好累，但只要你有煩惱，牠一定會陪你一起想。</p>
   </details>
 
   <footer>
     <p>結果參考就好，決定權在你手上。</p>
-    <button class="share" id="shareSite" type="button">把地瓜鳥分享給朋友</button>
+    <button class="share" id="shareSite" type="button">把小豬分享給朋友</button>
     <p class="by">by may22</p>
   </footer>
 </div>
@@ -137,23 +143,24 @@ footer .by{font-size:12.5px;letter-spacing:.08em;margin-top:4px}
 function dgT(p){try{window.dgTrack&&window.dgTrack(p)}catch(e){}}
 document.querySelectorAll('.opt').forEach(function(a){a.addEventListener('click',function(){dgT('index/go/'+a.getAttribute('href').replace('.html',''))})});
 document.getElementById('pick').addEventListener('click',function(){
-  var p=['tarot.html','iching.html','lenormand.html'];
+  var p=['tarot.html','iching.html','lenormand.html','qian.html'];
   var a=new Uint32Array(1);crypto.getRandomValues(a);
-  this.textContent='地瓜鳥想了一下……';
-  var to=p[a[0]%3];dgT('index/go/random');
-  setTimeout(function(){location.href=to},600);
+  this.textContent='小豬想了一下……';
+  var to=p[a[0]%4];dgT('index/go/random');document.getElementById('pigimg').src='img/pig-think.webp';var bb=document.getElementById('bubble');bb.textContent='嗯……讓我想想……';bb.hidden=false;
+  setTimeout(function(){location.href=to},900);
 });
-var LINES=['今天適合先吃飽，再來煩惱。','我站著不動，是在幫你想事情。','答案不急，蚯蚓也是慢慢等來的。','你已經比昨天的自己勇敢一點了。','有些事情，睡一覺就小一半。','先深呼吸三次，再決定也不遲。','我覺得你今天的運氣有地瓜那麼大。','別人的步調不是你的步調。','煩惱很重的話，分一半給我。','今天也有好好長大喔。','卡住的時候，換個角度站站看。','想問的事寫下來，心會比較安靜。','你值得被溫柔對待，包括被你自己。','偷偷告訴你：明天會比今天好一點。'];
+var PIGS=[['hug','先抱一下，再說說你的煩惱。'],['happy','今天也要開開心心的！'],['love','不管結果怎樣，我都站在你這邊。'],['great','你已經很棒了，真的。'],['what','在幹嘛？是不是又在想那件事？'],['miss','想你了，所以你來了。'],['kiss','親一個，壞運氣飛走。'],['cuddle','貼貼，煩惱分我一半。'],['crawl','匍匐前進也是前進喔。'],['hmph','哼！誰讓你不開心的？'],['tired','累了就休息，答案不會跑掉。'],['fierce','你兇我……好啦，我幫你算就是了。'],['cheer','加油！你比你想的還要厲害。'],['pat','乖～辛苦了，摸摸頭。'],['uh','ㄜ……這個問題有點難，換個問法試試？'],['no','不要再熬夜想這件事了啦。']];
 var last=-1,bt;
 document.getElementById('poke').addEventListener('click',function(){
-  var b=document.getElementById('bubble'),i;do{i=Math.floor(Math.random()*LINES.length)}while(i===last);last=i;
-  b.textContent=LINES[i];b.hidden=false;this.classList.remove('jump');void this.offsetWidth;this.classList.add('jump');
+  var b=document.getElementById('bubble'),i;do{i=Math.floor(Math.random()*PIGS.length)}while(i===last);last=i;
+  document.getElementById('pigimg').src='img/pig-'+PIGS[i][0]+'.webp';
+  b.textContent=PIGS[i][1];b.hidden=false;this.classList.remove('jump');void this.offsetWidth;this.classList.add('jump');
   clearTimeout(bt);bt=setTimeout(function(){b.hidden=true},4500);dgT('index/poke');
 });
 function toast(m){var t=document.querySelector('.toast');if(!t){t=document.createElement('div');t.className='toast';document.body.appendChild(t)}t.textContent=m;t.hidden=false;clearTimeout(t._t);t._t=setTimeout(function(){t.hidden=true},2000)}
 document.getElementById('shareSite').addEventListener('click',function(){
   var url=location.href.split('#')[0].split('?')[0];dgT('index/share');
-  if(navigator.share){navigator.share({title:'問問地瓜鳥',text:'有煩惱？問問地瓜鳥',url:url}).catch(function(){});return}
+  if(navigator.share){navigator.share({title:'問問小豬',text:'有煩惱？問問小豬',url:url}).catch(function(){});return}
   try{navigator.clipboard.writeText(url).then(function(){toast('已複製網址')},function(){toast(url)})}catch(e){toast(url)}
 });
 </script>

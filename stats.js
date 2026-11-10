@@ -1,4 +1,4 @@
-/* 問問地瓜鳥 — anonymous counts sent to your Google Sheet. Leave SHEET_URL empty to turn counting off. */
+/* 問問小豬 — anonymous counts sent to your Google Sheet. Leave SHEET_URL empty to turn counting off. */
 (function(){
   var SHEET_URL = 'https://script.google.com/macros/s/AKfycby9ttp7TF-O737paN7B2NaDgkqhsxId6si77ijs9C0zC2DjxQi7VHZiqiKFn4Qxu5XL/exec';
   var q = [], t;
