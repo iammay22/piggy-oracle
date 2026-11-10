@@ -154,6 +154,14 @@ footer strong{font-family:var(--display);font-size:1.1rem;color:var(--ink)}
 .dg-learn-b p{margin:0}
 .dg-learn-b p>b:first-child{display:block;font-size:15.5px;color:var(--dg-acc);margin-bottom:2px}
 .dg-learn-b b.in{color:var(--dg-ink)}
+.dg-modal{position:fixed;inset:0;z-index:60;background:var(--dg-scrim);display:flex;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.dg-sheet{background:var(--dg-surface);color:var(--dg-ink);border-radius:24px;padding:16px;width:100%;max-width:420px;max-height:100%;overflow:auto;display:flex;flex-direction:column;gap:10px;align-items:center;font-family:var(--round);text-align:center}
+.dg-sheet img{width:100%;height:auto;border-radius:14px;box-shadow:0 10px 30px -12px var(--dg-shadow)}
+.dg-tip{font-size:13px;color:var(--dg-soft);margin:0}.dg-wait{padding:40px 10px;margin:0}
+.dg-acts2{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.dg-b{font:inherit;font-weight:700;font-size:15px;border:0;border-radius:14px;padding:10px 18px;background:var(--dg-acc);color:var(--dg-on-acc);text-decoration:none;cursor:pointer}
+.dg-b.ghost{background:none;color:var(--dg-ink);border:1.5px solid var(--dg-line)}
+.dg-b:focus-visible{outline:2px solid var(--dg-acc);outline-offset:2px}
 .dg-copy{width:100%;margin-top:10px;font:inherit;font-size:14px;padding:10px;border-radius:12px;border:1px solid var(--dg-line);background:var(--dg-surface-2);color:var(--dg-ink)}
 </style>
 <style>
@@ -451,7 +459,7 @@ function showReading(){
       <p class="lean">整體傾向<span class="tag">${leanOf(picked)}</span></p>
       <p class="hint">把這幾句套進你的問題。最貼近你處境的那個解釋，通常就是答案。</p>`;
   }
-  html+=`<div class="acts"><button class="btn again" id="againBtn">再抽一次</button><button class="btn" id="shareBtn">分享結果連結</button></div>`;
+  html+=`<div class="acts"><button class="btn again" id="againBtn">再抽一次</button><button class="btn" id="shareBtn">分享結果連結</button><button class="btn" id="cardBtn">做成圖卡</button></div>`;
   r.innerHTML=html; r.hidden=false;
   $("againBtn").onclick=()=>{newRound();$("status").scrollIntoView({behavior:reduce()?"auto":"smooth",block:"start"})};
   r.scrollIntoView({behavior:reduce()?"auto":"smooth",block:"nearest"});
@@ -496,6 +504,57 @@ function dgShare(url,title,anchor){
   try{navigator.clipboard.writeText(url).then(()=>dgToast('已複製連結，貼給朋友吧'),fb)}catch(e){fb()}
 }
 function dgSharedBanner(el,again){el.insertAdjacentHTML('afterbegin',`<div class="dg-shared"><span>這是朋友分享給你的結果</span><a href="${again}">換我抽一次 →</a></div>`)}
+
+/* ---- 問問小豬: shareable result image card ---- */
+const DG_SITE='iammay22.github.io/piggy-oracle';
+function dgVar(n,fb){try{return getComputedStyle(document.documentElement).getPropertyValue(n).trim()||fb}catch(e){return fb}}
+function dgImg(src){return new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.onerror=()=>r(null);i.src=src})}
+function dgWrap(ctx,text,x,y,maxW,lh,maxLines){
+  const out=[];let line='';
+  for(const ch of String(text)){if(ch==='\n'){out.push(line);line='';continue}
+    if(ctx.measureText(line+ch).width>maxW&&line){out.push(line);line=ch}else line+=ch}
+  if(line)out.push(line);
+  const shown=out.slice(0,maxLines);if(out.length>maxLines){let l=shown[maxLines-1];while(ctx.measureText(l+'…').width>maxW&&l.length)l=l.slice(0,-1);shown[maxLines-1]=l+'…'}
+  shown.forEach((l,i)=>ctx.fillText(l,x,y+i*lh));return shown.length*lh;
+}
+function dgRR(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+const DG_F='"GenSenRounded","PingFang TC","Microsoft JhengHei",sans-serif';
+async function dgMakeCard(spec){
+  try{await Promise.all([document.fonts.load('700 40px GenSenRounded'),document.fonts.load('400 40px GenSenRounded')])}catch(e){}
+  const W=1080,H=1350,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');
+  const T={bg:dgVar('--dg-bg','#f8f1f0'),sf:dgVar('--dg-surface','#fff'),s2:dgVar('--dg-surface-2','#f1e7e5'),ink:dgVar('--dg-ink','#2a2022'),soft:dgVar('--dg-soft','#6f6265'),acc:dgVar('--dg-acc','#b84d6c'),line:dgVar('--dg-line','#ead9d6')};
+  x.fillStyle=T.bg;x.fillRect(0,0,W,H);
+  x.fillStyle=T.acc;x.globalAlpha=.07;for(let i=0;i<26;i++){x.beginPath();x.arc((i*397)%W,(i*263)%H,6+(i%4)*3,0,7);x.fill()}x.globalAlpha=1;
+  x.fillStyle=T.sf;dgRR(x,54,54,W-108,H-108,52);x.fill();x.strokeStyle=T.line;x.lineWidth=3;x.stroke();
+  x.textBaseline='alphabetic';x.textAlign='center';
+  x.fillStyle=T.acc;x.font=`700 34px ${DG_F}`;x.fillText(spec.eyebrow,W/2,148);
+  x.fillStyle=T.ink;x.font=`700 60px ${DG_F}`;x.fillText(spec.title,W/2,224);
+  if(spec.q){x.fillStyle=T.soft;x.font=`400 34px ${DG_F}`;let q=spec.q;if(q.length>22)q=q.slice(0,21)+'…';x.fillText('「'+q+'」',W/2,280)}
+  await spec.body(x,{top:320,bottom:960,W,T});
+  // message
+  x.textAlign='left';const mx=110,mw=600;let my=1010;
+  x.fillStyle=T.s2;dgRR(x,90,975,W-180,210,32);x.fill();
+  x.fillStyle=T.acc;x.font=`700 32px ${DG_F}`;x.fillText(spec.msgTitle||'小豬想說',mx,my+18);
+  x.fillStyle=T.ink;x.font=`400 34px ${DG_F}`;dgWrap(x,spec.msg,mx,my+70,mw,48,3);
+  const pig=await dgImg(spec.pig);if(pig){const pw=270,ph=pig.height*pw/pig.width;x.drawImage(pig,W-pw-70,1185-ph+20,pw,ph)}
+  x.fillStyle=T.soft;x.font=`700 28px ${DG_F}`;x.fillText('問問小豬',90,1252);x.font=`400 26px ${DG_F}`;x.fillText(DG_SITE,90,1288);
+  x.textAlign='right';x.fillText('by may22',W-90,1288);
+  return new Promise(r=>c.toBlob(b=>r(b),'image/png'));
+}
+async function dgShowCard(spec,name){
+  dgT(location.pathname.replace(/^.*\//,'').replace('.html','')+'/card');
+  let m=document.querySelector('.dg-modal');if(m)m.remove();
+  m=document.createElement('div');m.className='dg-modal';m.innerHTML='<div class="dg-sheet"><p class="dg-wait">小豬正在畫圖卡……</p></div>';document.body.appendChild(m);
+  m.addEventListener('click',e=>{if(e.target===m||e.target.closest('.dg-x'))m.remove()});
+  const blob=await dgMakeCard(spec);if(!blob){m.querySelector('.dg-sheet').innerHTML='<p>這個瀏覽器做不出圖卡，請改用截圖。</p><button class="dg-x">關閉</button>';return}
+  const url=URL.createObjectURL(blob),file=new File([blob],(name||'問問小豬')+'.png',{type:'image/png'});
+  const canShare=!!(navigator.canShare&&navigator.canShare({files:[file]}));
+  m.querySelector('.dg-sheet').innerHTML=`<img src="${url}" alt="占卜結果圖卡"><p class="dg-tip">手機可以長按圖片存到相簿</p><div class="dg-acts2">${canShare?'<button class="dg-b" id="dgShareImg">分享圖片</button>':''}<a class="dg-b ghost" href="${url}" download="${(name||'問問小豬')}.png">存成圖片</a><button class="dg-b ghost dg-x">關閉</button></div>`;
+  const s=m.querySelector('#dgShareImg');if(s)s.onclick=()=>navigator.share({files:[file],title:'問問小豬',text:'我的占卜結果｜'+DG_SITE}).catch(()=>{});
+}
+async function dgDrawCardImg(x,src,cx,cy,w,h,rev){const im=await dgImg(src);x.save();x.translate(cx,cy);if(rev)x.rotate(Math.PI);
+  x.shadowColor='rgba(0,0,0,.18)';x.shadowBlur=18;x.shadowOffsetY=8;dgRR(x,-w/2,-h/2,w,h,14);x.fillStyle='#fff';x.fill();x.shadowColor='transparent';x.clip();
+  if(im)x.drawImage(im,-w/2,-h/2,w,h);else{x.fillStyle='#ddd';x.fillRect(-w/2,-h/2,w,h)}x.restore()}
 
 /* ---- 問問小豬: richer Lenormand reading ---- */
 const LT=[null,
@@ -561,6 +620,20 @@ const _showReadingX=showReading;showReading=function(){_showReadingX();if(picked
   const r=$("reading"),hint=r.querySelector('.hint');if(hint)hint.insertAdjacentHTML('beforebegin','<div class="dg-extra">'+dgLenoExtra()+'</div>')};
 document.addEventListener('click',e=>{const b=e.target.closest('.dg-topics button');if(!b)return;dgSetTopic(b.dataset.t);dgT('lenormand/topic/'+b.dataset.t);
   if(picked.length===mode&&!$("reading").hidden){const x=$("reading").querySelector('.dg-extra');if(x)x.innerHTML=dgLenoExtra()}});
+function lenoCardSpec(){const cs=picked;let msg=mode===3?`這件事的核心是「${cs[1].noun}」。它${cs[0].adj}，也${cs[2].adj}。`:cs[0].tip;
+  return {eyebrow:'雷諾曼'+(dgTopic!=='general'?'・'+TN[dgTopic]:''),title:mode===3?'三張牌連成一句話':'今日提醒',q:$("question").value.trim(),pig:'img/pig-crystal.webp',msgTitle:'整體傾向：'+leanOf(cs),msg,
+    body:async(x,{top,W,T})=>{const n=cs.length,cw=n===1?280:240,ch=cw*1.48,gap=40,tot=n*cw+(n-1)*gap,labels=n===3?['左・形容','核心','右・形容']:['今日提醒'];
+      for(let i=0;i<n;i++){const c=cs[i],cx=(W-tot)/2+cw/2+i*(cw+gap),y=top+20;
+        x.save();x.shadowColor='rgba(0,0,0,.15)';x.shadowBlur=16;x.shadowOffsetY=6;x.fillStyle='#f3ead6';dgRR(x,cx-cw/2,y,cw,ch,16);x.fill();x.restore();
+        x.strokeStyle='#8a6a3a';x.lineWidth=3;dgRR(x,cx-cw/2+10,y+10,cw-20,ch-20,10);x.stroke();
+        x.fillStyle='#2b2420';x.font=`700 30px ${DG_F}`;x.textAlign='left';x.fillText(String(c.n),cx-cw/2+26,y+54);
+        x.fillStyle='#fff';dgRR(x,cx-34,y+30,68,88,6);x.fill();x.strokeStyle='#2b2420';x.lineWidth=2;x.stroke();
+        x.fillStyle=/[♥♦]/.test(c.pip)?'#b0302c':'#1c1c1c';x.textAlign='center';x.font='700 30px Georgia,serif';x.fillText(c.pip,cx,y+86);
+        x.fillStyle='#2b2420';x.font=`700 ${c.name.length>3?44:54}px ${DG_F}`;x.fillText(c.name,cx,y+ch*.62);
+        x.fillStyle='#6b5a44';x.font=`400 24px ${DG_F}`;dgWrap(x,c.k,cx,y+ch*.62+48,cw-40,32,2);
+        x.fillStyle=T.soft;x.font=`400 28px ${DG_F}`;x.fillText(labels[i],cx,y+ch+44)}
+      x.textAlign='left'}}}
+document.addEventListener('click',e=>{if(e.target.closest('#cardBtn')&&picked.length===mode)dgShowCard(lenoCardSpec(),'問問小豬-雷諾曼')});
 
 let dgShared=false;
 function shareURL(){const u=new URLSearchParams();u.set('l',picked.map(c=>c.n).join('.'));const q=$("question").value.trim();if(q)u.set('q',q);if(dgTopic!=='general')u.set('t',dgTopic);return dgBase()+'?'+u.toString()}

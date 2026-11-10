@@ -286,6 +286,14 @@ textarea::placeholder,input::placeholder{color:#9aa5ad}
 .dg-learn-b p{margin:0}
 .dg-learn-b p>b:first-child{display:block;font-size:15.5px;color:var(--dg-acc);margin-bottom:2px}
 .dg-learn-b b.in{color:var(--dg-ink)}
+.dg-modal{position:fixed;inset:0;z-index:60;background:var(--dg-scrim);display:flex;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.dg-sheet{background:var(--dg-surface);color:var(--dg-ink);border-radius:24px;padding:16px;width:100%;max-width:420px;max-height:100%;overflow:auto;display:flex;flex-direction:column;gap:10px;align-items:center;font-family:var(--round);text-align:center}
+.dg-sheet img{width:100%;height:auto;border-radius:14px;box-shadow:0 10px 30px -12px var(--dg-shadow)}
+.dg-tip{font-size:13px;color:var(--dg-soft);margin:0}.dg-wait{padding:40px 10px;margin:0}
+.dg-acts2{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.dg-b{font:inherit;font-weight:700;font-size:15px;border:0;border-radius:14px;padding:10px 18px;background:var(--dg-acc);color:var(--dg-on-acc);text-decoration:none;cursor:pointer}
+.dg-b.ghost{background:none;color:var(--dg-ink);border:1.5px solid var(--dg-line)}
+.dg-b:focus-visible{outline:2px solid var(--dg-acc);outline-offset:2px}
 .dg-copy{width:100%;margin-top:10px;font:inherit;font-size:14px;padding:10px;border-radius:12px;border:1px solid var(--dg-line);background:var(--dg-surface-2);color:var(--dg-ink)}
 </style>
 <style>
@@ -732,7 +740,7 @@ function synthHTML(r){
   ${stats.n>1?`<div class="stats"><div class="stat"><b>${stats.maj}/${stats.n}</b><span>大阿爾克那</span></div><div class="stat"><b>${stats.rev}/${stats.n}</b><span>逆位</span></div><div class="stat"><b>${stats.dom?SUIT[stats.dom].el:'—'}</b><span>${stats.dom?SUIT[stats.dom].n+'最多':'元素平均'}</span></div></div>`:''}
   ${out.map(p=>`<p>${esc(p)}</p>`).join('')}
   <ul class="summary">${r.cards.map((c,i)=>`<li><em>${i+1}・${esc(lab(sp.pos[i][0],r))}</em><span>${BYID[c.id].name}${c.rev?'（逆）':''}　${(c.rev?BYID[c.id].kr:BYID[c.id].k).slice(0,2).join('、')}</span></li>`).join('')}</ul>
-  <div class="actions"><button class="btn" data-act="again">同一個問題再抽</button><button class="btn ghost" data-act="new">問新的問題</button><button class="btn ghost" data-act="share">分享結果連結</button><button class="link" data-act="copy">複製解讀</button></div>
+  <div class="actions"><button class="btn" data-act="again">同一個問題再抽</button><button class="btn ghost" data-act="new">問新的問題</button><button class="btn ghost" data-act="share">分享結果連結</button><button class="btn ghost" data-act="imgcard">做成圖卡</button><button class="link" data-act="copy">複製解讀</button></div>
   <p class="foot">這次抽牌已存到「紀錄」。塔羅反映的是當下的狀態與可能性，最後的選擇在你手上。</p></div>`;
 }
 function readingText(r){
@@ -826,6 +834,57 @@ function dgShare(url,title,anchor){
   try{navigator.clipboard.writeText(url).then(()=>dgToast('已複製連結，貼給朋友吧'),fb)}catch(e){fb()}
 }
 function dgSharedBanner(el,again){el.insertAdjacentHTML('afterbegin',`<div class="dg-shared"><span>這是朋友分享給你的結果</span><a href="${again}">換我抽一次 →</a></div>`)}
+
+/* ---- 問問小豬: shareable result image card ---- */
+const DG_SITE='iammay22.github.io/piggy-oracle';
+function dgVar(n,fb){try{return getComputedStyle(document.documentElement).getPropertyValue(n).trim()||fb}catch(e){return fb}}
+function dgImg(src){return new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.onerror=()=>r(null);i.src=src})}
+function dgWrap(ctx,text,x,y,maxW,lh,maxLines){
+  const out=[];let line='';
+  for(const ch of String(text)){if(ch==='\n'){out.push(line);line='';continue}
+    if(ctx.measureText(line+ch).width>maxW&&line){out.push(line);line=ch}else line+=ch}
+  if(line)out.push(line);
+  const shown=out.slice(0,maxLines);if(out.length>maxLines){let l=shown[maxLines-1];while(ctx.measureText(l+'…').width>maxW&&l.length)l=l.slice(0,-1);shown[maxLines-1]=l+'…'}
+  shown.forEach((l,i)=>ctx.fillText(l,x,y+i*lh));return shown.length*lh;
+}
+function dgRR(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+const DG_F='"GenSenRounded","PingFang TC","Microsoft JhengHei",sans-serif';
+async function dgMakeCard(spec){
+  try{await Promise.all([document.fonts.load('700 40px GenSenRounded'),document.fonts.load('400 40px GenSenRounded')])}catch(e){}
+  const W=1080,H=1350,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');
+  const T={bg:dgVar('--dg-bg','#f8f1f0'),sf:dgVar('--dg-surface','#fff'),s2:dgVar('--dg-surface-2','#f1e7e5'),ink:dgVar('--dg-ink','#2a2022'),soft:dgVar('--dg-soft','#6f6265'),acc:dgVar('--dg-acc','#b84d6c'),line:dgVar('--dg-line','#ead9d6')};
+  x.fillStyle=T.bg;x.fillRect(0,0,W,H);
+  x.fillStyle=T.acc;x.globalAlpha=.07;for(let i=0;i<26;i++){x.beginPath();x.arc((i*397)%W,(i*263)%H,6+(i%4)*3,0,7);x.fill()}x.globalAlpha=1;
+  x.fillStyle=T.sf;dgRR(x,54,54,W-108,H-108,52);x.fill();x.strokeStyle=T.line;x.lineWidth=3;x.stroke();
+  x.textBaseline='alphabetic';x.textAlign='center';
+  x.fillStyle=T.acc;x.font=`700 34px ${DG_F}`;x.fillText(spec.eyebrow,W/2,148);
+  x.fillStyle=T.ink;x.font=`700 60px ${DG_F}`;x.fillText(spec.title,W/2,224);
+  if(spec.q){x.fillStyle=T.soft;x.font=`400 34px ${DG_F}`;let q=spec.q;if(q.length>22)q=q.slice(0,21)+'…';x.fillText('「'+q+'」',W/2,280)}
+  await spec.body(x,{top:320,bottom:960,W,T});
+  // message
+  x.textAlign='left';const mx=110,mw=600;let my=1010;
+  x.fillStyle=T.s2;dgRR(x,90,975,W-180,210,32);x.fill();
+  x.fillStyle=T.acc;x.font=`700 32px ${DG_F}`;x.fillText(spec.msgTitle||'小豬想說',mx,my+18);
+  x.fillStyle=T.ink;x.font=`400 34px ${DG_F}`;dgWrap(x,spec.msg,mx,my+70,mw,48,3);
+  const pig=await dgImg(spec.pig);if(pig){const pw=270,ph=pig.height*pw/pig.width;x.drawImage(pig,W-pw-70,1185-ph+20,pw,ph)}
+  x.fillStyle=T.soft;x.font=`700 28px ${DG_F}`;x.fillText('問問小豬',90,1252);x.font=`400 26px ${DG_F}`;x.fillText(DG_SITE,90,1288);
+  x.textAlign='right';x.fillText('by may22',W-90,1288);
+  return new Promise(r=>c.toBlob(b=>r(b),'image/png'));
+}
+async function dgShowCard(spec,name){
+  dgT(location.pathname.replace(/^.*\//,'').replace('.html','')+'/card');
+  let m=document.querySelector('.dg-modal');if(m)m.remove();
+  m=document.createElement('div');m.className='dg-modal';m.innerHTML='<div class="dg-sheet"><p class="dg-wait">小豬正在畫圖卡……</p></div>';document.body.appendChild(m);
+  m.addEventListener('click',e=>{if(e.target===m||e.target.closest('.dg-x'))m.remove()});
+  const blob=await dgMakeCard(spec);if(!blob){m.querySelector('.dg-sheet').innerHTML='<p>這個瀏覽器做不出圖卡，請改用截圖。</p><button class="dg-x">關閉</button>';return}
+  const url=URL.createObjectURL(blob),file=new File([blob],(name||'問問小豬')+'.png',{type:'image/png'});
+  const canShare=!!(navigator.canShare&&navigator.canShare({files:[file]}));
+  m.querySelector('.dg-sheet').innerHTML=`<img src="${url}" alt="占卜結果圖卡"><p class="dg-tip">手機可以長按圖片存到相簿</p><div class="dg-acts2">${canShare?'<button class="dg-b" id="dgShareImg">分享圖片</button>':''}<a class="dg-b ghost" href="${url}" download="${(name||'問問小豬')}.png">存成圖片</a><button class="dg-b ghost dg-x">關閉</button></div>`;
+  const s=m.querySelector('#dgShareImg');if(s)s.onclick=()=>navigator.share({files:[file],title:'問問小豬',text:'我的占卜結果｜'+DG_SITE}).catch(()=>{});
+}
+async function dgDrawCardImg(x,src,cx,cy,w,h,rev){const im=await dgImg(src);x.save();x.translate(cx,cy);if(rev)x.rotate(Math.PI);
+  x.shadowColor='rgba(0,0,0,.18)';x.shadowBlur=18;x.shadowOffsetY=8;dgRR(x,-w/2,-h/2,w,h,14);x.fillStyle='#fff';x.fill();x.shadowColor='transparent';x.clip();
+  if(im)x.drawImage(im,-w/2,-h/2,w,h);else{x.fillStyle='#ddd';x.fillRect(-w/2,-h/2,w,h)}x.restore()}
 
 /* ---- 問問小豬: richer tarot reading ---- */
 const MAJ_MONEY=['適合嘗試新的賺錢方式，但別把全部的錢都押上。','你有能力創造收入，善用手上的技能和資源。','財務決定先別急，多觀察，也相信你的直覺。','財運豐盛，可以適度享受，也記得留一些儲蓄。','照計畫理財，預算和紀律會帶來穩定。','跟著有經驗的人學理財，選擇穩健的方式。','面臨金錢上的選擇，選和你價值觀一致的那個。','積極爭取收入，靠努力有機會突破。','控制衝動消費，耐心會讓錢慢慢累積。','適合檢視自己的金錢觀，這陣子低調保守。','財運有轉機，留意突然出現的機會。','合約和帳目要清楚，付出和收入會相符。','收入暫時停滯，換個角度可能找到新財路。','某個收入來源結束，是重新規劃財務的時候。','收支平衡最重要，適度花費、穩定存錢。','小心欠債、分期付款和誘惑型消費。','可能有突發支出，先準備一筆緊急預備金。','財務慢慢恢復，長期目標有希望達成。','財務資訊不明，小心詐騙和看不懂的投資。','財運很好，努力會看到回報。','過去的投入開始回收，也適合重新檢視財務。','財務目標達成，可以規劃下一個階段。'];
@@ -923,6 +982,20 @@ const _readingText=readingText;readingText=function(r){
   const t=_readingText(r),i=t.lastIndexOf('\n\n'),st=dgStory(r),a=dgActions(r);
   return t.slice(0,i)+(st.length?'\n\n牌和牌一起看：\n'+st.join('\n'):'')+'\n\n可以這樣做：\n'+a.acts.map(x=>'・'+x).join('\n')+t.slice(i);
 };
+function tarotCardSpec(r){const sp=SP[r.spread],n=r.cards.length,a=dgActions(r),d0=BYID[r.cards[0].id];
+  return {eyebrow:'塔羅・'+sp.n,title:n===1?d0.name+(r.cards[0].rev?'（逆位）':''):'我抽到的牌',q:r.q,pig:'img/pig-card.webp',
+    msgTitle:n===1?'這張牌想告訴你':'小豬建議你',msg:n===1?(r.cards[0].rev?d0.r:d0.u):a.acts[0],
+    body:async(x,{top,W,T})=>{const cs=r.cards;
+      if(n<=3){const cw=n===1?300:250,ch=cw*12/7,gap=40,tot=n*cw+(n-1)*gap,cy=top+ch/2+10;
+        for(let i=0;i<n;i++){const c=cs[i],cx=(W-tot)/2+cw/2+i*(cw+gap);await dgDrawCardImg(x,'cards/'+c.id+'.webp',cx,cy,cw,ch,c.rev);
+          x.textAlign='center';x.fillStyle=T.soft;x.font=`400 28px ${DG_F}`;x.fillText(lab(sp.pos[i][0],r).replace(/[「」]/g,''),cx,cy+ch/2+44);
+          x.fillStyle=T.ink;x.font=`700 32px ${DG_F}`;x.fillText(BYID[c.id].name+(c.rev?'・逆':''),cx,cy+ch/2+86)}
+      }else{const cw=150,ch=cw*12/7,gx=24;
+        for(let i=0;i<n;i++){const c=cs[i],col=i%5,row=Math.floor(i/5),per=Math.min(5,n-row*5),off=(W-(per*cw+(per-1)*gx))/2;
+          const cx=off+cw/2+col*(cw+gx),cy=top+ch/2+row*(ch+70);await dgDrawCardImg(x,'cards/'+c.id+'.webp',cx,cy,cw,ch,c.rev);
+          x.textAlign='center';x.fillStyle=T.ink;x.font=`700 24px ${DG_F}`;x.fillText(BYID[c.id].name+(c.rev?'逆':''),cx,cy+ch/2+34)}}
+      x.textAlign='left'}}}
+document.addEventListener('click',e=>{if(e.target.closest('[data-act="imgcard"]')&&S.reading)dgShowCard(tarotCardSpec(S.reading),'問問小豬-塔羅')});
 
 function shareURL(r){const u=new URLSearchParams();u.set('s',r.spread);u.set('t',r.topic);u.set('c',r.cards.map(c=>c.id+(c.rev?'r':'')).join('.'));if(r.q)u.set('q',r.q);if(r.A)u.set('a',r.A);if(r.B)u.set('b',r.B);return dgBase()+'?'+u.toString()}
 document.addEventListener('click',e=>{const el=e.target.closest('[data-act="share"]');if(!el||!S.reading)return;dgShare(shareURL(S.reading),'我抽到的塔羅牌｜問問小豬',el)});
