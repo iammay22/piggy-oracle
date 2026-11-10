@@ -60,6 +60,11 @@
 .dg-greet p::before{content:"";position:absolute;left:-7px;top:50%;width:12px;height:12px;background:var(--dg-surface);border-left:1px solid var(--dg-line);border-bottom:1px solid var(--dg-line);transform:translateY(-50%) rotate(45deg)}
 .dg-greet.inset{margin-left:calc(-1*max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)))}
 .dg-learn{margin-top:14px}
+.dg-card{background:var(--dg-surface);border:1px solid var(--dg-line);border-radius:20px;padding:16px 20px;margin-top:26px;font-family:var(--round)}
+.dg-card summary{cursor:pointer;font-weight:700;color:var(--dg-acc);list-style:none}
+.dg-card summary::-webkit-details-marker{display:none}
+.dg-card summary::before{content:"＋ "}.dg-card[open] summary::before{content:"－ "}
+.dg-card summary:focus-visible{outline:2px solid var(--dg-acc);outline-offset:3px;border-radius:6px}
 .dg-learn summary{font-size:16px}
 .dg-learn-b{display:flex;flex-direction:column;gap:12px;margin-top:12px;font-size:15px;line-height:1.85}
 .dg-learn-b p{margin:0}

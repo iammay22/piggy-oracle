@@ -276,6 +276,11 @@ textarea::placeholder,input::placeholder{color:#9aa5ad}
 .dg-greet p::before{content:"";position:absolute;left:-7px;top:50%;width:12px;height:12px;background:var(--dg-surface);border-left:1px solid var(--dg-line);border-bottom:1px solid var(--dg-line);transform:translateY(-50%) rotate(45deg)}
 .dg-greet.inset{margin-left:calc(-1*max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)))}
 .dg-learn{margin-top:14px}
+.dg-card{background:var(--dg-surface);border:1px solid var(--dg-line);border-radius:20px;padding:16px 20px;margin-top:26px;font-family:var(--round)}
+.dg-card summary{cursor:pointer;font-weight:700;color:var(--dg-acc);list-style:none}
+.dg-card summary::-webkit-details-marker{display:none}
+.dg-card summary::before{content:"＋ "}.dg-card[open] summary::before{content:"－ "}
+.dg-card summary:focus-visible{outline:2px solid var(--dg-acc);outline-offset:3px;border-radius:6px}
 .dg-learn summary{font-size:16px}
 .dg-learn-b{display:flex;flex-direction:column;gap:12px;margin-top:12px;font-size:15px;line-height:1.85}
 .dg-learn-b p{margin:0}
@@ -325,6 +330,17 @@ body{background-image:radial-gradient(rgba(106,85,176,.22) 1px,transparent 1.5px
   <section id="v-draw"></section>
   <section id="v-lib" hidden></section>
   <section id="v-hist" hidden></section>
+  <details class="dg-learn dg-card">
+    <summary>第一次玩？塔羅怎麼讀</summary>
+    <div class="dg-learn-b">
+      <p><b>78 張牌分成兩大類</b><b class="in">大阿爾克那</b>有 22 張，像愚者、戀人、死神，講的是人生的大課題。<b class="in">小阿爾克那</b>有 56 張，講日常生活裡的事。抽到的大牌越多，代表這件事對你的影響越深。</p>
+      <p><b>小牌的四種花色</b><b class="in">權杖</b>是行動和熱情，<b class="in">聖杯</b>是感情和人際，<b class="in">寶劍</b>是想法和溝通，<b class="in">錢幣</b>是金錢、工作和現實。每種花色有一到十的數字牌，加上侍者、騎士、皇后、國王四張宮廷牌，宮廷牌常常代表某個人，或你自己展現的個性。</p>
+      <p><b>正位和逆位</b>牌倒過來出現叫逆位。逆位不等於壞事，比較像這股能量卡住了、延遲了，或是往內收。如果不想看逆位，開始前可以把「包含逆位牌」關掉。</p>
+      <p><b>牌陣的位置很重要</b>牌陣裡的每個位置都有自己的意思，同一張牌放在「過去」和「未來」，讀法就不一樣。第一次玩建議用三張的「時間之流」，看過去、現在、未來。</p>
+      <p><b>怎麼問比較準</b>開放式的問題，例如「我該怎麼面對這段關係？」，通常比「他會不會回來？」這種是非題更有收穫。一次問一件事，同一個問題也不要短時間內一直重抽。</p>
+      <p><b>結果要怎麼看</b>先一張張看牌在各自位置的意思，再看下面的整體解讀和「牌和牌一起看」，最後照著「接下來可以這樣做」挑一件事去試試。</p>
+    </div>
+  </details>
 </main>
 <div id="scrim" class="scrim" hidden></div>
 <div id="toast" class="toast" hidden></div>
