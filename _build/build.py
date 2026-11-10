@@ -349,11 +349,11 @@ def meta(p):
 <meta property="og:title" content="{t}">
 <meta property="og:description" content="{dsc}">
 <meta property="og:url" content="{url}">
-<meta property="og:image" content="{DOM}/og-image.jpg">
+<meta property="og:image" content="{DOM}/og-image.jpg?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="{DOM}/og-image.jpg">
+<meta name="twitter:image" content="{DOM}/og-image.jpg?v=2">
 <link rel="stylesheet" href="theme.css">
 <script src="stats.js"></script>
 <script src="sound.js" defer></script>
