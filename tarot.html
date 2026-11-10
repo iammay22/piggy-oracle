@@ -916,7 +916,7 @@ async function dgMakeCard(spec){
   return new Promise(r=>c.toBlob(b=>r(b),'image/png'));
 }
 async function dgShowCard(spec,name){
-  dgT(location.pathname.replace(/^.*\//,'').replace('.html','')+'/card');
+  dgT(location.pathname.replace(/^.*\//,'').replace('.html','')+'/imgcard');
   let m=document.querySelector('.dg-modal');if(m)m.remove();
   m=document.createElement('div');m.className='dg-modal';m.innerHTML='<div class="dg-sheet"><p class="dg-wait">小豬正在畫圖卡……</p></div>';document.body.appendChild(m);
   m.addEventListener('click',e=>{if(e.target===m||e.target.closest('.dg-x'))m.remove()});
