@@ -19,6 +19,6 @@ python3 build.py https://iammay22.github.io/piggy-oracle "https://script.google.
 
 ## 檔案
 - `src-tarot.html`、`src-iching.html`、`src-leno.html`：may22 原本的三個占卜（不要直接改，build 會注入共用樣式）
-- `hub.html`：首頁；`qian-body.html`：擲筊求籤
+- `hub.html`：首頁；`qian-body.html`：擲筊求籤；`numerology-body.html`：生命靈數（頁面自帶圖卡和分享程式，build 只加導覽列、寶寶藍房間配色和頁尾）
 - `ext-*.js`：加強解讀、圖鑑、紀錄、圖卡等共用功能
 - `小豬統計-AppsScript.gs`：試算表統計程式（貼在 Google 試算表的 Apps Script）

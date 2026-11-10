@@ -1,0 +1,727 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style></head><title>生命靈數｜問問小豬</title>
+<link rel="icon" href="img/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#f8f1f0">
+<meta name="description" content="輸入生日算出你的生命靈數和生日九宮格，也能和朋友、另一半、同事、家人配對，看看你們合不合。">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:site_name" content="問問小豬">
+<meta property="og:title" content="生命靈數｜問問小豬">
+<meta property="og:description" content="輸入生日算出你的生命靈數和生日九宮格，也能和朋友、另一半、同事、家人配對，看看你們合不合。">
+<meta property="og:url" content="https://iammay22.github.io/piggy-oracle/numerology.html">
+<meta property="og:image" content="https://iammay22.github.io/piggy-oracle/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://iammay22.github.io/piggy-oracle/og-image.jpg">
+<link rel="stylesheet" href="theme.css">
+<script src="stats.js"></script>
+<style>
+:root{--dg-bg:#f8f1f0;--dg-surface:#ffffff;--dg-surface-2:#f1e7e5;--dg-hover:#eadcd9;--dg-ink:#2a2022;--dg-soft:#6f6265;--dg-line:#ead9d6;--dg-line-a:rgba(42,32,34,.12);--dg-acc:#b84d6c;--dg-acc-dim:#dc9aad;--dg-acc-soft:rgba(184,77,108,.1);--dg-on-acc:#ffffff;--dg-potato:#b8652f;--dg-glass:rgba(255,255,255,.65);--dg-shadow:rgba(34,31,27,.14);--dg-place:#a39b8f;--dg-scrim:rgba(34,31,27,.45);color-scheme:light;--round:"GenSenRounded","PingFang TC","Microsoft JhengHei",sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--dg-bg:#1b1a18;--dg-surface:#252320;--dg-surface-2:#2e2b27;--dg-hover:#37332e;--dg-ink:#ece7de;--dg-soft:#a8a197;--dg-line:#3a3631;--dg-line-a:rgba(236,231,222,.12);--dg-acc:#f08fab;--dg-acc-dim:#8a4a5c;--dg-acc-soft:rgba(240,143,171,.16);--dg-on-acc:#2a1219;--dg-potato:#e0904f;--dg-glass:#252320;--dg-shadow:rgba(0,0,0,.4);--dg-place:#7d766c;--dg-scrim:rgba(0,0,0,.6);color-scheme:dark}}
+:root[data-theme="dark"]{--dg-bg:#1b1a18;--dg-surface:#252320;--dg-surface-2:#2e2b27;--dg-hover:#37332e;--dg-ink:#ece7de;--dg-soft:#a8a197;--dg-line:#3a3631;--dg-line-a:rgba(236,231,222,.12);--dg-acc:#f08fab;--dg-acc-dim:#8a4a5c;--dg-acc-soft:rgba(240,143,171,.16);--dg-on-acc:#2a1219;--dg-potato:#e0904f;--dg-glass:#252320;--dg-shadow:rgba(0,0,0,.4);--dg-place:#7d766c;--dg-scrim:rgba(0,0,0,.6);color-scheme:dark}
+
+.dg-nav{position:relative;z-index:6;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  max-width:760px;margin:0 auto;padding-block:14px 4px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  font-family:var(--round);font-size:14px;line-height:1.4}
+.dg-nav a{text-decoration:none;color:var(--dg-soft);font-weight:700}
+.dg-nav a:hover{color:var(--dg-acc)}
+.dg-nav a:focus-visible,.dg-shared a:focus-visible{outline:2px solid var(--dg-acc);outline-offset:2px;border-radius:6px}
+.dg-nav .home{display:inline-flex;align-items:center;gap:6px}
+.dg-nav .home img{width:30px;height:auto}
+.dg-nav .seg{display:flex;gap:2px;background:var(--dg-surface-2);border:1px solid var(--dg-line-a);border-radius:999px;padding:3px}
+.dg-nav .seg a{padding:4px 12px;border-radius:999px;font-weight:500}
+.dg-nav .seg a[aria-current]{background:var(--dg-surface);color:var(--dg-ink);font-weight:700;box-shadow:0 1px 3px var(--dg-shadow)}
+.dg-nav.inset{margin-left:calc(-1*max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)))}
+.dg-shared{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:0 0 16px;padding:12px 16px;border-radius:16px;
+  background:var(--dg-acc-soft);color:var(--dg-ink);font-family:var(--round);font-size:15px}
+.dg-shared a{color:var(--dg-acc);font-weight:700;text-decoration:none;white-space:nowrap}
+.dg-toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:40;background:var(--dg-ink);color:var(--dg-bg);
+  padding:8px 18px;border-radius:999px;font-family:var(--round);font-size:14px;white-space:nowrap}
+.dg-foot{max-width:760px;margin:36px auto 0;padding-block:20px 32px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  border-top:1px solid var(--dg-line);display:block;text-align:center;font-family:var(--round);font-size:14px;line-height:1.8;color:var(--dg-soft)}
+.dg-foot p{margin:0}
+.dg-foot nav{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin:6px 0}
+.dg-foot a{color:var(--dg-ink);text-decoration:none;font-weight:700}
+.dg-foot a:hover{color:var(--dg-acc)}
+.dg-foot .by{font-size:12.5px;letter-spacing:.08em}
+.dg-h{font-family:var(--round);font-size:17px;font-weight:700;margin:22px 0 8px;color:var(--dg-ink)}
+.dg-sub{font-size:13px;color:var(--dg-soft);margin:-4px 0 8px}
+.dg-acts{margin:0 0 12px;padding-left:1.3em;display:grid;gap:6px}
+.dg-extra{display:flex;flex-direction:column;gap:10px}.dg-extra .dg-h{margin:10px 0 0}.dg-extra p,.dg-extra ul{margin:0}
+.dg-topics{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-family:var(--round);font-size:14px;color:var(--dg-soft)}
+.dg-topics button{font:inherit;border:1px solid var(--dg-line);background:var(--dg-surface);color:var(--dg-ink);border-radius:999px;padding:4px 14px;cursor:pointer}
+.dg-topics button[aria-pressed="true"]{background:var(--dg-acc);color:var(--dg-on-acc);border-color:var(--dg-acc);font-weight:700}
+.dg-topics button:focus-visible{outline:2px solid var(--dg-acc);outline-offset:2px}
+.dg-greet{display:flex;align-items:center;gap:10px;max-width:760px;margin:6px auto 0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));font-family:var(--round)}
+.dg-greet img{width:84px;height:auto;flex:none}
+.dg-greet p{position:relative;margin:0;background:var(--dg-surface);color:var(--dg-ink);border:1px solid var(--dg-line);border-radius:16px;padding:8px 14px;font-size:15px;line-height:1.6;min-width:0}
+.dg-greet p::before{content:"";position:absolute;left:-7px;top:50%;width:12px;height:12px;background:var(--dg-surface);border-left:1px solid var(--dg-line);border-bottom:1px solid var(--dg-line);transform:translateY(-50%) rotate(45deg)}
+.dg-greet.inset{margin-left:calc(-1*max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)))}
+.dg-learn{margin-top:14px}
+.dg-card{background:var(--dg-surface);border:1px solid var(--dg-line);border-radius:20px;padding:16px 20px;margin-top:26px;font-family:var(--round)}
+.dg-card summary{cursor:pointer;font-weight:700;color:var(--dg-acc);list-style:none}
+.dg-card summary::-webkit-details-marker{display:none}
+.dg-card summary::before{content:"＋ "}.dg-card[open] summary::before{content:"－ "}
+.dg-card summary:focus-visible{outline:2px solid var(--dg-acc);outline-offset:3px;border-radius:6px}
+.dg-learn summary{font-size:16px}
+.dg-learn-b{display:flex;flex-direction:column;gap:12px;margin-top:12px;font-size:15px;line-height:1.85}
+.dg-learn-b p{margin:0}
+.dg-learn-b p>b:first-child{display:block;font-size:15.5px;color:var(--dg-acc);margin-bottom:2px}
+.dg-learn-b b.in{color:var(--dg-ink)}
+.dg-modal{position:fixed;inset:0;z-index:60;background:var(--dg-scrim);display:flex;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.dg-sheet{background:var(--dg-surface);color:var(--dg-ink);border-radius:24px;padding:16px;width:100%;max-width:420px;max-height:100%;overflow:auto;display:flex;flex-direction:column;gap:10px;align-items:center;font-family:var(--round);text-align:center}
+.dg-sheet img{width:100%;height:auto;border-radius:14px;box-shadow:0 10px 30px -12px var(--dg-shadow)}
+.dg-tip{font-size:13px;color:var(--dg-soft);margin:0}.dg-wait{padding:40px 10px;margin:0}
+.dg-acts2{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.dg-b{font:inherit;font-weight:700;font-size:15px;border:0;border-radius:14px;padding:10px 18px;background:var(--dg-acc);color:var(--dg-on-acc);text-decoration:none;cursor:pointer}
+.dg-b.ghost{background:none;color:var(--dg-ink);border:1.5px solid var(--dg-line)}
+.dg-b:focus-visible{outline:2px solid var(--dg-acc);outline-offset:2px}
+.dg-hrow{display:flex;align-items:center;justify-content:space-between;gap:10px 12px;flex-wrap:wrap;max-width:760px;margin:14px auto 4px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));font-family:var(--round)}
+.dg-hrow.inset{margin-left:calc(-1*max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)))}
+.dg-brand{display:flex;align-items:center;gap:10px;margin:0;font-family:var(--round);font-weight:700;font-size:20px;letter-spacing:.06em;color:var(--dg-ink);line-height:1.3}
+.dg-ic{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--dg-acc-soft);color:var(--dg-acc);font-size:18px;letter-spacing:0;flex:none}
+.dg-tabs{display:flex;gap:2px;background:var(--dg-surface-2);border:1px solid var(--dg-line-a);border-radius:999px;padding:3px}
+.dg-tabs button{font:inherit;font-family:var(--round);font-size:14px;border:0;background:none;color:var(--dg-soft);padding:6px 12px;border-radius:999px;cursor:pointer}
+.dg-tabs button[aria-selected="true"]{background:var(--dg-acc);color:var(--dg-on-acc);font-weight:700}
+.dg-tabs button:focus-visible{outline:2px solid var(--dg-acc);outline-offset:2px}
+.dg-hero{margin:6px 0 18px;font-family:var(--round)}
+.dg-hero .dg-eb,.hero .eyebrow{font-size:13px;letter-spacing:.2em;color:var(--dg-acc-dim);font-weight:400}
+.dg-hero h1,.hero h1{font-family:var(--round);font-size:clamp(28px,7vw,38px);font-weight:700;margin:4px 0 6px;color:var(--dg-ink);line-height:1.3;text-wrap:balance}
+.dg-hero p,.hero p{color:var(--dg-soft);margin:0;max-width:34em;line-height:1.75;font-size:16px}
+.dg-hero ol{display:flex;flex-wrap:wrap;gap:6px 18px;margin:10px 0 0;padding:0;list-style:none;counter-reset:s;font-size:14px;color:var(--dg-soft)}
+.dg-hero ol li{counter-increment:s;display:flex;gap:6px}.dg-hero ol li::before{content:counter(s);font-weight:700;color:var(--dg-acc)}
+.dg-filters{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 16px}
+.dg-chip{font:inherit;font-family:var(--round);font-size:15px;border:1px solid var(--dg-line);background:var(--dg-surface);color:var(--dg-ink);border-radius:999px;padding:7px 16px;cursor:pointer}
+.dg-chip[aria-pressed="true"]{border-color:var(--dg-acc);background:var(--dg-acc-soft);color:var(--dg-acc);font-weight:700}
+.dg-libgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(82px,1fr));gap:14px 12px}
+.dg-libc{border:0;background:none;padding:0;text-align:center;font-family:var(--round);font-size:12.5px;line-height:1.4;color:var(--dg-soft);cursor:pointer;min-width:0}
+.dg-libc b{display:block;color:var(--dg-ink);font-size:14px;margin-top:4px}
+.dg-libc .dg-face{width:100%;filter:drop-shadow(0 3px 5px var(--dg-shadow))}
+.dg-libc .dg-face.leno{aspect-ratio:100/148}.dg-libc .dg-face svg{display:block;width:100%;height:100%}
+.dg-libc .dg-face.hexbox{aspect-ratio:7/12;background:var(--dg-surface);border:1px solid var(--dg-line);border-radius:8px;display:grid;place-items:center}
+.dg-libc .dg-face.slipt{aspect-ratio:7/12;background:#f4e3c1;border-radius:6px;box-shadow:inset 0 0 0 3px #f4e3c1,inset 0 0 0 4px #a8322a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#3b1613}
+.slipt em{font-style:normal;font-size:12px}.slipt strong{font-size:18px;writing-mode:vertical-rl;letter-spacing:.15em}
+.slipt .tone,.dg-bsheet .tone{font-size:11px;font-weight:700;border-radius:999px;padding:1px 8px;color:#fff}
+.tone.t0{background:#a8322a}.tone.t1{background:#a77a2a}.tone.t2{background:#5d6470}
+.hexf{display:flex;flex-direction:column-reverse;gap:5px;width:62%}.hexf i{display:flex;gap:6px;height:6px}.hexf b{flex:1;background:var(--dg-ink);border-radius:1px}
+.hexf.big{width:150px;gap:9px}.hexf.big i{height:14px;gap:16px}
+.dg-scrim{position:fixed;inset:0;z-index:55;background:var(--dg-scrim);display:flex;align-items:flex-end;justify-content:center}
+.dg-bsheet{background:var(--dg-surface);color:var(--dg-ink);width:100%;max-width:640px;max-height:88%;overflow:auto;border-radius:20px 20px 0 0;border:1px solid var(--dg-line);font-family:var(--round);line-height:1.7;
+  padding-block:18px calc(24px + env(safe-area-inset-bottom,0px));padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px));animation:dgup .3s ease}
+@keyframes dgup{from{transform:translateY(40px);opacity:0}}
+.dg-bsheet .slip{clear:both}
+.dg-sx{float:right;width:34px;height:34px;border-radius:50%;border:1px solid var(--dg-line);background:none;color:var(--dg-ink);font:inherit;cursor:pointer}
+.dg-big{width:150px;margin:8px auto 12px;filter:drop-shadow(0 6px 12px var(--dg-shadow))}.dg-big.leno{aspect-ratio:100/148}.dg-big svg{display:block;width:100%;height:100%}
+.dg-big.hexbig{display:flex;justify-content:center;filter:none}
+.dg-bsheet h3{text-align:center;font-size:24px;margin:0;font-weight:700}
+.dg-en{text-align:center;color:var(--dg-soft);font-size:13px;letter-spacing:.04em}
+.dg-kws{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:10px 0 4px}.dg-kws span{font-size:13px;background:var(--dg-acc-soft);color:var(--dg-acc);padding:2px 10px;border-radius:6px}
+.dg-classic{font-size:17px;font-weight:700;text-align:center;margin:10px 0 2px}.dg-sub2{text-align:center;color:var(--dg-soft);margin:0}
+.dg-two{display:grid;grid-template-columns:1fr;gap:12px;margin-top:14px}@media(min-width:520px){.dg-two{grid-template-columns:1fr 1fr}}
+.dg-two>div{background:var(--dg-bg);border:1px solid var(--dg-line);border-radius:12px;padding:12px}.dg-two h4{margin:0 0 4px;font-size:15px;color:var(--dg-acc)}.dg-two p{margin:0;font-size:15px}
+.dg-hist{display:grid;gap:10px}
+.dg-hi{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;text-align:left;background:var(--dg-surface);border:1px solid var(--dg-line);border-radius:14px;padding:14px 16px;font-family:var(--round);color:var(--dg-ink);cursor:pointer}
+.dg-ht{min-width:0}.dg-ht b{display:block;font-size:16px}.dg-ht span{display:block;font-size:13px;color:var(--dg-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dg-go{font-size:22px;color:var(--dg-soft)}
+.dg-empty{text-align:center;color:var(--dg-soft);padding:40px 10px;font-family:var(--round);line-height:1.8}
+.dg-center{display:flex;justify-content:center;margin-top:14px}
+.dg-link{font:inherit;font-family:var(--round);font-size:14px;background:none;border:0;color:var(--dg-soft);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.dg-copy{width:100%;margin-top:10px;font:inherit;font-size:14px;padding:10px;border-radius:12px;border:1px solid var(--dg-line);background:var(--dg-surface-2);color:var(--dg-ink)}
+</style><style>
+/* room look */
+:root:root:root:root{--dg-bg:#eaf4fc;--dg-surface:#ffffff;--dg-surface-2:#dcecf8;--dg-hover:#cde3f4;--dg-ink:#1f2b38;--dg-soft:#5a6a7b;--dg-line:#cfe1f0;--dg-line-a:rgba(31,43,56,.12);--dg-acc:#2f72ad;--dg-acc-dim:#92c0e6;--dg-acc-soft:rgba(47,114,173,.1);--dg-on-acc:#ffffff;--dg-glass:rgba(255,255,255,.65);--dg-shadow:rgba(31,60,90,.14);--dg-place:#93a3b3;--dg-scrim:rgba(20,35,50,.45);color-scheme:light}
+body{background:var(--dg-bg);background-image:radial-gradient(70% 40% at 50% 0%,rgba(255,255,255,.7),transparent 70%)}
+</style><body>
+<nav class="dg-nav inset" aria-label="問問小豬"><a class="home" href="index.html"><img src="img/pig-face.png" alt="" width="120" height="85">← 問問小豬</a><span class="seg"><a href="tarot.html">塔羅</a><a href="iching.html">易經</a><a href="lenormand.html">雷諾曼</a><a href="qian.html">求籤</a><a href="numerology.html" aria-current="page">靈數</a></span></nav><div class="dg-greet inset"><img src="img/pig-number.webp" alt="小豬" width="400" height="398"><p id="say">把生日告訴小豬，我來幫你數一數～</p></div>
+<style>
+/* 生命靈數 — 一欄式：模式切換、生日表單、結果（氣球數字小豬、九宮格、流年）、配對、入門說明。共用的導覽列／頁尾／圖卡樣式由 build.py 的 NAVCSS 提供。 */
+:root{--balloon:#fdd85f;--balloon-hi:#fff1b8;--digit:#5a4b9c;--heart:#e9799a}
+body{background:var(--dg-bg);color:var(--dg-ink);font-family:var(--round);font-size:15px;line-height:1.8;-webkit-font-smoothing:antialiased;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:640px;margin:0 auto;padding-block:22px 10px;display:flex;flex-direction:column;gap:18px}
+.wrap h1{margin:0;font-size:2rem;line-height:1.3;text-wrap:balance}
+.lead{margin:4px 0 0;color:var(--dg-soft)}
+.wrap .dg-card{margin-top:0}
+.wrap .dg-shared{margin:0}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--dg-acc);outline-offset:2px}
+/* ---- this room ---- */
+.mode{display:inline-flex;align-self:flex-start;background:var(--dg-surface-2);border:1px solid var(--dg-line-a);border-radius:999px;padding:4px}
+.mode button{font:inherit;font-weight:700;border:0;background:none;color:var(--dg-soft);padding:7px 18px;border-radius:999px;cursor:pointer}
+.mode button[aria-pressed="true"]{background:var(--dg-surface);color:var(--dg-ink);box-shadow:0 1px 3px var(--dg-shadow)}
+.form{background:var(--dg-surface);border:1px solid var(--dg-line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:14px}
+.people{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:480px){.people{grid-template-columns:1fr}}
+.who{display:flex;flex-direction:column;gap:8px;min-width:0}
+.who .tag{font-size:13px;font-weight:700;color:var(--dg-acc)}
+.field{display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--dg-soft)}
+.field input{font:inherit;font-size:16px;color:var(--dg-ink);background:var(--dg-bg);border:1px solid var(--dg-line);border-radius:12px;padding:9px 12px;min-width:0;width:100%;box-sizing:border-box}
+.go{align-self:flex-start}
+.ymd{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:8px}
+.ymd select{font:inherit;font-size:16px;color:var(--dg-ink);background:var(--dg-bg);border:1px solid var(--dg-line);border-radius:12px;padding:9px 10px;min-width:0;width:100%;box-sizing:border-box}
+.err{margin:0;padding:8px 12px;border-radius:12px;background:var(--dg-acc-soft);color:var(--dg-ink);font-size:14px;font-weight:700}
+
+.result{display:flex;flex-direction:column;gap:14px}
+.hero{background:var(--dg-surface);border:1px solid var(--dg-line);border-radius:24px;padding:18px;display:flex;gap:16px;align-items:center}
+@media (max-width:480px){.hero{flex-direction:column;text-align:center}}
+.hero .txt{min-width:0;display:flex;flex-direction:column;gap:6px}
+.eyebrow{font-size:13px;font-weight:700;color:var(--dg-acc);letter-spacing:.06em}
+.hero h2{margin:0;font-size:1.6rem;line-height:1.3}
+.one{margin:0;font-size:1.05rem}
+.kws{display:flex;gap:6px;flex-wrap:wrap}
+@media (max-width:480px){.kws{justify-content:center}}
+.kws span{background:var(--dg-surface-2);border-radius:999px;padding:1px 12px;font-size:13px;font-weight:700}
+.calc{margin:0;font-size:13px;color:var(--dg-soft);font-variant-numeric:tabular-nums}
+
+/* pig holding a balloon; the number is painted over the balloon */
+.pig{--s:150px;position:relative;width:var(--s);flex:none}
+.pig img{display:block;width:100%;height:auto}
+.pig .num{position:absolute;left:75%;top:25.6%;width:33%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,var(--balloon-hi),var(--balloon) 62%);display:flex;align-items:center;justify-content:center;
+  color:var(--digit);font-weight:700;font-size:calc(var(--s)*.27);line-height:1}
+.pig.pop .num{animation:pop .5s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:translate(-50%,-50%) scale(.2)}100%{transform:translate(-50%,-50%) scale(1)}}
+
+.master{background:var(--dg-acc-soft);border-radius:16px;padding:10px 14px;margin:0;font-size:14.5px}
+.master b{color:var(--dg-acc)}
+.panel{background:var(--dg-surface);border:1px solid var(--dg-line);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.panel h3{margin:0;font-size:1.05rem}
+.panel p{margin:0}
+.panel .sub{color:var(--dg-soft);font-size:14px}
+.matches{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--balloon-hi),var(--balloon) 62%);color:var(--digit);font-weight:700}
+.acts{display:flex;gap:8px;flex-wrap:wrap}
+.rel .dg-topics{margin-bottom:4px}
+.g9row{display:flex;gap:18px;align-items:flex-start}
+@media (max-width:520px){.g9row{flex-direction:column;align-items:stretch}}
+.grid9{width:200px;max-width:100%;height:auto;flex:none;align-self:center}
+.g9txt{min-width:0;display:flex;flex-direction:column;gap:4px}
+.g9list{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:6px}
+.g9list b{color:var(--dg-acc)}
+.g9lack{display:flex;flex-direction:column;gap:6px;border-top:1px dashed var(--dg-line);padding-top:10px}
+.g9lack p{display:flex;gap:10px;align-items:flex-start}
+.chip.ghost{background:none;border:2px dashed var(--dg-place);color:var(--dg-soft);flex:none;width:30px;height:30px}
+
+/* pair */
+.duo{background:var(--dg-surface);border:1px solid var(--dg-line);border-radius:24px;padding:18px 12px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:6px;text-align:center}
+.duo .side{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0}
+.duo .pig{--s:min(132px,30vw)}
+.duo .side b{font-size:1.05rem;overflow-wrap:anywhere}
+.duo .side small{color:var(--dg-soft)}
+.score{display:flex;flex-direction:column;align-items:center;gap:2px}
+.heart{width:76px;height:70px;position:relative;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:1.25rem;font-variant-numeric:tabular-nums}
+.heart svg{position:absolute;inset:0;width:100%;height:100%}
+.heart span{position:relative;margin-top:-6px}
+.score small{font-size:12px;color:var(--dg-soft)}
+.rel h2{margin:0;font-size:1.4rem}
+.meter{height:10px;border-radius:999px;background:var(--dg-surface-2);overflow:hidden}
+.meter i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--dg-acc-dim),var(--heart));transition:width .8s ease}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:480px){.two{grid-template-columns:1fr}}
+.two div{min-width:0}
+.two b{color:var(--dg-acc)}
+.tipbox{border-top:1px dashed var(--dg-line);padding-top:10px}
+@media (prefers-reduced-motion:reduce){.pig.pop .num{animation:none}.meter i{transition:none}}
+</style>
+<main class="wrap">
+  <div id="sharedSlot"></div>
+  <header>
+    <h1>生命靈數</h1>
+    <p class="lead">把生日的每個數字加起來，加到剩一位數，就是你的生命靈數。也可以輸入兩個人的生日，看看合不合拍。</p>
+  </header>
+
+  <div class="mode" role="group" aria-label="選擇玩法">
+    <button id="mSolo" type="button" aria-pressed="true">我的數字</button>
+    <button id="mPair" type="button" aria-pressed="false">兩人配對</button>
+  </div>
+
+  <form class="form" id="soloForm" novalidate>
+    <div class="field"><span id="lbSolo">你的生日（西元）</span><div class="ymd" id="dSolo" role="group" aria-labelledby="lbSolo"></div></div>
+    <button class="dg-b go" type="submit">算一算</button>
+    <p class="err" id="errSolo" hidden></p>
+  </form>
+
+  <form class="form" id="pairForm" novalidate hidden>
+    <div class="people">
+      <div class="who"><span class="tag">第一個人</span>
+        <label class="field" for="nA">名字或暱稱（可不填）<input type="text" id="nA" maxlength="8" placeholder="例如：我"></label>
+        <div class="field"><span id="lbA">生日</span><div class="ymd" id="dA" role="group" aria-labelledby="lbA"></div></div>
+      </div>
+      <div class="who"><span class="tag">第二個人</span>
+        <label class="field" for="nB">名字或暱稱（可不填）<input type="text" id="nB" maxlength="8" placeholder="例如：他"></label>
+        <div class="field"><span id="lbB">生日</span><div class="ymd" id="dB" role="group" aria-labelledby="lbB"></div></div>
+      </div>
+    </div>
+    <div class="field"><span>想看哪一種關係</span><div class="dg-topics" role="group" aria-label="想看哪一種關係" id="ptForm"></div></div>
+    <button class="dg-b go" type="submit">看看合不合</button>
+    <p class="err" id="errPair" hidden></p>
+  </form>
+
+  <section class="result" id="soloOut" hidden aria-live="polite"></section>
+  <section class="result" id="pairOut" hidden aria-live="polite"></section>
+
+  <details class="dg-learn dg-card">
+    <summary>第一次玩？生命靈數怎麼算</summary>
+    <div class="dg-learn-b">
+      <p><b>把生日數字全部加起來</b>用西元生日，年月日的每一個數字都加起來，加到剩一位數為止。例如 1998/5/22：1+9+9+8+0+5+2+2 = 36，3+6 = 9，就是 9 號人。</p>
+      <p><b>大師數 11、22、33</b>加的過程中如果出現 11、22 或 33，就是帶著「大師數」。你還是看 2、4、6 號的內容，另外多一段大師數的說明。</p>
+      <p><b>流年數</b>把出生的月、日加上今年的西元年，一樣加到一位數，代表你今年的主題。每年都會換，可以每年回來看看。</p>
+      <p><b>生日九宮格</b>格子由下往上、由左往右排 1～9（上排 3 6 9、中排 2 5 8、下排 1 4 7）。把生日的數字和加總出來的數字都圈進去，三格連成一線是一條連線，共有藝術、組織、權力、物質、感情、智慧、事業、人緣八條。空著的格子代表比較需要練習的地方。</p>
+      <p><b>兩人配對</b>小豬把 1～9 分成三派：1、5、7 獨立派，2、4、8 穩定派，3、6、9 感性派。同一派默契好，不同派各有互補或要磨合的地方。可以選感情、友情、工作或家人來看，同樣兩個人在不同關係裡，合拍的地方也不一樣。</p>
+    </div>
+  </details>
+</main>
+
+<script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ---------- 內容：1～9 號 ---------- */
+const N=[null,
+{n:'開路先鋒',one:'想到就做，自帶主角光環',kw:['獨立','果斷','有主見'],
+ g:'你習慣自己拿主意，遇到事情會先衝第一個。優點是行動力強、不怕從零開始；課題是學會等等別人，有時候放慢一點，團隊會更願意跟你走。',
+ love:'喜歡就會主動追，也希望對方欣賞你的能力。要小心不自覺變成「我說了算」，多問一句「你覺得呢」，感情會順很多。',
+ work:'適合能自己做決定的位置：創業、帶團隊、業務開發、需要開新局的專案。被管太細會很痛苦。',
+ money:'賺錢有衝勁，花錢也很乾脆。看到想要的就買，記得留一筆「衝動預備金」，就不會月底後悔。',
+ m:[3,5,9],pig:'原來你是 1 號人！難怪做什麼都想當第一個～'},
+{n:'貼心夥伴',one:'最會察言觀色的溫柔派',kw:['細膩','合作','體貼'],
+ g:'你很容易感覺到別人的情緒，是大家身邊最舒服的存在。優點是溫柔、擅長協調；課題是別總把自己放最後，你的感受也很重要。',
+ love:'需要很多陪伴和確認，對方一句晚安就能開心一整天。容易委屈自己，想要什麼要說出口，對方才知道。',
+ work:'適合需要合作和細心的工作：助理、行政、客服、諮商、設計協作。在有安全感的團隊裡會發光。',
+ money:'用錢保守、不太亂花，但常常為了別人花錢。請朋友、送禮物之外，也記得對自己好一點。',
+ m:[4,6,8],pig:'原來你是 2 號人！難怪小豬一難過你就發現了～'},
+{n:'開心果',one:'走到哪，笑聲就跟到哪',kw:['創意','表達','樂觀'],
+ g:'你腦袋轉很快，點子多、很會講話，常常是場子裡的氣氛擔當。優點是樂觀有創意；課題是專心把一件事做完，三分鐘熱度要小心。',
+ love:'戀愛要好玩、有趣才行，喜歡一起找新鮮事做。情緒來得快去得快，吵架別說出太傷人的話。',
+ work:'適合需要表達和創意的工作：行銷、企劃、主持、寫作、設計、社群經營。重複性高的工作會悶壞你。',
+ money:'錢來得快去得也快，常常花在吃喝玩樂和朋友身上。試著設一個「好玩基金」，花得開心又不爆掉。',
+ m:[1,5,6],pig:'原來你是 3 號人！難怪跟你聊天都停不下來～'},
+{n:'穩穩建築師',one:'一步一腳印，說到做到',kw:['踏實','可靠','有條理'],
+ g:'你做事有計畫、有步驟，交給你的事大家都放心。優點是穩定、負責；課題是別太固執，偶爾讓計畫外的事發生，也可能有驚喜。',
+ love:'不擅長甜言蜜語，愛是用行動表現的：接送、記得紀念日、默默把事情處理好。希望對方也看得到你的用心。',
+ work:'適合需要穩定和精準的工作：會計、工程、管理、品管、公務體系。規則清楚的地方最能發揮。',
+ money:'天生會存錢，記帳、預算都難不倒你。小心太省錯過值得的投資，該花的地方就大方一點。',
+ m:[2,6,8],pig:'原來你是 4 號人！難怪你的計畫表比小豬的零食還多～'},
+{n:'自由冒險家',one:'生活要有新鮮感才算數',kw:['好奇','變化','行動派'],
+ g:'你喜歡嘗試新東西、去新地方，對世界充滿好奇。優點是適應力強、反應快；課題是定下來，別因為無聊就放棄還沒完成的事。',
+ love:'需要很多自由空間，被盯太緊會想逃。最適合一起旅行、一起探險的伴侶，感情要保持新鮮感。',
+ work:'適合變化多、會移動的工作：旅遊、媒體、業務、自由接案、新創。每天一樣的辦公室生活會讓你枯萎。',
+ money:'收入可能起起伏伏，花錢重體驗，旅行和新玩意是大宗。存一筆緊急預備金，自由才會更自在。',
+ m:[1,3,7],pig:'原來你是 5 號人！難怪你總是坐不住，下一站去哪～'},
+{n:'溫暖照顧者',one:'身邊的人，都被你照顧到了',kw:['責任','溫柔','顧家'],
+ g:'你很有責任感，看到別人需要幫忙就會出手。優點是溫暖、可靠；課題是別什麼都扛，照顧別人之前先照顧好自己。',
+ love:'很顧家，會把另一半照顧得無微不至。小心付出太多變成控制，也別期待對方用一樣的方式回報。',
+ work:'適合照顧人、服務人的工作：教育、醫護、社工、餐飲、室內設計。能讓人變好的工作最有成就感。',
+ money:'錢常常花在家人和朋友身上。家裡的開銷你都想扛，記得替自己的夢想也留一份。',
+ m:[2,3,9],pig:'原來你是 6 號人！難怪小豬一來你就問吃飽沒～'},
+{n:'思考哲學家',one:'腦袋裡永遠有十萬個為什麼',kw:['洞察','獨處','追根究柢'],
+ g:'你喜歡想事情、研究事情，看得比別人更深。優點是觀察力強、有自己的見解；課題是別想太多，也別把自己關起來，偶爾說出心裡話。',
+ love:'慢熱，需要時間才會打開心房。一旦認定就很專一，但需要獨處的空間，對方要懂你的安靜不是冷淡。',
+ work:'適合需要專業和深度的工作：研究、工程、分析、寫作、心理、玄學。能專心鑽研的環境最適合你。',
+ money:'不太在意物質，錢多花在書、課程和興趣上。理財前會研究很久，記得研究完要真的行動。',
+ m:[5,4,9],pig:'原來你是 7 號人！難怪那麼愛想東想西～'},
+{n:'實力經營者',one:'目標明確，越挑戰越有勁',kw:['企圖心','效率','資源'],
+ g:'你很有目標感，知道自己要什麼，也願意為它努力。優點是執行力和判斷力；課題是別只看結果，過程中的人和感受也要顧到。',
+ love:'會用實際行動給對方安全感，想一起打拼未來。工作忙起來容易忽略另一半，記得把約會也排進行程。',
+ work:'適合能看見成果和數字的工作：管理、金融、經營、法律、業務主管。有升遷空間的地方最有動力。',
+ money:'對錢很敏感，懂得讓錢變大。投資前記得分散風險，別一次全押，也別把賺錢當成唯一目標。',
+ m:[2,4,6],pig:'原來你是 8 號人！難怪你連逛夜市都在算 CP 值～'},
+{n:'理想夢想家',one:'心很大，想讓世界變好一點',kw:['包容','浪漫','利他'],
+ g:'你心胸寬、同理心強，常常想到別人和更大的事情。優點是包容、有理想；課題是別活在想像裡太久，把夢想拆成今天可以做的一小步。',
+ love:'浪漫、重視心靈契合，愛一個人會很無私。小心愛上「想像中的他」，看清楚真實的對方再投入。',
+ work:'適合有意義感的工作：藝術、公益、教育、心理、醫療、國際交流。光為了賺錢的工作會讓你失去動力。',
+ money:'對錢不太計較，常常捐出去或花在別人身上。給自己訂個簡單的存錢規則，才能長久地幫助別人。',
+ m:[3,6,1],pig:'原來你是 9 號人！難怪你連路邊的貓都想照顧～'}];
+
+const MASTER={
+ 11:'你帶著大師數 <b>11</b>：直覺特別準，常常說中別人心事。是很好的傾聽者和啟發者，但也比較敏感，要記得替自己充電。',
+ 22:'你帶著大師數 <b>22</b>：有把夢想蓋成真實建築的能力，適合做大規模、長期的事。壓力大時別一個人硬撐。',
+ 33:'你帶著大師數 <b>33</b>：天生的療癒者，身邊的人跟你在一起會覺得被理解。付出很多的同時，也要讓別人照顧你。'};
+
+const YEAR=[null,
+ '新的開始。適合開新計畫、換環境、學新東西，大膽一點。',
+ '慢慢來的一年。適合經營關係、等待時機，合作比單打獨鬥好。',
+ '表現自己的一年。社交、創作、玩樂運都好，多出去走走。',
+ '打地基的一年。踏實做事、存錢、整理生活，辛苦會有回報。',
+ '變動的一年。可能搬家、換工作或旅行，保持彈性迎接改變。',
+ '家庭與責任的一年。多陪家人、照顧身邊的人，感情有機會升溫。',
+ '向內看的一年。適合進修、獨處、想清楚自己要什麼。',
+ '收穫的一年。努力會被看見，工作和財運都有機會往上。',
+ '整理與告別的一年。把不需要的放下，為下一輪新開始騰出空間。'];
+
+/* ---------- 兩人配對：三派 ---------- */
+const GROUP={1:'A',5:'A',7:'A',2:'B',4:'B',8:'B',3:'C',6:'C',9:'C'};
+const GNAME={A:'獨立派',B:'穩定派',C:'感性派'};
+const REL={
+ same:{base:86,t:'照鏡子組合',d:(a,b)=>`你們是一樣的數字，很多想法不用說就懂，連缺點都很像。相處起來很輕鬆，但吵架時也一樣固執。`,tip:'一個人退一步不代表輸。輪流當那個先開口的人。'},
+ group:{base:92,t:'默契組合',d:(a,b,g)=>`你們都是${GNAME[g]}，看事情的角度很接近，在一起很自在，像認識很久的老朋友。`,tip:'太像也容易一起陷入同樣的盲點，偶爾找朋友聽聽不同意見。'},
+ BC:{base:88,t:'互補組合',d:(a,b)=>`一個是穩定派，一個是感性派。一個負責讓生活踏實，一個負責讓生活有溫度，互相補上對方缺的那一塊。`,tip:'穩定派多說一句好聽話，感性派多體諒一點務實的考量。'},
+ AC:{base:80,t:'火花組合',d:(a,b)=>`一個是獨立派，一個是感性派。你們會被對方身上自己沒有的東西吸引，相處起來很有火花，也很有話聊。`,tip:'獨立派記得多表達關心，感性派給對方一點獨處的空間。'},
+ AB:{base:72,t:'磨合組合',d:(a,b)=>`一個是獨立派，一個是穩定派。一個想往前衝，一個想先規劃好，步調不一樣，需要時間找到彼此的節奏。`,tip:'把「你怎麼這樣」換成「我們各做擅長的」，就會變成最強搭檔。'}};
+function relation(a,b){
+  if(a===b)return['same',null];
+  const ga=GROUP[a],gb=GROUP[b];
+  if(ga===gb)return['group',ga];
+  return[[ga,gb].sort().join(''),null];
+}
+/* ---------- 配對：不同關係（感情用上面的 REL，其餘在這裡） ---------- */
+const PTOPICS=[['love','感情'],['friend','友情'],['work','工作'],['family','家人']];
+const PWHO={love:'談戀愛',friend:'當朋友',work:'一起工作',family:'在家裡'};
+const FR=[null,
+ '當朋友時是帶頭揪團的那個人，很講義氣，有時候太有主見。',
+ '最好的傾聽者，朋友心情不好都會找你。別忘了你也可以找別人訴苦。',
+ '朋友圈裡的開心果，有你就不冷場。約好的事別臨時忘記喔。',
+ '最可靠的朋友，答應的事一定做到，只是有點難約，要早點排。',
+ '新奇好玩的事都找得到你，交友圈很廣，但不喜歡被綁住。',
+ '朋友眼中的爸媽，會問大家吃飽沒、有沒有帶傘。',
+ '朋友不多但交情很深，跟你聊天常常能聊到很深的話題。',
+ '有事找你最靠譜，人脈廣、資源多，朋友常請你出主意。',
+ '對朋友大方又包容，常常是大家心裡最溫柔的那個人。'];
+const FAM=[null,
+ '在家裡很有自己的想法，不喜歡被管，但有事會第一個站出來。',
+ '家裡的和事佬，大家吵架時會默默在中間協調。',
+ '家裡的氣氛擔當，常逗大家笑，也常被念不夠認真。',
+ '家裡的管家，帳單、行程都記得清清楚楚，是大家的靠山。',
+ '常常不在家、到處跑，家人想你時記得多報平安。',
+ '最顧家的人，大小事都想照顧到，偶爾也讓自己休息一下。',
+ '在家比較安靜，需要自己的空間，但其實很在乎家人。',
+ '家裡的經濟支柱或決策者，對家人有責任感，也對自己要求很高。',
+ '對家人很寬容，願意為家付出，記得也說說自己的需要。'];
+const PCTX={
+ friend:{
+  same:{t:'同款好朋友',adj:2,d:'你們的笑點和雷點都很像，常常異口同聲。一起玩很開心，但也可能一起衝動做決定。',tip:'有一個人負責踩煞車，友情會更長久。'},
+  group:{t:'默契好麻吉',adj:2,d:'你們都是{G}，喜歡的東西和相處節奏很像，不用解釋就懂對方。',tip:'偶爾一起嘗試對方沒玩過的東西，友情會更有新鮮感。'},
+  BC:{t:'互補好朋友',adj:0,d:'穩定派是可靠的靠山，感性派是快樂的來源。一個幫忙出主意，一個陪你哭陪你笑。',tip:'感性派記得說謝謝，穩定派偶爾也讓自己被照顧。'},
+  AC:{t:'火花好朋友',adj:4,d:'獨立派帶來新點子和行動力，感性派帶來溫暖和歡樂，聚在一起永遠不無聊。',tip:'獨立派別放鳥，感性派別太黏，保持彼此舒服的距離。'},
+  AB:{t:'慢熟好朋友',adj:4,d:'一個說走就走，一個要先排好行程。剛認識可能覺得不太合，熟了反而很互補。',tip:'獨立派提早說計畫，穩定派偶爾陪對方來場說走就走。'}},
+ work:{
+  same:{t:'同頻搭檔',adj:-4,d:'你們做事方法一樣，溝通很省力。但擅長和不擅長的也一樣，容易一起漏掉同一件事。',tip:'開工前先分工，把兩個人都不愛做的部分講清楚。'},
+  group:{t:'默契搭檔',adj:0,d:'你們都是{G}，工作節奏和標準很接近，合作起來很順。',tip:'需要不同觀點的任務，記得找其他派的人一起討論。'},
+  BC:{t:'互補搭檔',adj:3,d:'穩定派把關流程和細節，感性派負責創意和人際。一個管進度，一個管氣氛。',tip:'先講好誰做決定、誰負責溝通，就能發揮最大戰力。'},
+  AC:{t:'創意搭檔',adj:0,d:'獨立派負責衝方向，感性派負責把想法說得動人，很適合一起做企劃或創意工作。',tip:'兩個人都不愛細節，記得找人幫忙盯進度。'},
+  AB:{t:'衝刺＋把關',adj:8,d:'獨立派負責開路和做決定，穩定派負責規劃和執行細節。磨合好會是很強的組合。',tip:'先把目標和期限講清楚，再各自用自己的方式做。'}},
+ family:{
+  same:{t:'一個模子刻出來',adj:0,d:'你們像到別人一看就知道是一家人，最懂彼此，也最容易為小事卡住。',tip:'意見不同時先說「我懂你」，再說自己的想法。'},
+  group:{t:'貼心家人',adj:0,d:'你們都是{G}，生活習慣和想法接近，在家裡常常站在同一邊。',tip:'別一起對其他家人二打一，多聽聽不同派的聲音。'},
+  BC:{t:'互相補位的家人',adj:2,d:'穩定派撐起生活大小事，感性派讓家裡有溫度和笑聲。',tip:'穩定派多說出口的關心，感性派多分擔一點家務。'},
+  AC:{t:'有話直說的家人',adj:-3,d:'一個重自由，一個重感受，常常意見不同，但也最能刺激彼此成長。',tip:'說話前想一下對方的感受，家人也需要好好說話。'},
+  AB:{t:'要互相讓步的家人',adj:0,d:'一個想照自己的方式走，一個希望一切照規矩來，難免為生活習慣拌嘴。',tip:'家裡的規則一起討論，不要單方面決定。'}}};
+let ptopic='love';
+function rel(a,b,ctx){
+  const [key,g]=relation(a,b),base=REL[key].base,v=((a*b+a+b)%7)-3;
+  if(ctx==='love'||!PCTX[ctx])return{key,t:REL[key].t,d:REL[key].d(a,b,g),tip:REL[key].tip,sc:Math.min(99,base+v)};
+  const C=PCTX[ctx][key];
+  return{key,t:C.t,d:C.d.replace('{G}',g?GNAME[g]:''),tip:C.tip,sc:Math.max(50,Math.min(99,base+C.adj+v))};
+}
+const personLine=(n,ctx)=>({love:N[n].love,friend:FR[n],work:N[n].work,family:FAM[n]})[ctx];
+const ptopicBtns=()=>PTOPICS.map(([k,l])=>`<button type="button" data-pt="${k}" aria-pressed="${k===ptopic}">${l}</button>`).join('');
+function syncPtopic(){document.querySelectorAll('[data-pt]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.pt===ptopic))}
+
+
+/* ---------- 計算 ---------- */
+const dsum=n=>String(n).split('').reduce((s,c)=>s+(+c),0);
+function lifeNumber(ymd){ // ymd = "19980522"
+  const digits=ymd.split('');let n=dsum(ymd);const steps=[digits.join('+')+' = '+n];let master=null;
+  while(n>9){if([11,22,33].includes(n)&&!master)master=n;const m=dsum(n);steps.push(String(n).split('').join('+')+' = '+m);n=m}
+  return{n,master,steps:steps.join(' → ')};
+}
+function yearNumber(ymd){let n=dsum(ymd.slice(4))+dsum(new Date().getFullYear());while(n>9)n=dsum(n);return n}
+const toYMD=v=>v?v.replace(/-/g,''):'';
+const fromYMD=s=>/^\d{8}$/.test(s)?`${s.slice(0,4)}-${s.slice(4,6)}-${s.slice(6)}`:'';
+const pretty=s=>`${+s.slice(0,4)}/${+s.slice(4,6)}/${+s.slice(6)}`;
+/* ---------- 年／月／日 下拉選單 ---------- */
+const YEAR_START=2007; // 年份選單打開時先停在這一年
+function buildYMD(id){
+  const box=$(id),now=new Date().getFullYear();
+  const opt=(v,t)=>`<option value="${v}">${t}</option>`;
+  let ys=opt('','年');for(let y=now;y>=1900;y--)ys+=opt(y,y);
+  let ms=opt('','月');for(let m=1;m<=12;m++)ms+=opt(m,m+' 月');
+  box.innerHTML=`<select id="${id}Y" aria-label="年">${ys}</select><select id="${id}M" aria-label="月">${ms}</select><select id="${id}D" aria-label="日"></select>`;
+  const Y=$(id+'Y'),M=$(id+'M');
+  const jump=()=>{if(!Y.value)Y.value=YEAR_START};
+  Y.addEventListener('pointerdown',jump);Y.addEventListener('focus',jump);
+  Y.addEventListener('change',()=>fillDays(id));M.addEventListener('change',()=>fillDays(id));
+  fillDays(id);
+}
+function fillDays(id){
+  const D=$(id+'D'),keep=D.value,y=+$(id+'Y').value||2000,m=+$(id+'M').value;
+  const max=m?new Date(y,m,0).getDate():31;let ds='<option value="">日</option>';
+  for(let d=1;d<=max;d++)ds+=`<option value="${d}">${d} 日</option>`;
+  D.innerHTML=ds;if(keep&&+keep<=max)D.value=keep;
+}
+const p2=n=>String(n).padStart(2,'0');
+function getYMD(id){const y=$(id+'Y').value,m=$(id+'M').value,d=$(id+'D').value;return y&&m&&d?y+p2(m)+p2(d):''}
+function setYMD(id,s){$(id+'Y').value=+s.slice(0,4);$(id+'M').value=+s.slice(4,6);fillDays(id);$(id+'D').value=+s.slice(6)}
+const touchedYMD=id=>['Y','M','D'].some(k=>$(id+k).value);
+function focusYMD(id){const k=['Y','M','D'].find(k=>!$(id+k).value)||'Y';$(id+k).focus()}
+['dSolo','dA','dB'].forEach(buildYMD);
+$('ptForm').innerHTML=ptopicBtns();
+$('ptForm').querySelectorAll('[data-pt]').forEach(b=>b.onclick=()=>{ptopic=b.dataset.pt;syncPtopic();if(pair&&!$('pairOut').hidden)renderPair()});
+
+function validYMD(s){if(!/^\d{8}$/.test(s))return false;const d=new Date(+s.slice(0,4),+s.slice(4,6)-1,+s.slice(6));return d.getMonth()===+s.slice(4,6)-1&&d<=new Date()&&+s.slice(0,4)>=1900}
+
+/* ---------- 生日九宮格 ---------- */
+/* 格子排法（台灣常見）：上排 3 6 9、中排 2 5 8、下排 1 4 7 */
+const GPOS=d=>({c:Math.floor((d-1)/3),r:2-((d-1)%3)});
+const LINES=[
+ {k:[1,2,3],n:'藝術線',d:'有美感和創意，很會用作品或文字表達自己。'},
+ {k:[4,5,6],n:'組織線',d:'做事有條理，擅長規劃和整合資源。'},
+ {k:[7,8,9],n:'權力線',d:'有企圖心和影響力，常被推上帶頭的位置。'},
+ {k:[1,4,7],n:'物質線',d:'重視實際，賺錢和把事情落地的能力強。'},
+ {k:[2,5,8],n:'感情線',d:'重感情也重情義，人際關係是你很大的能量來源。'},
+ {k:[3,6,9],n:'智慧線',d:'學習力強、反應快，有一套自己的思考方式。'},
+ {k:[1,5,9],n:'事業線',d:'目標感強，願意為工作投入，比較容易做出成績。'},
+ {k:[3,5,7],n:'人緣線',d:'天生有親和力，走到哪都有人願意幫你。'}];
+const LACK=[null,
+ '比較不習慣自己做決定，可以練習先說出自己的想法。',
+ '表達比較直接，多一點耐心聽別人把話說完。',
+ '比較少把心情說出口，找個方式抒發，寫字、畫畫、唱歌都好。',
+ '不愛被規則綁住，重要的事記得列個計畫表。',
+ '容易想太多、怕變化，給自己一點冒險的空間。',
+ '照顧自己優先，也記得偶爾關心身邊的人。',
+ '比較相信實際經驗，遇到挫折別急著否定自己。',
+ '對錢比較隨性，可以養成記帳或存錢的小習慣。',
+ '比較專注眼前的事，偶爾抬頭想想更遠的夢想。'];
+function gridData(ymd){
+  const sums=[];let n=dsum(ymd);sums.push(n);while(n>9){n=dsum(n);sums.push(n)}
+  const all=(ymd+sums.join('')).split('').map(Number).filter(d=>d>0);
+  const cnt=Array(10).fill(0);all.forEach(d=>cnt[d]++);
+  const lines=LINES.filter(L=>L.k.every(d=>cnt[d]>0));
+  const lack=[1,2,3,4,5,6,7,8,9].filter(d=>!cnt[d]);
+  const many=[1,2,3,4,5,6,7,8,9].filter(d=>cnt[d]>=3);
+  return{cnt,lines,lack,many,sumText:sums.join('、')};
+}
+function gridSVG(g){
+  const C=d=>{const p=GPOS(d);return[50+p.c*100,50+p.r*100]};
+  let s=`<svg class="grid9" viewBox="0 0 300 300" role="img" aria-label="生日九宮格：${[1,2,3,4,5,6,7,8,9].map(d=>d+(g.cnt[d]?' 有'+g.cnt[d]+'個':' 沒有')).join('，')}">
+  <defs><radialGradient id="gb" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="var(--balloon-hi)"/><stop offset=".62" stop-color="var(--balloon)"/></radialGradient></defs>`;
+  for(let d=1;d<=9;d++){const p=GPOS(d);s+=`<rect x="${p.c*100+5}" y="${p.r*100+5}" width="90" height="90" rx="20" fill="var(--dg-surface-2)"/>`}
+  g.lines.forEach(L=>{const[a,b]=[C(L.k[0]),C(L.k[2])];s+=`<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="var(--dg-acc)" stroke-width="12" stroke-linecap="round" opacity=".35"/>`});
+  for(let d=1;d<=9;d++){const[x,y]=C(d),k=g.cnt[d];
+    if(k){s+=`<circle cx="${x}" cy="${y}" r="30" fill="url(#gb)"/><text x="${x}" y="${y+1}" fill="var(--digit)" font-size="34" font-weight="700" text-anchor="middle" dominant-baseline="central">${d}</text>`;
+      if(k>1)s+=`<text x="${x+30}" y="${y-24}" fill="var(--dg-acc)" font-size="17" font-weight="700" text-anchor="middle">×${k}</text>`}
+    else s+=`<text x="${x}" y="${y+1}" fill="var(--dg-place)" font-size="30" text-anchor="middle" dominant-baseline="central" opacity=".55">${d}</text>`}
+  return s+'</svg>';
+}
+function gridPanel(r){
+  const g=gridData(r.ymd);
+  return`<div class="panel g9"><h3>生日九宮格</h3>
+    <p class="sub">把生日裡的數字，加上加總出來的數字（${g.sumText}），都放進格子裡。三格連成一線就是一條「連線」。</p>
+    <div class="g9row">${gridSVG(g)}
+      <div class="g9txt">${g.lines.length?`<p><b>你有 ${g.lines.length} 條連線</b></p><ul class="g9list">${g.lines.map(L=>`<li><b>${L.n}</b>（${L.k.join('-')}）${L.d}</li>`).join('')}</ul>`:'<p><b>你沒有完整的連線</b>：每個數字都還在慢慢收集中，反而代表彈性很大，往哪個方向發展都可以。</p>'}</div></div>
+    ${g.many.length?`<p>${g.many.map(d=>`<b>${d} 出現 ${g.cnt[d]} 次</b>：${N[d].kw.join('、')}的特質在你身上特別明顯。`).join('<br>')}</p>`:''}
+    ${g.lack.length?`<div class="g9lack"><span class="sub">空著的格子</span>${g.lack.map(d=>`<p><span class="chip ghost">${d}</span>${LACK[d]}</p>`).join('')}</div>`:'<p><b>九個數字全部都有！</b>很少見，代表你各方面都很平均。</p>'}
+    <div class="acts"><button class="dg-b ghost" type="button" id="cardGrid">九宮格做成圖卡</button></div>
+  </div>`;
+}
+function gridCard(){const r=solo,g=gridData(r.ymd);
+  const msg=g.lines.length?`你有 ${g.lines.length} 條連線：${g.lines.map(L=>L.n).join('、')}，小豬覺得很厲害！`:'沒有連線也沒關係，每個空格都是還能長大的地方～';
+  return{eyebrow:'問問小豬・生日九宮格',title:pretty(r.ymd),msg,pig:'img/pig-think.webp',
+  body:async(x,{top,W,T})=>{
+    const cs=150,gx=W/2-cs*1.5,gy=top+40,C=d=>{const p=GPOS(d);return[gx+p.c*cs+cs/2,gy+p.r*cs+cs/2]};
+    for(let d=1;d<=9;d++){const p=GPOS(d);x.fillStyle=T.s2;dgRR(x,gx+p.c*cs+8,gy+p.r*cs+8,cs-16,cs-16,30);x.fill()}
+    x.strokeStyle=T.acc;x.globalAlpha=.35;x.lineWidth=18;x.lineCap='round';
+    g.lines.forEach(L=>{const[a,b]=[C(L.k[0]),C(L.k[2])];x.beginPath();x.moveTo(a[0],a[1]);x.lineTo(b[0],b[1]);x.stroke()});x.globalAlpha=1;
+    x.textAlign='center';x.textBaseline='middle';
+    for(let d=1;d<=9;d++){const[cx,cy]=C(d),k=g.cnt[d];
+      if(k){const rr=46,gr=x.createRadialGradient(cx-rr*.3,cy-rr*.4,rr*.1,cx,cy,rr);gr.addColorStop(0,'#fff1b8');gr.addColorStop(.62,'#fdd85f');gr.addColorStop(1,'#fdd85f');
+        x.fillStyle=gr;x.beginPath();x.arc(cx,cy,rr,0,7);x.fill();x.fillStyle='#5a4b9c';x.font=`700 52px ${DG_F}`;x.fillText(d,cx,cy+2);
+        if(k>1){x.fillStyle=T.acc;x.font=`700 26px ${DG_F}`;x.fillText('×'+k,cx+46,cy-40)}}
+      else{x.globalAlpha=.4;x.fillStyle=T.soft;x.font=`400 46px ${DG_F}`;x.fillText(d,cx,cy+2);x.globalAlpha=1}}
+    x.textBaseline='alphabetic';
+    const names=g.lines.length?g.lines.map(L=>L.n):['還沒有連線'];x.font=`700 32px ${DG_F}`;
+    const ws=names.map(k=>x.measureText(k).width+52),gap=14;let rows=[[]],rw=0;
+    ws.forEach((w,i)=>{if(rw+w>W-220&&rows[rows.length-1].length){rows.push([]);rw=0}rows[rows.length-1].push(i);rw+=w+gap});
+    rows.slice(0,2).forEach((row,ri)=>{const tot=row.reduce((s,i)=>s+ws[i]+gap,-gap);let cx=W/2-tot/2,y=gy+cs*3+40+ri*72;
+      row.forEach(i=>{x.fillStyle=g.lines.length?T.acc:T.s2;dgRR(x,cx,y,ws[i],58,29);x.fill();x.fillStyle=g.lines.length?dgVar('--dg-on-acc','#fff'):T.ink;x.fillText(names[i],cx+ws[i]/2,y+40);cx+=ws[i]+gap})});
+  }}}
+
+/* ---------- 畫面 ---------- */
+const dgT=p=>{try{window.dgTrack&&window.dgTrack(p)}catch(e){}};
+const pigHTML=(n,size)=>`<div class="pig pop" style="${size?'--s:'+size:''}"><img src="img/pig-number.webp" alt="" width="400" height="398"><span class="num" aria-hidden="true">${n}</span></div>`;
+let topic='general',solo=null,pair=null,shared=false;
+const TOPICS=[['general','整體'],['love','感情'],['work','工作'],['money','財運']];
+const say=t=>$('say').textContent=t;
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function setMode(m){
+  const isPair=m==='pair';
+  $('mSolo').setAttribute('aria-pressed',!isPair);$('mPair').setAttribute('aria-pressed',isPair);
+  $('soloForm').hidden=isPair;$('pairForm').hidden=!isPair;
+  $('soloOut').hidden=isPair||!solo;$('pairOut').hidden=!isPair||!pair;
+  if(!(isPair?pair:solo))say(isPair?'輸入兩個人的生日，小豬幫你們配配看～':'把生日告訴小豬，我來幫你數一數～');
+}
+$('mSolo').onclick=()=>setMode('solo');
+$('mPair').onclick=()=>setMode('pair');
+
+function renderSolo(){
+  const r=solo,c=N[r.n],yn=yearNumber(r.ymd),yr=new Date().getFullYear();
+  const body={general:c.g,love:c.love,work:c.work,money:c.money}[topic];
+  $('soloOut').innerHTML=`
+    <div class="hero">${pigHTML(r.n)}
+      <div class="txt"><span class="eyebrow">${pretty(r.ymd)} 的生命靈數</span>
+        <h2>${r.n} 號・${c.n}</h2><p class="one">${c.one}</p>
+        <div class="kws">${c.kw.map(k=>`<span>${k}</span>`).join('')}</div>
+        <p class="calc">${r.steps}</p></div></div>
+    ${r.master?`<p class="master">${MASTER[r.master]}</p>`:''}
+    <div class="panel">
+      <div class="dg-topics" role="group" aria-label="想看哪一方面">${TOPICS.map(([k,l])=>`<button type="button" data-t="${k}" aria-pressed="${k===topic}">${l}</button>`).join('')}</div>
+      <p>${body}</p>
+      <div class="matches"><span class="sub">最合拍的數字</span>${c.m.map(x=>`<span class="chip">${x}</span>`).join('')}</div>
+    </div>
+    ${gridPanel(r)}
+    <div class="panel"><h3>${yr} 年，你是 ${yn} 號年</h3><p>${YEAR[yn]}</p><p class="sub">流年數：出生月日＋今年西元年，加到一位數。每年都會換。</p></div>
+    <div class="acts"><button class="dg-b" type="button" id="cardSolo">做成圖卡</button><button class="dg-b ghost" type="button" id="shareSolo">分享結果</button><button class="dg-b ghost" type="button" id="toPair">和誰配對看看</button></div>`;
+  $('soloOut').querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{topic=b.dataset.t;dgT('numerology/topic/'+topic);renderSolo();$('soloOut').querySelectorAll('.pig').forEach(p=>p.classList.remove('pop'))});
+  $('shareSolo').onclick=e=>dgShare(soloURL(),`我是生命靈數 ${r.n} 號・${c.n}`,e.currentTarget);
+  $('cardSolo').onclick=()=>dgShowCard(soloCard(),`生命靈數${r.n}號`);
+  $('cardGrid').onclick=()=>{dgT('numerology/gridcard');dgShowCard(gridCard(),'生日九宮格')};
+  $('toPair').onclick=()=>{setYMD('dA',r.ymd);setMode('pair');$('nA').focus()};
+}
+
+function renderPair(){
+  const p=pair,R=rel(p.a.n,p.b.n,ptopic),sc=R.sc;
+  const na=esc(p.na||'第一個人'),nb=esc(p.nb||'第二個人');
+  $('pairOut').innerHTML=`
+    <div class="duo">
+      <div class="side">${pigHTML(p.a.n)}<b>${na}</b><small>${p.a.n} 號・${GNAME[GROUP[p.a.n]]}</small></div>
+      <div class="score"><div class="heart"><svg viewBox="0 0 76 70" aria-hidden="true"><path fill="var(--heart)" d="M38 68C14 50 2 38 2 22 2 10 11 2 21 2c7 0 13 4 17 10C42 6 48 2 55 2c10 0 19 8 19 20 0 16-12 28-36 46z"/></svg><span>${sc}%</span></div><small>${PTOPICS.find(t=>t[0]===ptopic)[1]}合拍度</small></div>
+      <div class="side">${pigHTML(p.b.n)}<b>${nb}</b><small>${p.b.n} 號・${GNAME[GROUP[p.b.n]]}</small></div>
+    </div>
+    <div class="panel rel"><div class="dg-topics" role="group" aria-label="想看哪一種關係">${ptopicBtns()}</div><span class="eyebrow">${p.a.n} 號 × ${p.b.n} 號</span><h2>${R.t}</h2>
+      <div class="meter" role="img" aria-label="合拍度 ${sc}%"><i style="width:${reduce?sc:0}%"></i></div>
+      <p>${R.d}</p>
+      <div class="two"><div><b>${na}${PWHO[ptopic]}</b><p>${personLine(p.a.n,ptopic)}</p></div><div><b>${nb}${PWHO[ptopic]}</b><p>${personLine(p.b.n,ptopic)}</p></div></div>
+      <p class="tipbox"><b>小豬的相處建議：</b>${R.tip}</p>
+    </div>
+    <div class="acts"><button class="dg-b" type="button" id="cardPair">做成圖卡</button><button class="dg-b ghost" type="button" id="sharePair">傳給對方看</button></div>`;
+  if(!reduce)requestAnimationFrame(()=>requestAnimationFrame(()=>{const i=$('pairOut').querySelector('.meter i');if(i)i.style.width=sc+'%'}));
+  $('sharePair').onclick=e=>dgShare(pairURL(),`我們是生命靈數「${R.t}」，合拍度 ${sc}%`,e.currentTarget);
+  $('cardPair').onclick=()=>dgShowCard(pairCard(),`生命靈數配對`);
+  $('pairOut').querySelectorAll('[data-pt]').forEach(b=>b.onclick=()=>{ptopic=b.dataset.pt;syncPtopic();dgT('numerology/pairtopic/'+ptopic);renderPair();say(`換成${PTOPICS.find(t=>t[0]===ptopic)[1]}來看，你們是「${rel(pair.a.n,pair.b.n,ptopic).t}」！`);$('pairOut').querySelectorAll('.pig').forEach(x=>x.classList.remove('pop'))});
+}
+
+async function runSolo(ymd,instant){
+  solo={ymd,...lifeNumber(ymd)};
+  if(!instant){say('1、2、3……小豬在數手指（只有四隻）');$('soloOut').hidden=true;await wait(reduce?0:900);dgT('numerology/draw/'+solo.n)}
+  say(N[solo.n].pig);renderSolo();$('soloOut').hidden=false;
+  if(!instant)$('soloOut').scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+}
+async function runPair(a,b,na,nb,instant){
+  pair={a:{ymd:a,...lifeNumber(a)},b:{ymd:b,...lifeNumber(b)},na,nb};
+  if(!instant){say('小豬正在幫你們牽線……');$('pairOut').hidden=true;await wait(reduce?0:1000);dgT('numerology/pair/'+pair.a.n+'x'+pair.b.n)}
+  say(`${pair.a.n} 號配 ${pair.b.n} 號，是「${rel(pair.a.n,pair.b.n,ptopic).t}」耶！`);
+  renderPair();$('pairOut').hidden=false;
+  if(!instant)$('pairOut').scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+}
+
+$('soloForm').onsubmit=e=>{e.preventDefault();const s=getYMD('dSolo'),er=$('errSolo');
+  if(!validYMD(s)){er.textContent=touchedYMD('dSolo')&&getYMD('dSolo')?'這個日期怪怪的，要在 1900 年之後、而且不能是未來喔。':'生日還沒填完整，年、月、日都要選到喔。';er.hidden=false;say('咦？小豬還看不懂這個生日～');focusYMD('dSolo');return}er.hidden=true;runSolo(s)};
+$('pairForm').onsubmit=e=>{e.preventDefault();const a=getYMD('dA'),b=getYMD('dB'),er=$('errPair');
+  if(!validYMD(a)||!validYMD(b)){er.textContent='兩個人的生日都要填完整（年、月、日），而且不能是未來的日期。';er.hidden=false;say('咦？還差一個生日沒填好～');focusYMD(validYMD(a)?'dB':'dA');return}er.hidden=true;
+  runPair(a,b,$('nA').value.trim(),$('nB').value.trim())};
+
+/* ---------- 分享連結 ---------- */
+function dgToast(m){let t=document.querySelector('.dg-toast');if(!t){t=document.createElement('div');t.className='dg-toast';document.body.appendChild(t)}t.textContent=m;t.hidden=false;clearTimeout(t._t);t._t=setTimeout(()=>t.hidden=true,2000)}
+function dgBase(){return location.href.split('#')[0].split('?')[0]}
+function dgShare(url,title,anchor){
+  dgT('numerology/share');
+  if(navigator.share){navigator.share({title,text:title,url}).catch(()=>{});return}
+  const fb=()=>{let b=anchor.parentElement.querySelector('textarea');if(!b){b=document.createElement('textarea');b.className='dg-copy field';b.readOnly=true;b.rows=2;b.style.width='100%';anchor.parentElement.appendChild(b)}b.value=url;b.focus();b.select();dgToast('長按連結複製')};
+  try{navigator.clipboard.writeText(url).then(()=>dgToast('已複製連結，貼給朋友吧'),fb)}catch(e){fb()}
+}
+function soloURL(){const u=new URLSearchParams({d:solo.ymd});if(topic!=='general')u.set('t',topic);return dgBase()+'?'+u}
+function pairURL(){const u=new URLSearchParams({a:pair.a.ymd,b:pair.b.ymd});if(pair.na)u.set('na',pair.na);if(pair.nb)u.set('nb',pair.nb);if(ptopic!=='love')u.set('t',ptopic);return dgBase()+'?'+u}
+
+/* ---------- 圖卡 1080×1350（跟其他房間同一套版型） ---------- */
+const DG_SITE='iammay22.github.io/piggy-oracle';
+const DG_F='"GenSenRounded","PingFang TC","Microsoft JhengHei",sans-serif';
+function dgVar(n,fb){try{return getComputedStyle(document.documentElement).getPropertyValue(n).trim()||fb}catch(e){return fb}}
+function dgImg(src){return new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.onerror=()=>r(null);i.src=src})}
+function dgWrap(ctx,text,x,y,maxW,lh,maxLines){const out=[];let line='';
+  for(const ch of String(text)){if(ctx.measureText(line+ch).width>maxW&&line){out.push(line);line=ch}else line+=ch}if(line)out.push(line);
+  const shown=out.slice(0,maxLines);if(out.length>maxLines){let l=shown[maxLines-1];while(ctx.measureText(l+'…').width>maxW&&l.length)l=l.slice(0,-1);shown[maxLines-1]=l+'…'}
+  shown.forEach((l,i)=>ctx.fillText(l,x,y+i*lh));return shown.length*lh}
+function dgRR(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+async function dgMakeCard(spec){
+  try{await Promise.all([document.fonts.load('700 40px GenSenRounded'),document.fonts.load('400 40px GenSenRounded')])}catch(e){}
+  const W=1080,H=1350,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');
+  const T={bg:dgVar('--dg-bg','#eaf4fc'),sf:dgVar('--dg-surface','#fff'),s2:dgVar('--dg-surface-2','#dcecf8'),ink:dgVar('--dg-ink','#1f2b38'),soft:dgVar('--dg-soft','#5a6a7b'),acc:dgVar('--dg-acc','#2f72ad'),line:dgVar('--dg-line','#cfe1f0'),heart:dgVar('--heart','#e9799a')};
+  x.fillStyle=T.bg;x.fillRect(0,0,W,H);
+  x.fillStyle=T.acc;x.globalAlpha=.07;for(let i=0;i<26;i++){x.beginPath();x.arc((i*397)%W,(i*263)%H,6+(i%4)*3,0,7);x.fill()}x.globalAlpha=1;
+  x.fillStyle=T.sf;dgRR(x,54,54,W-108,H-108,52);x.fill();x.strokeStyle=T.line;x.lineWidth=3;x.stroke();
+  x.textBaseline='alphabetic';x.textAlign='center';
+  x.fillStyle=T.acc;x.font=`700 34px ${DG_F}`;x.fillText(spec.eyebrow,W/2,148);
+  x.fillStyle=T.ink;x.font=`700 60px ${DG_F}`;x.fillText(spec.title,W/2,224);
+  await spec.body(x,{top:260,bottom:960,W,T});
+  x.textAlign='left';const mx=110,mw=600,my=1010;
+  x.fillStyle=T.s2;dgRR(x,90,975,W-180,210,32);x.fill();
+  x.fillStyle=T.acc;x.font=`700 32px ${DG_F}`;x.fillText(spec.msgTitle||'小豬想說',mx,my+18);
+  x.fillStyle=T.ink;x.font=`400 34px ${DG_F}`;dgWrap(x,spec.msg,mx,my+70,mw,48,3);
+  const pig=await dgImg(spec.pig);if(pig){const pw=250,ph=pig.height*pw/pig.width;x.drawImage(pig,W-pw-80,1185-ph+20,pw,ph)}
+  x.fillStyle=T.soft;x.font=`700 28px ${DG_F}`;x.fillText('問問小豬',90,1252);x.font=`400 26px ${DG_F}`;x.fillText(DG_SITE,90,1288);
+  x.textAlign='right';x.fillText('by may22',W-90,1288);
+  return new Promise(r=>c.toBlob(b=>r(b),'image/png'));
+}
+async function dgShowCard(spec,name){
+  dgT('numerology/card');
+  let m=document.querySelector('.dg-modal');if(m)m.remove();
+  m=document.createElement('div');m.className='dg-modal';m.innerHTML='<div class="dg-sheet"><p class="dg-wait">小豬正在畫圖卡……</p></div>';document.body.appendChild(m);
+  m.addEventListener('click',e=>{if(e.target===m||e.target.closest('.dg-x'))m.remove()});
+  const blob=await dgMakeCard(spec);if(!blob){m.querySelector('.dg-sheet').innerHTML='<p>這個瀏覽器做不出圖卡，請改用截圖。</p><button class="dg-b ghost dg-x">關閉</button>';return}
+  const url=URL.createObjectURL(blob),file=new File([blob],name+'.png',{type:'image/png'});
+  const canShare=!!(navigator.canShare&&navigator.canShare({files:[file]}));
+  m.querySelector('.dg-sheet').innerHTML=`<img src="${url}" alt="生命靈數結果圖卡"><p class="dg-tip">手機可以長按圖片存到相簿</p><div class="dg-acts2">${canShare?'<button class="dg-b" id="dgShareImg">分享圖片</button>':''}<a class="dg-b ghost" href="${url}" download="${name}.png">存成圖片</a><button class="dg-b ghost dg-x">關閉</button></div>`;
+  const s=m.querySelector('#dgShareImg');if(s)s.onclick=()=>navigator.share({files:[file],title:'問問小豬',text:'我的生命靈數｜'+DG_SITE}).catch(()=>{});
+}
+/* pig with the balloon number painted on: balloon centre sits at (300,102) of the 400px art */
+async function drawPigNum(x,n,cx,top,w){
+  const im=await dgImg('img/pig-number.webp');if(!im)return 0;const h=im.height*w/im.width,l=cx-w/2;x.drawImage(im,l,top,w,h);
+  const bx=l+w*.75,by=top+w*.255,r=w*.165,g=x.createRadialGradient(bx-r*.3,by-r*.4,r*.1,bx,by,r);
+  g.addColorStop(0,'#fff1b8');g.addColorStop(.62,'#fdd85f');g.addColorStop(1,'#fdd85f');
+  x.fillStyle=g;x.beginPath();x.arc(bx,by,r,0,7);x.fill();
+  x.fillStyle='#5a4b9c';x.font=`700 ${Math.round(w*.27)}px ${DG_F}`;x.textAlign='center';x.textBaseline='middle';x.fillText(n,bx,by+w*.01);x.textBaseline='alphabetic';
+  return h;
+}
+function soloCard(){const r=solo,c=N[r.n];return{eyebrow:'問問小豬・生命靈數',title:`${r.n} 號・${c.n}`,msg:c.pig,pig:'img/pig-happy.webp',
+  body:async(x,{top,W,T})=>{
+    await drawPigNum(x,r.n,W/2-40,top,420);
+    x.textAlign='center';x.fillStyle=T.ink;x.font=`700 44px ${DG_F}`;x.fillText(c.one,W/2,top+500);
+    x.font=`700 32px ${DG_F}`;const ks=c.kw,ws=ks.map(k=>x.measureText(k).width+56),tot=ws.reduce((a,b)=>a+b,0)+(ks.length-1)*18;let cx=W/2-tot/2;
+    ks.forEach((k,i)=>{x.fillStyle=T.s2;dgRR(x,cx,top+540,ws[i],58,29);x.fill();x.fillStyle=T.ink;x.fillText(k,cx+ws[i]/2,top+580);cx+=ws[i]+18});
+    x.fillStyle=T.soft;x.font=`400 28px ${DG_F}`;x.fillText(pretty(r.ymd)+(r.master?`　大師數 ${r.master}`:''),W/2,top+660);
+  }}}
+function pairCard(){const p=pair,R=rel(p.a.n,p.b.n,ptopic),sc=R.sc,lab=PTOPICS.find(t=>t[0]===ptopic)[1];
+  return{eyebrow:'問問小豬・生命靈數配對・'+lab,title:R.t,msg:R.tip,msgTitle:'小豬的相處建議',pig:'img/pig-love.webp',
+  body:async(x,{top,W,T})=>{
+    const w=330;await drawPigNum(x,p.a.n,W/2-250,top+20,w);await drawPigNum(x,p.b.n,W/2+250,top+20,w);
+    x.textAlign='center';x.fillStyle=T.ink;x.font=`700 38px ${DG_F}`;
+    x.fillText(p.na||'第一個人',W/2-250,top+410);x.fillText(p.nb||'第二個人',W/2+250,top+410);
+    x.fillStyle=T.soft;x.font=`400 28px ${DG_F}`;x.fillText(`${p.a.n} 號・${GNAME[GROUP[p.a.n]]}`,W/2-250,top+456);x.fillText(`${p.b.n} 號・${GNAME[GROUP[p.b.n]]}`,W/2+250,top+456);
+    // heart
+    const hx=W/2,hy=top+230,s=1.7;x.save();x.translate(hx-38*s,hy-35*s);x.scale(s,s);
+    x.fillStyle=T.heart;x.fill(new Path2D('M38 68C14 50 2 38 2 22 2 10 11 2 21 2c7 0 13 4 17 10C42 6 48 2 55 2c10 0 19 8 19 20 0 16-12 28-36 46z'));x.restore();
+    x.fillStyle='#fff';x.font=`700 40px ${DG_F}`;x.fillText(sc+'%',hx,hy+4);
+    x.fillStyle=T.soft;x.font=`400 26px ${DG_F}`;x.fillText(lab+'合拍度',hx,hy+92);
+    x.fillStyle=T.ink;x.font=`400 32px ${DG_F}`;x.textAlign='left';dgWrap(x,R.d,130,top+540,W-260,46,3);
+  }}}
+
+/* ---------- 打開別人分享的連結 ---------- */
+(function(){
+  const P=new URLSearchParams(location.search);
+  const sharedBanner=()=>{$('sharedSlot').innerHTML=`<div class="dg-shared"><span>這是朋友分享給你的結果</span><a href="${dgBase()}">換我算算看 →</a></div>`};
+  if(validYMD(P.get('a')||'')&&validYMD(P.get('b')||'')){
+    sharedBanner();setYMD('dA',P.get('a'));setYMD('dB',P.get('b'));$('nA').value=P.get('na')||'';$('nB').value=P.get('nb')||'';
+    {const t=P.get('t');if(PTOPICS.some(([k])=>k===t))ptopic=t}syncPtopic();
+    setMode('pair');runPair(P.get('a'),P.get('b'),(P.get('na')||'').slice(0,8),(P.get('nb')||'').slice(0,8),true);
+  }else if(validYMD(P.get('d')||'')){
+    sharedBanner();const t=P.get('t');if(TOPICS.some(([k])=>k===t))topic=t;setYMD('dSolo',P.get('d'));runSolo(P.get('d'),true);
+  }
+
+})();
+</script>
+
+<footer class="dg-foot"><p>結果參考就好，決定權在你手上。</p><nav aria-label="其他占卜"><a href="index.html">首頁</a><a href="tarot.html">塔羅</a><a href="iching.html">易經</a><a href="lenormand.html">雷諾曼</a><a href="qian.html">求籤</a><a href="numerology.html">生命靈數</a></nav><p class="by">by may22</p></footer>
+</body></html>

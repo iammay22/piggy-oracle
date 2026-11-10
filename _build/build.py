@@ -2,7 +2,7 @@ import re, os, shutil, subprocess, sys
 os.chdir('/home/claude/digua-site')
 DOM = sys.argv[1] if len(sys.argv) > 1 else 'https://super-swan-5b5b97.netlify.app'
 GC = sys.argv[2] if len(sys.argv) > 2 else ''
-SCR = '/tmp/claude-0/-home-claude/13a1fd83-a6db-5519-8bec-fd3a47b498c1/scratchpad/'
+SCR = '/tmp/claude-0/-home-claude/3d595ea2-d814-5f15-858d-0428b492a703/scratchpad/'
 FS = SCR + 'fontsrc/g/otf/TW/'
 
 def sub1(s, old, new):
@@ -258,7 +258,7 @@ STATS_JS = '''/* 問問小豬 — anonymous counts sent to your Google Sheet. Le
 })();
 ''' % GC
 
-FOOT = '<footer class="dg-foot"><p>結果參考就好，決定權在你手上。</p><nav aria-label="其他占卜"><a href="index.html">首頁</a><a href="tarot.html">塔羅</a><a href="iching.html">易經</a><a href="lenormand.html">雷諾曼</a><a href="qian.html">求籤</a></nav><p class="by">by may22</p></footer>'
+FOOT = '<footer class="dg-foot"><p>結果參考就好，決定權在你手上。</p><nav aria-label="其他占卜"><a href="index.html">首頁</a><a href="tarot.html">塔羅</a><a href="iching.html">易經</a><a href="lenormand.html">雷諾曼</a><a href="qian.html">求籤</a><a href="numerology.html">生命靈數</a></nav><p class="by">by may22</p></footer>'
 
 def room(tok, extra=''):
     return '<style>\n/* room look */\n:root:root:root:root{' + tok + '}\n' + extra + '\n</style>'
@@ -271,6 +271,8 @@ ROOM = {
    'body{background:var(--dg-bg)!important;background-image:repeating-linear-gradient(0deg,rgba(120,70,50,.025) 0 2px,transparent 2px 6px)!important}'),
  'qian': room('--dg-bg:#fbf0e3;--dg-surface:#fffaf3;--dg-surface-2:#f5e3ce;--dg-hover:#efd8bc;--dg-ink:#4a1c15;--dg-soft:#8a5a4a;--dg-line:#ecd2b6;--dg-line-a:rgba(74,28,21,.14);--dg-acc:#b3261e;--dg-acc-dim:#d98b80;--dg-acc-soft:rgba(179,38,30,.08);--dg-on-acc:#fff6e6;--dg-glass:#fffaf3;--dg-shadow:rgba(120,40,20,.18);--dg-place:#c4a28a;--dg-scrim:rgba(74,28,21,.45);color-scheme:light',
    'body{margin:0;background:var(--dg-bg);background-image:radial-gradient(70% 40% at 50% 0%,rgba(233,184,79,.22),transparent 70%),repeating-radial-gradient(circle at 50% -20%,rgba(179,38,30,.035) 0 2px,transparent 2px 28px);color:var(--dg-ink);-webkit-font-smoothing:antialiased}'),
+ 'numerology': room('--dg-bg:#eaf4fc;--dg-surface:#ffffff;--dg-surface-2:#dcecf8;--dg-hover:#cde3f4;--dg-ink:#1f2b38;--dg-soft:#5a6a7b;--dg-line:#cfe1f0;--dg-line-a:rgba(31,43,56,.12);--dg-acc:#2f72ad;--dg-acc-dim:#92c0e6;--dg-acc-soft:rgba(47,114,173,.1);--dg-on-acc:#ffffff;--dg-glass:rgba(255,255,255,.65);--dg-shadow:rgba(31,60,90,.14);--dg-place:#93a3b3;--dg-scrim:rgba(20,35,50,.45);color-scheme:light',
+   'body{background:var(--dg-bg);background-image:radial-gradient(70% 40% at 50% 0%,rgba(255,255,255,.7),transparent 70%)}'),
 }
 
 
@@ -322,7 +324,7 @@ LENO_LEARN = """
   </details>"""
 
 def nav(cur, inset=False):
-    L = [('tarot.html', '塔羅'), ('iching.html', '易經'), ('lenormand.html', '雷諾曼'), ('qian.html', '求籤')]
+    L = [('tarot.html', '塔羅'), ('iching.html', '易經'), ('lenormand.html', '雷諾曼'), ('qian.html', '求籤'), ('numerology.html', '靈數')]
     links = ''.join(f'<a href="{h}"' + (' aria-current="page"' if h == cur else '') + f'>{t}</a>' for h, t in L)
     return f'<nav class="dg-nav{" inset" if inset else ""}" aria-label="問問小豬"><a class="home" href="index.html"><img src="img/pig-face.png" alt="" width="120" height="85">← 問問小豬</a><span class="seg">{links}</span></nav>'
 
@@ -331,6 +333,7 @@ PAGES = {
  'tarot.html': ('塔羅牌｜問問小豬', '78 張萊德偉特塔羅，洗牌、切牌、親手抽牌，附正逆位與整體解讀。'),
  'iching.html': ('易經起卦｜問問小豬', '擲銅錢、姓名或數字起卦，看本卦變卦，直接告訴你這次最該讀哪一句。'),
  'lenormand.html': ('雷諾曼｜問問小豬', '36 張經典雷諾曼牌，三張連成一句話，適合問最近會發生什麼。'),
+ 'numerology.html': ('生命靈數｜問問小豬', '輸入生日算出你的生命靈數和生日九宮格，也能和朋友、另一半、同事、家人配對，看看你們合不合。'),
  'qian.html': ('擲筊求籤｜問問小豬', '線上擲筊抽六十甲子籤：擲到聖筊才能抽籤，附籤詩原文、白話解釋和感情、工作、財運的說法。'),
 }
 def meta(p):
@@ -398,6 +401,11 @@ _qb = open('qian-body.html', encoding='utf8').read().replace('/*COMMON_JS*/', CO
 _q = _head + f'<title>{PAGES["qian.html"][0]}</title>\n' + meta('qian.html') + NAVCSS + ROOM['qian'] + '<body>\n' + nav('qian.html') + hrow('qian') + f'<div class="dg-greet"><img src="img/pig-tube.webp" alt="小豬" width="400" height="415"><p>先擲筊請示，再抽一支籤喔。</p></div>' + '\n' + _qb + '\n' + FOOT + '\n</body></html>'
 open('qian.html', 'w', encoding='utf8').write(_q)
 out['qian.html'] = _q
+# ---- 生命靈數（寶寶藍房間；頁面本身自帶圖卡和分享程式，所以不注入 COMMON_JS） ----
+_nb = open('numerology-body.html', encoding='utf8').read()
+_n = _head + f'<title>{PAGES["numerology.html"][0]}</title>\n' + meta('numerology.html') + NAVCSS + ROOM['numerology'] + '<body>\n' + nav('numerology.html', True) + '<div class="dg-greet inset"><img src="img/pig-number.webp" alt="小豬" width="400" height="398"><p id="say">把生日告訴小豬，我來幫你數一數～</p></div>' + '\n' + _nb + '\n' + FOOT + '\n</body></html>'
+open('numerology.html', 'w', encoding='utf8').write(_n)
+out['numerology.html'] = _n
 open('theme.css', 'w').write(FONTS)
 open('stats.js', 'w').write(STATS_JS)
 
@@ -433,6 +441,8 @@ open('README.md','w',encoding='utf8').write('''# 問問小豬
 - `tarot.html` 塔羅牌（78 張萊德偉特，牌面圖在 `cards/`）
 - `iching.html` 易經起卦
 - `lenormand.html` 雷諾曼
+- `qian.html` 擲筊求籤（六十甲子籤）
+- `numerology.html` 生命靈數（個人靈數、生日九宮格、流年、兩人配對）
 - `stats.js` 匿名統計（寫進 Google 試算表，網址填在檔案最上面）
 
 字型：源泉圓體（GenSenRounded），SIL Open Font License，授權見 `fonts/OFL.txt`。
@@ -450,7 +460,7 @@ h = h[:i] + '\n' + meta('index.html') + h[i:]
 h = h.replace('<link rel="stylesheet" href="theme.css">\n<script src="stats.js"></script>\n', '', 1)
 OUTD='site'; shutil.rmtree(OUTD, ignore_errors=True); shutil.rmtree('netlify', ignore_errors=True); os.makedirs(OUTD)
 open(OUTD+'/index.html', 'w', encoding='utf8').write(head + '<body>\n' + h + '\n</body></html>')
-for f in ['tarot.html', 'iching.html', 'lenormand.html', 'qian.html', 'theme.css', 'stats.js', 'og-image.jpg', 'manifest.webmanifest', '404.html', 'README.md']:
+for f in ['tarot.html', 'iching.html', 'lenormand.html', 'qian.html', 'numerology.html', 'theme.css', 'stats.js', 'og-image.jpg', 'manifest.webmanifest', '404.html', 'README.md']:
     shutil.copy(f, OUTD + '/' + f)
 for d in ['cards', 'fonts', 'img']:
     shutil.copytree(d, OUTD + '/' + d)
