@@ -43,36 +43,29 @@ h1 em::after{content:"";position:absolute;left:-2px;right:-2px;bottom:.08em;heig
 .sec{display:flex;align-items:baseline;justify-content:space-between;margin:6px 4px -6px}
 .sec h2{font-size:17px;margin:0}
 .sec span{font-size:13px;color:var(--ink-soft)}
-.opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.opt{--r:var(--surface-2);--k:var(--accent);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-start;min-height:178px;padding:16px 16px 0;border-radius:24px;
-  background:var(--r);color:var(--ink);text-decoration:none;border:1px solid var(--line);box-shadow:0 18px 30px -26px var(--shadow);transition:transform .15s ease,box-shadow .15s ease;isolation:isolate}
-.opt:hover{transform:translateY(-2px);box-shadow:0 22px 34px -24px var(--shadow)}
-.opt:active{transform:scale(.98)}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{--r:var(--surface-2);--k:var(--accent);display:grid;grid-template-columns:48px 1fr 18px;gap:14px;align-items:center;text-decoration:none;color:var(--ink);
+  background:var(--r);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:0 12px 24px -22px var(--shadow);transition:transform .1s ease,box-shadow .15s ease}
+.opt:hover{box-shadow:0 16px 28px -20px var(--shadow)}
+.opt:active{transform:scale(.99)}
 .opt:focus-visible,.pick:focus-visible,summary:focus-visible,.share:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.opt .ic{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:15px;background:var(--surface);color:var(--k);box-shadow:inset 0 0 0 1px var(--line)}
-.opt b{display:block;font-size:18px;font-weight:700;margin-top:10px;color:var(--k)}
-.opt .d{display:block;font-size:13.5px;line-height:1.5;color:var(--ink-soft);margin-top:3px;flex:1;text-wrap:pretty}
-.opt img{display:block;margin:6px -10px -16px auto;width:88px;height:auto;transition:transform .2s ease}
-.opt:hover img{transform:rotate(-5deg) translateY(-3px)}
-.opt.feat{grid-column:1/-1;min-height:164px;padding:20px 20px 18px}
-.opt b,.opt .ic{position:relative;z-index:1}
-.opt.feat b{font-size:22px}
-.opt.feat .d{max-width:13em;font-size:14.5px;flex:none}
-.opt.feat img{position:absolute;margin:0;width:132px;right:12px;bottom:-14px;z-index:-1}
-.opt.feat .go{margin-top:auto;align-self:flex-start;font-size:13px;font-weight:700;color:var(--k);background:var(--surface);border-radius:999px;padding:5px 12px 5px 14px;box-shadow:inset 0 0 0 1px var(--line)}
-.tag{position:absolute;top:27px;left:64px;font-size:11.5px;font-weight:700;color:var(--k);background:var(--surface);border-radius:999px;padding:2px 9px;box-shadow:inset 0 0 0 1px var(--line)}
+.opt .ic{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:18px;background:var(--surface);color:var(--k);box-shadow:inset 0 0 0 1px var(--line)}
+.opt .t{min-width:0}
+.opt b{display:block;font-size:17.5px;font-weight:700;color:var(--k)}
+.opt .d{display:block;font-size:14px;line-height:1.5;color:var(--ink-soft);text-wrap:pretty}
+.opt svg{width:18px;height:18px;color:var(--k)}
+.tag,.soon{font-style:normal;font-size:11.5px;font-weight:700;border-radius:999px;padding:1px 8px;margin-left:6px;vertical-align:2px;white-space:nowrap}
+.tag{color:var(--k);background:var(--surface);box-shadow:inset 0 0 0 1px var(--line)}
+.soon{color:var(--potato);border:1px solid currentColor}
 .opt[href="tarot.html"]{--r:var(--r-tarot);--k:var(--k-tarot)}
 .opt[href="iching.html"]{--r:var(--r-iching);--k:var(--k-iching)}
 .opt[href="lenormand.html"]{--r:var(--r-leno);--k:var(--k-leno)}
 .opt[href="qian.html"]{--r:var(--r-qian);--k:var(--k-qian)}
 .opt[href="numerology.html"]{--r:var(--r-num);--k:var(--k-num)}
-.opt.more{grid-column:1/-1;min-height:0;flex-direction:row;flex-wrap:wrap;align-items:center;column-gap:12px;padding:16px 18px;background:transparent;border:1.5px dashed var(--star);box-shadow:none;cursor:default}
-.opt.more:hover{transform:none;box-shadow:none}.opt.more:hover img{transform:none}.opt.more:active{transform:none}
-.opt.more .ic{color:var(--accent);font-size:18px}
-.opt.more b{margin:0;color:var(--ink);font-size:17px}
-.opt.more .d{flex-basis:100%;margin-top:6px;padding-right:76px;text-wrap:balance}
-.opt.more img{position:absolute;right:10px;bottom:-14px;width:70px;margin:0;opacity:.9}
-.soon{font-style:normal;font-size:11.5px;font-weight:700;color:var(--potato);border:1px solid currentColor;border-radius:999px;padding:1px 8px;margin-left:4px;vertical-align:2px;white-space:nowrap}
+.opt.more{grid-template-columns:48px 1fr;background:transparent;border:1.5px dashed var(--star);box-shadow:none;cursor:default}
+.opt.more:active{transform:none}.opt.more:hover{box-shadow:none}
+.opt.more .ic{color:var(--accent);font-size:20px}
+.opt.more b{color:var(--ink)}
 /* random pick */
 .pick{display:flex;align-items:center;gap:12px;width:100%;font:inherit;text-align:left;color:var(--ink);cursor:pointer;
   background:var(--glass);border:1.5px dashed var(--star);border-radius:22px;padding:10px 18px 10px 12px;transition:transform .1s ease}
@@ -97,7 +90,6 @@ details[open] summary::after{content:"−"}
 footer{text-align:center;font-size:14px;color:var(--ink-soft);line-height:1.8;margin-top:6px}
 footer p{margin:0}
 footer .by{font-size:12.5px;letter-spacing:.08em;margin-top:4px}
-@media (min-width:560px){.opt:not(.more) img{width:104px}.opt.feat img{width:150px}}
 </style>
 
 <div class="wrap">
@@ -112,12 +104,12 @@ footer .by{font-size:12.5px;letter-spacing:.08em;margin-top:4px}
 
   <div class="sec"><h2>選一種方式</h2><span>都是免費的</span></div>
   <nav class="opts" aria-label="選擇占卜方式">
-    <a class="opt feat" href="tarot.html"><span class="tag">最多人玩</span><span class="ic">塔</span><b>塔羅牌</b><span class="d">78 張牌親手抽，看心情、關係和兩個選項</span><span class="go">開始抽牌 →</span><img src="img/pig-card.webp" width="400" height="440" alt="" loading="eager"></a>
-    <a class="opt" href="iching.html"><span class="ic">易</span><b>易經起卦</b><span class="d">擲銅錢起卦，問時機和方向</span><img src="img/pig-coins.webp" width="400" height="401" alt=""></a>
-    <a class="opt" href="lenormand.html"><span class="ic">雷</span><b>雷諾曼</b><span class="d">三張牌連成一句話，看最近的事</span><img src="img/pig-crystal.webp" width="400" height="439" alt=""></a>
-    <a class="opt" href="qian.html"><span class="ic">籤</span><b>擲筊求籤</b><span class="d">先擲到聖筊，再抽一支籤詩</span><img src="img/pig-tube.webp" width="400" height="415" alt=""></a>
-    <a class="opt" href="numerology.html"><span class="ic">數</span><b>生命靈數</b><span class="d">輸入生日，看你是幾號人</span><img src="img/pig-number.webp" width="400" height="398" alt=""></a>
-    <div class="opt more" aria-disabled="true"><span class="ic">＋</span><b>更多測驗 <em class="soon">準備中</em></b><span class="d">小豬正在準備新的玩法，過幾天再回來看看～</span><img src="img/pig-base.webp" width="400" height="456" alt=""></div>
+    <a class="opt" href="tarot.html"><span class="ic">塔</span><span class="t"><b>塔羅牌<em class="tag">最多人玩</em></b><span class="d">78 張牌親手抽，看心情、關係和兩個選項</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+    <a class="opt" href="iching.html"><span class="ic">易</span><span class="t"><b>易經起卦</b><span class="d">擲銅錢或用名字起卦，問時機和方向</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+    <a class="opt" href="lenormand.html"><span class="ic">雷</span><span class="t"><b>雷諾曼</b><span class="d">三張牌連成一句話，問最近會發生什麼</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+    <a class="opt" href="qian.html"><span class="ic">籤</span><span class="t"><b>擲筊求籤</b><span class="d">先擲到聖筊，再抽一支六十甲子籤</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+    <a class="opt" href="numerology.html"><span class="ic">數</span><span class="t"><b>生命靈數</b><span class="d">輸入生日看你是幾號人，還能和朋友配對</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+    <div class="opt more" aria-disabled="true"><span class="ic">＋</span><span class="t"><b>更多測驗<em class="soon">準備中</em></b><span class="d">小豬正在準備新玩法，過幾天再來看看～</span></span></div>
   </nav>
 
   <button class="pick" id="pick" type="button"><img src="img/pig-think.webp" width="400" height="548" alt=""><span><b id="pickT">讓小豬幫我選一個</b><span>不知道玩哪個？交給小豬決定</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>

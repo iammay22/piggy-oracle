@@ -1,7 +1,7 @@
 /* 問問小豬：背景音樂＋音效
    - 右下角小按鈕：點開可以分別開關「背景音樂」「音效」，設定存在這支手機
    - 每個房間一首自己的音樂（audio/music/*.mp3），音效在 audio/sfx/
-   - 瀏覽器規定要先點一下畫面才能出聲，所以音樂一律等使用者點擊後才開始
+   - 瀏覽器規定要先點一下畫面才能出聲，所以音樂預設開啟，會在使用者第一次點畫面時開始播
    素材：音樂 open-lofi（CC0）、音效 Kenney Interface Sounds / Casino Audio（CC0），詳見 audio/CREDITS.txt */
 (function () {
   'use strict';
@@ -23,7 +23,7 @@
 
   function get(k, d) { try { var v = localStorage.getItem('dg-' + k); return v === null ? d : v === '1'; } catch (e) { return d; } }
   function set(k, v) { try { localStorage.setItem('dg-' + k, v ? '1' : '0'); } catch (e) {} }
-  var st = { music: get('music', false), sfx: get('sfx', true) };
+  var st = { music: get('music', true), sfx: get('sfx', true) };
 
   /* ---------- audio engine ---------- */
   var ctx = null, master = null, musicGain = null, el = null, bufs = {}, loading = false;
@@ -157,13 +157,11 @@
     btn.addEventListener('click', function () {
       root.classList.remove('hint');
       var open = pan.hidden; pan.hidden = !open; btn.setAttribute('aria-expanded', String(open));
-      if (open && !st.music && !get('asked', false)) { set('asked', true); }
     });
     m.addEventListener('change', function () { st.music = m.checked; set('music', st.music); if (st.music) musicOn(); else musicOff(); try { window.dgTrack && window.dgTrack('sound/music/' + (st.music ? 'on' : 'off')); } catch (e) {} });
     x.addEventListener('change', function () { st.sfx = x.checked; set('sfx', st.sfx); if (st.sfx) { loadSfx(); setTimeout(function () { play('pop'); }, 60); } });
     document.addEventListener('click', function (e) { if (!pan.hidden && !root.contains(e.target)) close(); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !pan.hidden) { close(); btn.focus(); } });
-    if (!st.music && !get('asked', false)) root.classList.add('hint');
     ui();
   }
   function ui() { if (root) root.classList.toggle('on', playing()); }
