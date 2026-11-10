@@ -3,63 +3,77 @@
 <link rel="stylesheet" href="theme.css">
 <script src="stats.js"></script>
 <style>
-/* Layout: one centered card on warm paper — mascot, question, three choices as tappable rows, a quiet footer */
-:root{--bg:#f8f1f0;--surface:#ffffff;--surface-2:#efebe3;--hover:#e7e1d6;--ink:#221f1b;--ink-soft:#6b655c;--line:rgba(34,31,27,.12);--accent:#b84d6c;--accent-soft:rgba(184,77,108,.1);--potato:#d9607f;--glass:rgba(255,255,255,.65);--shadow:rgba(34,31,27,.2);color-scheme:light;
-  --round:"GenSenRounded","PingFang TC","Microsoft JhengHei",sans-serif}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1a18;--surface:#252320;--surface-2:#2e2b27;--hover:#37332e;--ink:#ece7de;--ink-soft:#a8a197;--line:rgba(236,231,222,.12);--accent:#f08fab;--accent-soft:rgba(240,143,171,.16);--potato:#f5a0b8;--glass:#252320;--shadow:rgba(0,0,0,.45);color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#1b1a18;--surface:#252320;--surface-2:#2e2b27;--hover:#37332e;--ink:#ece7de;--ink-soft:#a8a197;--line:rgba(236,231,222,.12);--accent:#f08fab;--accent-soft:rgba(240,143,171,.16);--potato:#f5a0b8;--glass:#252320;--shadow:rgba(0,0,0,.45);color-scheme:dark}
+/* Layout: airy pink hero (mascot + headline + sparkles), then a bento of five room-colored cards, each with its themed pig */
+:root{--bg:#fbf3f2;--surface:#ffffff;--surface-2:#f4ece9;--ink:#2a2220;--ink-soft:#6f6460;--line:rgba(42,34,32,.11);--accent:#c24f72;--potato:#e0698a;--glow:rgba(255,190,207,.55);--glow2:rgba(214,200,255,.35);--halo:#ffe1e8;--glass:rgba(255,255,255,.7);--shadow:rgba(80,40,50,.22);--star:#f2b7c6;--star2:#f4cf7a;
+  --r-tarot:#ece5f7;--k-tarot:#5d4b9e;--r-iching:#f5ecda;--k-iching:#a8322a;--r-leno:#f6e3df;--k-leno:#b5566e;--r-qian:#f9e5d4;--k-qian:#b3261e;--r-num:#e0ebf8;--k-num:#3d6aa3;
+  color-scheme:light;--round:"GenSenRounded","PingFang TC","Microsoft JhengHei",sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1c1918;--surface:#272321;--surface-2:#2f2a28;--ink:#efe8e2;--ink-soft:#aba29b;--line:rgba(239,232,226,.12);--accent:#f394b0;--potato:#f7a6bd;--glow:rgba(240,120,155,.18);--glow2:rgba(150,130,230,.14);--halo:rgba(243,148,176,.16);--glass:#272321;--shadow:rgba(0,0,0,.5);--star:#9b5b6c;--star2:#a88a45;
+  --r-tarot:#2b2638;--k-tarot:#c5b6f2;--r-iching:#302a20;--k-iching:#eaa79d;--r-leno:#33262a;--k-leno:#f2a7b8;--r-qian:#33251f;--k-qian:#f3a08f;--r-num:#1f2a37;--k-num:#a3c5ef;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1c1918;--surface:#272321;--surface-2:#2f2a28;--ink:#efe8e2;--ink-soft:#aba29b;--line:rgba(239,232,226,.12);--accent:#f394b0;--potato:#f7a6bd;--glow:rgba(240,120,155,.18);--glow2:rgba(150,130,230,.14);--halo:rgba(243,148,176,.16);--glass:#272321;--shadow:rgba(0,0,0,.5);--star:#9b5b6c;--star2:#a88a45;
+  --r-tarot:#2b2638;--k-tarot:#c5b6f2;--r-iching:#302a20;--k-iching:#eaa79d;--r-leno:#33262a;--k-leno:#f2a7b8;--r-qian:#33251f;--k-qian:#f3a08f;--r-num:#1f2a37;--k-num:#a3c5ef;color-scheme:dark}
 *{box-sizing:border-box}
 html,body{background:var(--bg);color:var(--ink)}
-body{font-family:var(--round);-webkit-font-smoothing:antialiased;overflow-x:hidden}
-.corner{position:fixed;top:-70px;right:-70px;width:260px;height:260px;color:var(--line);pointer-events:none;z-index:0}
-.wrap{position:relative;z-index:1;max-width:560px;margin:0 auto;padding-block:64px 40px;
-  padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));
-  display:flex;flex-direction:column;gap:20px}
-.card{text-align:center;padding:30px 24px 28px;border-radius:28px;background:var(--glass);border:1px solid var(--line);box-shadow:0 30px 70px -36px var(--shadow)}
-.poke{position:relative;display:block;margin:0 auto 4px;padding:0;border:0;background:none;cursor:pointer;width:160px;min-height:126px}
-.poke:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:16px}
-.mascot{width:140px;height:auto;display:block;margin:0 auto}
-.bubble{position:absolute;left:50%;bottom:calc(100% + 6px);transform:translateX(-50%);width:max-content;max-width:min(280px,78vw);
-  background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:16px;padding:10px 14px;font-size:15px;line-height:1.55;
-  box-shadow:0 12px 30px -16px var(--shadow);text-wrap:balance}
+body{font-family:var(--round);-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  background:radial-gradient(60% 420px at 50% 0,var(--glow),transparent 70%),radial-gradient(40% 320px at 90% 8%,var(--glow2),transparent 70%),var(--bg);background-repeat:no-repeat}
+.wrap{position:relative;max-width:600px;margin:0 auto;padding-block:28px 40px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:18px}
+/* hero */
+.hero{position:relative;text-align:center;padding:64px 4px 6px}
+.spark{position:absolute;width:var(--s,18px);height:var(--s,18px);color:var(--star);pointer-events:none}
+.spark.g{color:var(--star2)}
+@media (prefers-reduced-motion:no-preference){.spark{animation:tw 3.4s ease-in-out infinite;animation-delay:var(--d,0s)}@keyframes tw{0%,100%{transform:scale(1) rotate(0);opacity:1}50%{transform:scale(.6) rotate(20deg);opacity:.45}}}
+.poke{position:relative;display:block;margin:0 auto;padding:0;border:0;background:none;cursor:pointer;width:190px;min-height:170px}
+.poke::before{content:"";position:absolute;left:50%;bottom:4px;width:176px;height:176px;transform:translateX(-50%);border-radius:50%;background:var(--halo);z-index:-1}
+.poke:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:24px}
+.mascot{width:168px;height:auto;display:block;margin:0 auto}
+.bubble{position:absolute;left:50%;bottom:calc(100% + 4px);transform:translateX(-50%);width:max-content;max-width:min(280px,80vw);z-index:2;
+  background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:16px;padding:10px 14px;font-size:15px;line-height:1.55;box-shadow:0 12px 30px -16px var(--shadow);text-wrap:balance}
 .bubble::after{content:"";position:absolute;left:50%;top:100%;width:12px;height:12px;background:var(--surface);border-right:1px solid var(--line);border-bottom:1px solid var(--line);transform:translate(-50%,-6px) rotate(45deg)}
-.hint{font-size:12.5px;color:var(--ink-soft);margin:0}
+.hint{display:inline-block;font-size:12.5px;color:var(--ink-soft);margin:10px 0 0;background:var(--glass);border:1px solid var(--line);border-radius:999px;padding:3px 12px}
 .poke.jump .mascot{animation:hop .45s ease}
-@keyframes hop{30%{transform:translateY(-10px) rotate(-3deg)}60%{transform:translateY(0)}}
-@media (prefers-reduced-motion:no-preference){
-  .poke:not(.jump) .mascot{animation:bob 3.2s ease-in-out infinite;transform-origin:50% 100%}
-  @keyframes bob{0%,86%,100%{transform:none}90%{transform:rotate(-4deg)}94%{transform:rotate(3deg)}}
-}
-.eyebrow{font-weight:700;font-size:14px;letter-spacing:.14em;color:var(--accent);margin:8px 0 0}
-h1{font-weight:700;font-size:clamp(30px,8vw,40px);line-height:1.3;margin:10px 0 12px;text-wrap:balance}
-h1 em{font-style:normal;color:var(--potato)}
-.lede{font-size:16px;line-height:1.75;color:var(--ink-soft);margin:0 auto 22px;max-width:30em}
-.opts{display:flex;flex-direction:column;gap:10px;text-align:left}
-.opt{display:grid;grid-template-columns:48px 1fr 18px;gap:14px;align-items:center;text-decoration:none;color:var(--ink);
-  background:var(--surface-2);border:1px solid var(--line);border-radius:16px;padding:14px 16px;
-  box-shadow:0 10px 24px -20px var(--shadow);transition:transform .1s ease,background .15s ease}
-.opt:hover{background:var(--hover)}
-.opt:active{transform:scale(.99)}
-.opt:focus-visible,.alt:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.opt .ic{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:18px;background:var(--accent-soft);color:var(--accent)}
-.opt .t{min-width:0}
-.opt b{display:block;font-size:17.5px;font-weight:700}
-.opt .d{display:block;font-size:14px;line-height:1.5;color:var(--ink-soft);min-width:0}
-.opt svg{width:18px;height:18px;color:var(--ink-soft)}
-.opt[href="tarot.html"] .ic{background:#e6dff1;color:#6a55b0}
-.opt[href="iching.html"] .ic{background:#f2e8d5;color:#a8322a;box-shadow:inset 0 0 0 1px #ddcfb4}
-.opt[href="lenormand.html"] .ic{background:#f1dfd9;color:#b5566e}
-.opt[href="qian.html"] .ic{background:#f7e3cf;color:#b3261e}
-.opt.soon{background:transparent;border:1.5px dashed var(--line);box-shadow:none;cursor:default}
-.opt.soon:hover{background:transparent}.opt.soon:active{transform:none}
-.opt.soon .ic{background:var(--surface-2);color:var(--ink-soft)}
-.opt.soon .ic svg{width:24px;height:24px}
-.opt .pigic{overflow:hidden;background:#fdf0f3!important}.opt .pigic img{width:44px;height:auto}
-.opt.soon b{color:var(--ink-soft)}
-.badge{font-style:normal;font-size:11.5px;font-weight:700;color:var(--potato);border:1px solid currentColor;border-radius:999px;padding:1px 8px;margin-left:4px;vertical-align:2px;white-space:nowrap}
-.meta{margin-top:16px;font-size:14px;color:var(--ink-soft)}
-.alt{display:inline-block;margin-top:14px;font:inherit;font-weight:700;font-size:15px;color:var(--ink);background:none;border:1.5px solid var(--line);border-radius:14px;padding:11px 20px;cursor:pointer}
-.alt:active{transform:scale(.98)}
+@keyframes hop{30%{transform:translateY(-12px) rotate(-3deg)}60%{transform:translateY(0)}}
+@media (prefers-reduced-motion:no-preference){.poke:not(.jump) .mascot{animation:bob 3.2s ease-in-out infinite;transform-origin:50% 100%}@keyframes bob{0%,86%,100%{transform:none}90%{transform:rotate(-4deg)}94%{transform:rotate(3deg)}}}
+.eyebrow{font-weight:700;font-size:13px;letter-spacing:.16em;color:var(--accent);margin:18px 0 0}
+h1{font-weight:700;font-size:clamp(34px,9vw,46px);line-height:1.25;margin:8px 0 10px;text-wrap:balance}
+h1 em{font-style:normal;color:var(--potato);position:relative;white-space:nowrap}
+h1 em::after{content:"";position:absolute;left:-2px;right:-2px;bottom:.08em;height:.3em;background:var(--halo);border-radius:999px;z-index:-1}
+.lede{font-size:16px;line-height:1.75;color:var(--ink-soft);margin:0 auto;max-width:30em}
+/* choices */
+.sec{display:flex;align-items:baseline;justify-content:space-between;margin:6px 4px -6px}
+.sec h2{font-size:17px;margin:0}
+.sec span{font-size:13px;color:var(--ink-soft)}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.opt{--r:var(--surface-2);--k:var(--accent);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-start;min-height:178px;padding:16px 16px 0;border-radius:24px;
+  background:var(--r);color:var(--ink);text-decoration:none;border:1px solid var(--line);box-shadow:0 18px 30px -26px var(--shadow);transition:transform .15s ease,box-shadow .15s ease;isolation:isolate}
+.opt:hover{transform:translateY(-2px);box-shadow:0 22px 34px -24px var(--shadow)}
+.opt:active{transform:scale(.98)}
+.opt:focus-visible,.pick:focus-visible,summary:focus-visible,.share:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.opt .ic{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:15px;background:var(--surface);color:var(--k);box-shadow:inset 0 0 0 1px var(--line)}
+.opt b{display:block;font-size:18px;font-weight:700;margin-top:10px;color:var(--k)}
+.opt .d{display:block;font-size:13.5px;line-height:1.5;color:var(--ink-soft);margin-top:3px;flex:1;text-wrap:pretty}
+.opt img{display:block;margin:6px -10px -16px auto;width:88px;height:auto;transition:transform .2s ease}
+.opt:hover img{transform:rotate(-5deg) translateY(-3px)}
+.opt.feat{grid-column:1/-1;min-height:164px;padding:20px 20px 18px}
+.opt b,.opt .ic{position:relative;z-index:1}
+.opt.feat b{font-size:22px}
+.opt.feat .d{max-width:13em;font-size:14.5px;flex:none}
+.opt.feat img{position:absolute;margin:0;width:132px;right:12px;bottom:-14px;z-index:-1}
+.opt.feat .go{margin-top:auto;align-self:flex-start;font-size:13px;font-weight:700;color:var(--k);background:var(--surface);border-radius:999px;padding:5px 12px 5px 14px;box-shadow:inset 0 0 0 1px var(--line)}
+.tag{position:absolute;top:27px;left:64px;font-size:11.5px;font-weight:700;color:var(--k);background:var(--surface);border-radius:999px;padding:2px 9px;box-shadow:inset 0 0 0 1px var(--line)}
+.opt[href="tarot.html"]{--r:var(--r-tarot);--k:var(--k-tarot)}
+.opt[href="iching.html"]{--r:var(--r-iching);--k:var(--k-iching)}
+.opt[href="lenormand.html"]{--r:var(--r-leno);--k:var(--k-leno)}
+.opt[href="qian.html"]{--r:var(--r-qian);--k:var(--k-qian)}
+.opt[href="numerology.html"]{--r:var(--r-num);--k:var(--k-num)}
+/* random pick */
+.pick{display:flex;align-items:center;gap:12px;width:100%;font:inherit;text-align:left;color:var(--ink);cursor:pointer;
+  background:var(--glass);border:1.5px dashed var(--star);border-radius:22px;padding:10px 18px 10px 12px;transition:transform .1s ease}
+.pick:active{transform:scale(.99)}
+.pick img{width:54px;height:auto;flex:none}
+.pick b{display:block;font-size:16.5px}
+.pick span{display:block;font-size:13.5px;color:var(--ink-soft)}
+.pick svg{margin-left:auto;width:20px;height:20px;color:var(--accent);flex:none}
+.meta{text-align:center;font-size:13.5px;color:var(--ink-soft);margin:-4px 0 0}
 details{background:var(--glass);border:1px solid var(--line);border-radius:20px;padding:16px 20px}
 summary{cursor:pointer;font-weight:700;font-size:16px;list-style:none;display:flex;justify-content:space-between;align-items:center}
 summary::-webkit-details-marker{display:none}
@@ -70,34 +84,35 @@ details[open] summary::after{content:"−"}
 .guide li+li{border-top:1px solid var(--line)}
 .guide b{display:block;color:var(--accent);font-size:13.5px;letter-spacing:.06em}
 .about p{margin:10px 0 0;font-size:15px;line-height:1.75;color:var(--ink-soft)}
-.about b{color:var(--ink)}
-.share{font:inherit;font-weight:700;font-size:14.5px;color:var(--accent);background:none;border:0;padding:6px 4px;cursor:pointer}
-.share:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+.share{font:inherit;font-weight:700;font-size:14.5px;color:var(--accent);background:none;border:0;padding:6px 4px;cursor:pointer;border-radius:8px}
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:30;background:var(--ink);color:var(--bg);padding:8px 18px;border-radius:999px;font-size:14px;white-space:nowrap}
-footer{text-align:center;font-size:14px;color:var(--ink-soft);line-height:1.8}
+footer{text-align:center;font-size:14px;color:var(--ink-soft);line-height:1.8;margin-top:6px}
 footer p{margin:0}
 footer .by{font-size:12.5px;letter-spacing:.08em;margin-top:4px}
+@media (min-width:560px){.opt img{width:104px}.opt.feat img{width:150px}}
 </style>
 
-<svg class="corner" viewBox="0 0 200 200" fill="none" aria-hidden="true"><path d="M100 14 L116 84 L186 100 L116 116 L100 186 L84 116 L14 100 L84 84 Z" stroke="currentColor" stroke-width="1.5"/></svg>
-
 <div class="wrap">
-  <section class="card">
-    <button class="poke" id="poke" type="button" aria-label="戳一下小豬，聽牠說一句話"><span class="bubble" id="bubble" hidden></span><img class="mascot" id="pigimg" src="img/pig-hug.webp" width="400" height="363" alt="may22 畫的粉紅小豬，說著抱抱"></button>
+  <header class="hero">
+    <svg class="spark" style="left:8%;top:70px;--s:22px" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 0c.9 6.6 4.8 10.6 12 12-7.2 1.4-11.1 5.4-12 12-.9-6.6-4.8-10.6-12-12 7.2-1.4 11.1-5.4 12-12z"/></svg><svg class="spark g" style="right:10%;top:52px;--s:16px;--d:.8s" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 0c.9 6.6 4.8 10.6 12 12-7.2 1.4-11.1 5.4-12 12-.9-6.6-4.8-10.6-12-12 7.2-1.4 11.1-5.4 12-12z"/></svg><svg class="spark" style="right:4%;top:150px;--s:12px;--d:1.6s" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 0c.9 6.6 4.8 10.6 12 12-7.2 1.4-11.1 5.4-12 12-.9-6.6-4.8-10.6-12-12 7.2-1.4 11.1-5.4 12-12z"/></svg><svg class="spark g" style="left:3%;top:180px;--s:12px;--d:2.2s" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 0c.9 6.6 4.8 10.6 12 12-7.2 1.4-11.1 5.4-12 12-.9-6.6-4.8-10.6-12-12 7.2-1.4 11.1-5.4 12-12z"/></svg><svg class="spark" style="left:22%;top:20px;--s:10px;--d:1.1s" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 0c.9 6.6 4.8 10.6 12 12-7.2 1.4-11.1 5.4-12 12-.9-6.6-4.8-10.6-12-12 7.2-1.4 11.1-5.4 12-12z"/></svg><svg class="spark g" style="right:24%;top:12px;--s:9px;--d:2.6s" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 0c.9 6.6 4.8 10.6 12 12-7.2 1.4-11.1 5.4-12 12-.9-6.6-4.8-10.6-12-12 7.2-1.4 11.1-5.4 12-12z"/></svg>
+    <button class="poke" id="poke" type="button" aria-label="戳一下小豬，聽牠說一句話"><span class="bubble" id="bubble" hidden></span><img class="mascot" id="pigimg" src="img/pig-wizard.webp" width="400" height="399" alt="may22 畫的粉紅小豬巫師"></button>
     <p class="hint">戳戳看小豬</p>
-    <div class="eyebrow">塔羅 · 易經 · 雷諾曼</div>
+    <div class="eyebrow">塔羅 · 易經 · 雷諾曼 · 求籤 · 靈數</div>
     <h1>有煩惱？<br>問問<em>小豬</em></h1>
-    <p class="lede">先給小豬抱抱，再把問題交給牠。<br>挑一種方式，一起算算看。</p>
-    <nav class="opts" aria-label="選擇占卜方式">
-      <a class="opt" href="tarot.html"><span class="ic">塔</span><span class="t"><b>塔羅牌</b><span class="d">78 張牌親手抽，看心情、關係和兩個選項</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
-      <a class="opt" href="iching.html"><span class="ic">易</span><span class="t"><b>易經起卦</b><span class="d">擲銅錢或用名字起卦，問時機和方向</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
-      <a class="opt" href="lenormand.html"><span class="ic">雷</span><span class="t"><b>雷諾曼</b><span class="d">三張牌連成一句話，問最近會發生什麼</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
-      <a class="opt" href="qian.html"><span class="ic">籤</span><span class="t"><b>擲筊求籤</b><span class="d">先擲到聖筊，再抽一支六十甲子籤</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
-      <a class="opt" href="numerology.html"><span class="ic">數</span><span class="t"><b>生命靈數</b><span class="d">輸入生日看你是幾號人，還能和朋友配對</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
-    </nav>
-    <div class="meta">免費 · 不用註冊 · 紀錄只存在你的手機</div>
-    <button class="alt" id="pick" type="button">讓小豬幫我選一個</button>
-  </section>
+    <p class="lede">把問題交給小豬，<br>挑一種方式，一起算算看。</p>
+  </header>
+
+  <div class="sec"><h2>選一種方式</h2><span>都是免費的</span></div>
+  <nav class="opts" aria-label="選擇占卜方式">
+    <a class="opt feat" href="tarot.html"><span class="tag">最多人玩</span><span class="ic">塔</span><b>塔羅牌</b><span class="d">78 張牌親手抽，看心情、關係和兩個選項</span><span class="go">開始抽牌 →</span><img src="img/pig-card.webp" width="400" height="440" alt="" loading="eager"></a>
+    <a class="opt" href="iching.html"><span class="ic">易</span><b>易經起卦</b><span class="d">擲銅錢起卦，問時機和方向</span><img src="img/pig-coins.webp" width="400" height="401" alt=""></a>
+    <a class="opt" href="lenormand.html"><span class="ic">雷</span><b>雷諾曼</b><span class="d">三張牌連成一句話，看最近的事</span><img src="img/pig-crystal.webp" width="400" height="439" alt=""></a>
+    <a class="opt" href="qian.html"><span class="ic">籤</span><b>擲筊求籤</b><span class="d">先擲到聖筊，再抽一支籤詩</span><img src="img/pig-tube.webp" width="400" height="415" alt=""></a>
+    <a class="opt" href="numerology.html"><span class="ic">數</span><b>生命靈數</b><span class="d">輸入生日，看你是幾號人</span><img src="img/pig-number.webp" width="400" height="398" alt=""></a>
+  </nav>
+
+  <button class="pick" id="pick" type="button"><img src="img/pig-think.webp" width="400" height="548" alt=""><span><b id="pickT">讓小豬幫我選一個</b><span>不知道玩哪個？交給小豬決定</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>
+  <p class="meta">免費 · 不用註冊 · 紀錄只存在你的手機</p>
 
   <details>
     <summary>不知道選哪個？</summary>
@@ -124,12 +139,12 @@ footer .by{font-size:12.5px;letter-spacing:.08em;margin-top:4px}
 
 <script>
 function dgT(p){try{window.dgTrack&&window.dgTrack(p)}catch(e){}}
-document.querySelectorAll('.opt').forEach(function(a){a.addEventListener('click',function(){dgT('index/go/'+a.getAttribute('href').replace('.html',''))})});
+document.querySelectorAll('a.opt').forEach(function(a){a.addEventListener('click',function(){dgT('index/go/'+a.getAttribute('href').replace('.html',''))})});
 document.getElementById('pick').addEventListener('click',function(){
-  var p=['tarot.html','iching.html','lenormand.html','qian.html'];
+  var p=['tarot.html','iching.html','lenormand.html','qian.html','numerology.html'];
   var a=new Uint32Array(1);crypto.getRandomValues(a);
-  this.textContent='小豬想了一下……';
-  var to=p[a[0]%4];dgT('index/go/random');document.getElementById('pigimg').src='img/pig-think.webp';var bb=document.getElementById('bubble');bb.textContent='嗯……讓我想想……';bb.hidden=false;
+  document.getElementById('pickT').textContent='小豬想了一下……';
+  var to=p[a[0]%p.length];dgT('index/go/random');document.getElementById('pigimg').src='img/pig-think.webp';var bb=document.getElementById('bubble');bb.textContent='嗯……讓我想想……';bb.hidden=false;
   setTimeout(function(){location.href=to},900);
 });
 var PIGS=[['hug','先抱一下，再說說你的煩惱。'],['happy','今天也要開開心心的！'],['love','不管結果怎樣，我都站在你這邊。'],['great','你已經很棒了，真的。'],['what','在幹嘛？是不是又在想那件事？'],['miss','想你了，所以你來了。'],['kiss','親一個，壞運氣飛走。'],['cuddle','貼貼，煩惱分我一半。'],['crawl','匍匐前進也是前進喔。'],['hmph','哼！誰讓你不開心的？'],['tired','累了就休息，答案不會跑掉。'],['fierce','你兇我……好啦，我幫你算就是了。'],['cheer','加油！你比你想的還要厲害。'],['pat','乖～辛苦了，摸摸頭。'],['uh','ㄜ……這個問題有點難，換個問法試試？'],['no','不要再熬夜想這件事了啦。']];
