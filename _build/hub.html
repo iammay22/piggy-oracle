@@ -2,6 +2,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="theme.css">
 <script src="stats.js"></script>
+<script src="sound.js" defer></script>
 <style>
 /* Layout: airy pink hero (mascot + headline + sparkles), then a bento of five room-colored cards, each with its themed pig */
 :root{--bg:#fbf3f2;--surface:#ffffff;--surface-2:#f4ece9;--ink:#2a2220;--ink-soft:#6f6460;--line:rgba(42,34,32,.11);--accent:#c24f72;--potato:#e0698a;--glow:rgba(255,190,207,.55);--glow2:rgba(214,200,255,.35);--halo:#ffe1e8;--glass:rgba(255,255,255,.7);--shadow:rgba(80,40,50,.22);--star:#f2b7c6;--star2:#f4cf7a;
@@ -65,6 +66,13 @@ h1 em::after{content:"";position:absolute;left:-2px;right:-2px;bottom:.08em;heig
 .opt[href="lenormand.html"]{--r:var(--r-leno);--k:var(--k-leno)}
 .opt[href="qian.html"]{--r:var(--r-qian);--k:var(--k-qian)}
 .opt[href="numerology.html"]{--r:var(--r-num);--k:var(--k-num)}
+.opt.more{grid-column:1/-1;min-height:0;flex-direction:row;flex-wrap:wrap;align-items:center;column-gap:12px;padding:16px 18px;background:transparent;border:1.5px dashed var(--star);box-shadow:none;cursor:default}
+.opt.more:hover{transform:none;box-shadow:none}.opt.more:hover img{transform:none}.opt.more:active{transform:none}
+.opt.more .ic{color:var(--accent);font-size:18px}
+.opt.more b{margin:0;color:var(--ink);font-size:17px}
+.opt.more .d{flex-basis:100%;margin-top:6px;padding-right:76px;text-wrap:balance}
+.opt.more img{position:absolute;right:10px;bottom:-14px;width:70px;margin:0;opacity:.9}
+.soon{font-style:normal;font-size:11.5px;font-weight:700;color:var(--potato);border:1px solid currentColor;border-radius:999px;padding:1px 8px;margin-left:4px;vertical-align:2px;white-space:nowrap}
 /* random pick */
 .pick{display:flex;align-items:center;gap:12px;width:100%;font:inherit;text-align:left;color:var(--ink);cursor:pointer;
   background:var(--glass);border:1.5px dashed var(--star);border-radius:22px;padding:10px 18px 10px 12px;transition:transform .1s ease}
@@ -89,7 +97,7 @@ details[open] summary::after{content:"−"}
 footer{text-align:center;font-size:14px;color:var(--ink-soft);line-height:1.8;margin-top:6px}
 footer p{margin:0}
 footer .by{font-size:12.5px;letter-spacing:.08em;margin-top:4px}
-@media (min-width:560px){.opt img{width:104px}.opt.feat img{width:150px}}
+@media (min-width:560px){.opt:not(.more) img{width:104px}.opt.feat img{width:150px}}
 </style>
 
 <div class="wrap">
@@ -109,6 +117,7 @@ footer .by{font-size:12.5px;letter-spacing:.08em;margin-top:4px}
     <a class="opt" href="lenormand.html"><span class="ic">雷</span><b>雷諾曼</b><span class="d">三張牌連成一句話，看最近的事</span><img src="img/pig-crystal.webp" width="400" height="439" alt=""></a>
     <a class="opt" href="qian.html"><span class="ic">籤</span><b>擲筊求籤</b><span class="d">先擲到聖筊，再抽一支籤詩</span><img src="img/pig-tube.webp" width="400" height="415" alt=""></a>
     <a class="opt" href="numerology.html"><span class="ic">數</span><b>生命靈數</b><span class="d">輸入生日，看你是幾號人</span><img src="img/pig-number.webp" width="400" height="398" alt=""></a>
+    <div class="opt more" aria-disabled="true"><span class="ic">＋</span><b>更多測驗 <em class="soon">準備中</em></b><span class="d">小豬正在準備新的玩法，過幾天再回來看看～</span><img src="img/pig-base.webp" width="400" height="456" alt=""></div>
   </nav>
 
   <button class="pick" id="pick" type="button"><img src="img/pig-think.webp" width="400" height="548" alt=""><span><b id="pickT">讓小豬幫我選一個</b><span>不知道玩哪個？交給小豬決定</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>

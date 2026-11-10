@@ -6,7 +6,7 @@
 ```
 mkdir -p /home/claude/digua-site && cd /home/claude/digua-site
 cp -r <repo>/_build/* .
-cp -r <repo>/img <repo>/fonts <repo>/cards <repo>/og-image.jpg <repo>/theme.css <repo>/stats.js .   # 圖片、字型等素材從網站根目錄拿
+cp -r <repo>/img <repo>/audio <repo>/fonts <repo>/cards <repo>/og-image.jpg <repo>/theme.css <repo>/stats.js .   # 圖片、字型等素材從網站根目錄拿
 ```
 - `build.py` 第 2 行是工作資料夾、第 5 行 `SCR` 是暫存資料夾，換對話後改成新路徑。
 - 字型子集化需要完整的源泉圓體 OTF（github.com/ButTaiwan/gensen-font），放在 `SCR/fontsrc/g/otf/TW/`。
@@ -20,5 +20,6 @@ python3 build.py https://iammay22.github.io/piggy-oracle "https://script.google.
 ## 檔案
 - `src-tarot.html`、`src-iching.html`、`src-leno.html`：may22 原本的三個占卜（不要直接改，build 會注入共用樣式）
 - `hub.html`：首頁；`qian-body.html`：擲筊求籤；`numerology-body.html`：生命靈數（頁面自帶圖卡和分享程式，build 只加導覽列、寶寶藍房間配色和頁尾）
+- `sound.js`：背景音樂和音效（右下角聲音按鈕），素材在網站根目錄 `audio/`，來源和授權見 `audio/CREDITS.txt`
 - `ext-*.js`：加強解讀、圖鑑、紀錄、圖卡等共用功能
 - `小豬統計-AppsScript.gs`：試算表統計程式（貼在 Google 試算表的 Apps Script）

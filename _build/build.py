@@ -356,6 +356,7 @@ def meta(p):
 <meta name="twitter:image" content="{DOM}/og-image.jpg">
 <link rel="stylesheet" href="theme.css">
 <script src="stats.js"></script>
+<script src="sound.js" defer></script>
 '''
 
 out = {}
@@ -460,9 +461,9 @@ h = h[:i] + '\n' + meta('index.html') + h[i:]
 h = h.replace('<link rel="stylesheet" href="theme.css">\n<script src="stats.js"></script>\n', '', 1)
 OUTD='site'; shutil.rmtree(OUTD, ignore_errors=True); shutil.rmtree('netlify', ignore_errors=True); os.makedirs(OUTD)
 open(OUTD+'/index.html', 'w', encoding='utf8').write(head + '<body>\n' + h + '\n</body></html>')
-for f in ['tarot.html', 'iching.html', 'lenormand.html', 'qian.html', 'numerology.html', 'theme.css', 'stats.js', 'og-image.jpg', 'manifest.webmanifest', '404.html', 'README.md']:
+for f in ['tarot.html', 'iching.html', 'lenormand.html', 'qian.html', 'numerology.html', 'theme.css', 'stats.js', 'sound.js', 'og-image.jpg', 'manifest.webmanifest', '404.html', 'README.md']:
     shutil.copy(f, OUTD + '/' + f)
-for d in ['cards', 'fonts', 'img']:
+for d in ['cards', 'fonts', 'img', 'audio']:
     shutil.copytree(d, OUTD + '/' + d)
 open(OUTD + '/.nojekyll', 'w').write('')
 print('ok chars', len(chars))

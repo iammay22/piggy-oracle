@@ -1,0 +1,16 @@
+問問小豬 使用的聲音素材（全部是 CC0 公眾領域，可商用、不需標註，這裡列出來方便查）
+
+背景音樂 audio/music/ ── Open Lofi by btahir（CC0 1.0）
+  https://github.com/btahir/open-lofi
+  作者以 Suno v5 付費會員身分製作後捐到公眾領域。檔案經過音量調整、頭尾淡入淡出、轉成 96kbps。
+  home.mp3   首頁      Window Seat Daydream
+  tarot.mp3  塔羅      Warm Constellations
+  iching.mp3 易經      Moon Through Bamboo
+  leno.mp3   雷諾曼    Stacks of Quiet Books
+  qian.mp3   擲筊求籤  Bells Before Sunrise
+  num.mp3    生命靈數  Dust on the Morning Keys
+
+音效 audio/sfx/ ── Kenney（www.kenney.nl，CC0 1.0）
+  Interface Sounds：tap（click_002）、switch（switch_002）、pop（pluck_001）、think（question_001）、chime（confirmation_002）
+  Casino Audio：shuffle、slide1-3、place1-3、fan（洗牌、抽牌、翻牌）、coins1-3（銅錢）、shake（搖籤筒）、jiao1-2（擲筊）
+  取自 github.com/Calinou/kenney-interface-sounds、github.com/series-ai/jam-ready-assets
