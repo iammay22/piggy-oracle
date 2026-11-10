@@ -1,0 +1,487 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<nav class="dg-nav inset" aria-label="問問地瓜鳥"><a class="home" href="index.html"><img src="img/digua.webp" alt="" width="360" height="243">← 問問地瓜鳥</a><span class="seg"><a href="tarot.html">塔羅</a><a href="iching.html">易經</a><a href="lenormand.html" aria-current="page">雷諾曼</a></span></nav>
+<title>雷諾曼｜問問地瓜鳥</title>
+<link rel="icon" href="img/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#f5f2ec">
+<meta name="description" content="36 張經典雷諾曼牌，三張連成一句話，適合問最近會發生什麼。">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:site_name" content="問問地瓜鳥">
+<meta property="og:title" content="雷諾曼｜問問地瓜鳥">
+<meta property="og:description" content="36 張經典雷諾曼牌，三張連成一句話，適合問最近會發生什麼。">
+<meta property="og:url" content="https://iammay22.github.io/ask-digua/lenormand.html">
+<meta property="og:image" content="https://iammay22.github.io/ask-digua/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://iammay22.github.io/ask-digua/og-image.jpg">
+<link rel="stylesheet" href="theme.css">
+<script src="stats.js"></script>
+
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<style>
+/* Layout: one narrow column — intro, mode switch, chosen-card slots, reading, face-down deck to pick from, card gallery, author footer */
+:root{
+  --paper:#e8ecf0; --card:#fbfbf9; --ink:#1d2433; --muted:#5b6474;
+  --accent:#1f6f6b; --line:#c9d0d8; --back:#24414a; --on-accent:#ffffff;
+  --display:"LXGW WenKai TC","Kaiti TC","KaiTi",serif;
+  --body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#12161f; --card:#1d2331; --ink:#e7eaf0; --muted:#9aa3b3;
+  --accent:#5fb8b1; --line:#2f3747; --back:#2a4a53; --on-accent:#0d1a1a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#12161f; --card:#1d2331; --ink:#e7eaf0; --muted:#9aa3b3;
+  --accent:#5fb8b1; --line:#2f3747; --back:#2a4a53; --on-accent:#0d1a1a; color-scheme:dark}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.7;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:640px;margin:0 auto;padding-block:28px 40px;display:flex;flex-direction:column;gap:24px}
+h1{font-family:var(--display);font-weight:700;text-wrap:balance;margin:0;line-height:1.25;font-size:2.1rem}
+.lead{color:var(--muted);margin:6px 0 0;max-width:34em}
+[hidden]{display:none!important}
+.steps{display:flex;flex-wrap:wrap;gap:6px 18px;margin:12px 0 0;padding:0;list-style:none;counter-reset:s;font-size:.9rem}
+.steps li{counter-increment:s;display:flex;gap:6px;align-items:baseline}
+.steps li::before{content:counter(s);font-family:var(--display);font-weight:700;color:var(--accent)}
+.q{width:100%;box-sizing:border-box;font:inherit;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+.q:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.myq{font-size:.9rem;color:var(--muted)}
+.lean{display:flex;align-items:center;gap:8px;font-size:.9rem;color:var(--muted)}
+.pairs{display:flex;flex-direction:column;gap:4px;font-size:.92rem}
+.pairs b{font-family:var(--display)}
+.again{align-self:flex-start}
+.learn{font-size:.92rem}
+.learn summary{font-size:1rem}
+.learn p{margin:8px 0 0;color:var(--muted)}
+.play{display:flex;flex-direction:column;gap:14px}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.seg button{border:0;background:transparent;color:var(--ink);font:inherit;padding:8px 16px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.btn{background:transparent;color:var(--accent);border:1px solid var(--accent);font:inherit;font-weight:700;padding:8px 18px;border-radius:10px;cursor:pointer}
+button:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.status{font-family:var(--display);font-size:1.15rem;margin:0}
+.slots{display:grid;gap:12px;grid-template-columns:repeat(var(--n,3),minmax(0,1fr));width:100%;max-width:var(--mw,100%);margin:0 auto}
+.slot{perspective:900px;min-width:0}
+.cardx{position:relative;width:100%;aspect-ratio:100/148;transform-style:preserve-3d;transition:transform .6s ease}
+.cardx.on{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:7px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden}
+.empty{border:2px dashed var(--line);border-radius:7px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.85rem;aspect-ratio:100/148;width:100%}
+.backside{background:var(--back);background-image:repeating-linear-gradient(45deg,rgb(255 255 255 / .07) 0 6px,transparent 6px 12px);border:3px solid var(--card);box-shadow:0 2px 8px rgb(0 0 0 / .14)}
+.front{transform:rotateY(180deg);box-shadow:0 3px 12px rgb(0 0 0 / .18)}
+.front svg,.thumb svg{display:block;width:100%;height:100%}
+.pos{text-align:center;font-size:.8rem;color:var(--muted);margin-top:6px}
+.reading{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.reading p{margin:0}
+.row{display:flex;gap:10px;align-items:baseline}
+.row b{font-family:var(--display);font-size:1.1rem;min-width:4.5em}
+.row span{color:var(--muted);min-width:0}
+.combo{border-top:1px dashed var(--line);padding-top:10px;font-family:var(--display);font-size:1.15rem}
+.tag{display:inline-block;font-family:var(--body);font-size:.8rem;font-weight:700;border-radius:999px;padding:1px 10px;margin-left:6px;vertical-align:middle;border:1px solid currentColor;color:var(--accent)}
+.hint{font-size:.85rem;color:var(--muted)}
+/* deck: 3 overlapping rows of 12, like cards spread on a table */
+.deck{display:flex;flex-direction:column;gap:10px;--ov:14px}
+.drow{display:flex}
+.dc{flex:0 0 calc((100% + 11 * var(--ov)) / 12);aspect-ratio:100/148;border-radius:6px;cursor:pointer;padding:0;margin-left:calc(-1 * var(--ov));transition:transform .15s ease}
+.dc:first-child{margin-left:0}
+.dc:hover{transform:translateY(-6px)}
+.dc:disabled{visibility:hidden}
+.deck.shuffling .dc{animation:jig .45s ease}
+@keyframes jig{30%{transform:translate(var(--dx),var(--dy)) rotate(var(--dr))}100%{transform:none}}
+details{border-top:1px solid var(--line);padding-top:14px}
+summary{cursor:pointer;font-family:var(--display);font-size:1.15rem;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin-top:14px}
+@media (max-width:520px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.tile{display:flex;flex-direction:column;gap:4px;min-width:0}
+.thumb{aspect-ratio:100/148;border-radius:6px;overflow:hidden;box-shadow:0 1px 5px rgb(0 0 0 / .15)}
+.tile small{color:var(--muted);font-size:.78rem;line-height:1.4;text-align:center}
+footer{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;border-top:1px solid var(--line);padding-top:14px;font-size:.85rem;color:var(--muted)}
+footer strong{font-family:var(--display);font-size:1.1rem;color:var(--ink)}
+@media (prefers-reduced-motion: reduce){.cardx,.dc{transition:none}.deck.shuffling .dc{animation:none}}
+</style>
+<style>
+:root{--dg-bg:#f5f2ec;--dg-surface:#ffffff;--dg-surface-2:#efebe3;--dg-hover:#e7e1d6;--dg-ink:#221f1b;--dg-soft:#6b655c;--dg-line:#e4ded3;--dg-line-a:rgba(34,31,27,.12);--dg-acc:#3c6e5a;--dg-acc-dim:#8fb0a2;--dg-acc-soft:rgba(60,110,90,.12);--dg-on-acc:#ffffff;--dg-potato:#b8652f;--dg-glass:rgba(255,255,255,.65);--dg-shadow:rgba(34,31,27,.14);--dg-place:#a39b8f;--dg-scrim:rgba(34,31,27,.45);color-scheme:light;--round:"GenSenRounded","PingFang TC","Microsoft JhengHei",sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--dg-bg:#1b1a18;--dg-surface:#252320;--dg-surface-2:#2e2b27;--dg-hover:#37332e;--dg-ink:#ece7de;--dg-soft:#a8a197;--dg-line:#3a3631;--dg-line-a:rgba(236,231,222,.12);--dg-acc:#7fb79e;--dg-acc-dim:#4f7a68;--dg-acc-soft:rgba(127,183,158,.16);--dg-on-acc:#14231d;--dg-potato:#e0904f;--dg-glass:#252320;--dg-shadow:rgba(0,0,0,.4);--dg-place:#7d766c;--dg-scrim:rgba(0,0,0,.6);color-scheme:dark}}
+:root[data-theme="dark"]{--dg-bg:#1b1a18;--dg-surface:#252320;--dg-surface-2:#2e2b27;--dg-hover:#37332e;--dg-ink:#ece7de;--dg-soft:#a8a197;--dg-line:#3a3631;--dg-line-a:rgba(236,231,222,.12);--dg-acc:#7fb79e;--dg-acc-dim:#4f7a68;--dg-acc-soft:rgba(127,183,158,.16);--dg-on-acc:#14231d;--dg-potato:#e0904f;--dg-glass:#252320;--dg-shadow:rgba(0,0,0,.4);--dg-place:#7d766c;--dg-scrim:rgba(0,0,0,.6);color-scheme:dark}
+
+.dg-nav{position:relative;z-index:6;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  max-width:760px;margin:0 auto;padding-block:14px 4px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  font-family:var(--round);font-size:14px;line-height:1.4}
+.dg-nav a{text-decoration:none;color:var(--dg-soft);font-weight:700}
+.dg-nav a:hover{color:var(--dg-acc)}
+.dg-nav a:focus-visible,.dg-shared a:focus-visible{outline:2px solid var(--dg-acc);outline-offset:2px;border-radius:6px}
+.dg-nav .home{display:inline-flex;align-items:center;gap:6px}
+.dg-nav .home img{width:30px;height:auto}
+.dg-nav .seg{display:flex;gap:2px;background:var(--dg-surface-2);border:1px solid var(--dg-line-a);border-radius:999px;padding:3px}
+.dg-nav .seg a{padding:4px 12px;border-radius:999px;font-weight:500}
+.dg-nav .seg a[aria-current]{background:var(--dg-surface);color:var(--dg-ink);font-weight:700;box-shadow:0 1px 3px var(--dg-shadow)}
+.dg-nav.inset{margin-left:calc(-1*max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)))}
+.dg-shared{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:0 0 16px;padding:12px 16px;border-radius:16px;
+  background:var(--dg-acc-soft);color:var(--dg-ink);font-family:var(--round);font-size:15px}
+.dg-shared a{color:var(--dg-acc);font-weight:700;text-decoration:none;white-space:nowrap}
+.dg-toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:40;background:var(--dg-ink);color:var(--dg-bg);
+  padding:8px 18px;border-radius:999px;font-family:var(--round);font-size:14px;white-space:nowrap}
+.dg-foot{max-width:760px;margin:36px auto 0;padding-block:20px 32px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  border-top:1px solid var(--dg-line);display:block;text-align:center;font-family:var(--round);font-size:14px;line-height:1.8;color:var(--dg-soft)}
+.dg-foot p{margin:0}
+.dg-foot nav{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin:6px 0}
+.dg-foot a{color:var(--dg-ink);text-decoration:none;font-weight:700}
+.dg-foot a:hover{color:var(--dg-acc)}
+.dg-foot .by{font-size:12.5px;letter-spacing:.08em}
+.dg-copy{width:100%;margin-top:10px;font:inherit;font-size:14px;padding:10px;border-radius:12px;border:1px solid var(--dg-line);background:var(--dg-surface-2);color:var(--dg-ink)}
+</style>
+<style>
+:root:root:root{--paper:var(--dg-bg);--card:var(--dg-surface);--ink:var(--dg-ink);--muted:var(--dg-soft);--accent:var(--dg-acc);--line:var(--dg-line);--back:#2f5a4a;--on-accent:var(--dg-on-acc);--display:var(--round);--body:var(--round)}
+body{-webkit-font-smoothing:antialiased}
+.reading{border-radius:24px;box-shadow:0 30px 70px -36px var(--dg-shadow)}
+.btn,.seg,.q{border-radius:14px}
+.acts{display:flex;gap:10px;flex-wrap:wrap}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>雷諾曼小抽屜</h1>
+    <p class="lead">雷諾曼有 36 張牌，每張都是生活裡的具體小事，例如信、狗、鑰匙。它講話很直接，適合問「最近會怎樣」。</p>
+    <ol class="steps">
+      <li>想一個具體的問題</li><li>選一張或三張</li><li>從牌堆親手點牌</li>
+    </ol>
+  </header>
+
+  <section class="play">
+    <div class="controls">
+      <div class="seg" role="group" aria-label="牌陣">
+        <button id="m1" aria-pressed="false">今日提醒・一張</button>
+        <button id="m3" aria-pressed="true">三張牌陣</button>
+      </div>
+      <button class="btn" id="shuffleBtn">重新洗牌</button>
+    </div>
+    <input class="q" id="question" maxlength="60" placeholder="（選填）寫下你的問題" aria-label="你的問題">
+    <p class="status" id="status"></p>
+    <div class="slots" id="slots"></div>
+    <div class="reading" id="reading" hidden></div>
+    <div class="deck" id="deck" aria-label="蓋著的牌堆"></div>
+  </section>
+
+  <details class="learn">
+    <summary>第一次玩？雷諾曼怎麼讀</summary>
+    <p>雷諾曼的牌沒有正逆位，意思都很具體。讀法像造句：一張牌當「主角」，旁邊的牌負責「形容」它。例如「心＋老鼠」是被消磨的感情，「老鼠＋心」則是為感情焦慮。</p>
+    <p>三張牌陣：中間那張是核心，左右兩張在形容它。單張牌比較像今天的小提醒，順便看看事情偏「是」還是偏「否」。</p>
+    <p>男士、女士這兩張通常代表你自己。抽到了，代表答案跟你自己的想法有關。</p>
+  </details>
+
+  <details id="gallery">
+    <summary>36 張牌一覽</summary>
+    <div class="grid" id="grid"></div>
+  </details>
+</div>
+
+<script>
+const D=[
+["騎士","Rider","9♥","消息、來訪、速度","消息很快就到，可以主動聯絡一下。","偏是"],
+["幸運草","Clover","6♦","小確幸、短暫機會","小機會就在眼前，別猶豫太久。","是"],
+["船","Ship","10♠","旅行、遠方、變動","換個環境或方向看看。","看情況"],
+["房子","House","K♥","家、穩定、家人","先顧好家和自己的基本盤。","偏是"],
+["樹","Tree","7♥","健康、成長、根基","慢慢來，記得照顧身體。","看情況"],
+["雲","Clouds","K♣","迷惘、看不清","現在還看不清，先別急著決定。","偏否"],
+["蛇","Snake","Q♣","繞路、複雜、心機","事情比表面複雜，多想一步。","偏否"],
+["棺材","Coffin","9♦","結束、休息","該結束的就放下，好好休息。","否"],
+["花束","Bouquet","Q♠","禮物、喜悅、讚美","大方接受別人的好意。","是"],
+["鐮刀","Scythe","J♦","突然、切斷、決斷","需要果斷，但小心衝動。","偏否"],
+["鞭子","Whip","J♣","爭執、反覆","別陷進反覆的爭論。","偏否"],
+["鳥","Birds","7♦","交談、緊張、閒聊","找人聊一聊，把話說開。","看情況"],
+["小孩","Child","J♠","新開始、單純","用新手的心態重新開始。","偏是"],
+["狐狸","Fox","9♣","工作、精明、留心","留意細節，保護自己的利益。","看情況"],
+["熊","Bear","10♣","力量、權威、保護","拿出你的力量，或找可靠的人撐腰。","偏是"],
+["星星","Stars","6♥","希望、指引、願望","照著心裡的方向走。","是"],
+["鸛鳥","Stork","Q♥","轉變、搬遷","改變會帶來好轉。","偏是"],
+["狗","Dog","10♥","朋友、忠誠","找信任的朋友聊聊。","是"],
+["塔","Tower","6♠","機構、孤立、界線","劃清界線，留一點自己的空間。","看情況"],
+["花園","Garden","8♠","社交、公開場合","多出去走走，見見人。","偏是"],
+["山","Mountain","8♣","阻礙、延遲","會慢一點，耐心繞過去。","否"],
+["十字路口","Crossroads","Q♦","選擇、岔路","你有選擇，列出選項再決定。","看情況"],
+["老鼠","Mice","7♣","損耗、焦慮","找出正在消耗你的東西。","否"],
+["心","Heart","J♥","愛、感情","跟著感覺走，對人溫柔一點。","是"],
+["戒指","Ring","A♣","承諾、合約","說到做到，約定很重要。","是"],
+["書","Book","10♦","秘密、學習","還有沒看到的資訊，先多了解。","看情況"],
+["信","Letter","7♠","文件、訊息","把事情寫下來，或確認一下文件。","看情況"],
+["男士","Man","A♥","你自己或重要男性","重點在你自己或某位男性，先問自己想要什麼。","看情況"],
+["女士","Woman","A♠","你自己或重要女性","重點在你自己或某位女性，先問自己想要什麼。","看情況"],
+["百合","Lily","K♠","成熟、平和","放慢腳步，保持平靜。","偏是"],
+["太陽","Sun","A♦","成功、能量","放手去做，會順利的。","是"],
+["月亮","Moon","8♥","情緒、名聲","照顧好情緒，你的努力會被看見。","偏是"],
+["鑰匙","Key","8♦","答案、確定","答案已經在你手上。","是"],
+["魚","Fish","K♦","金錢、流動","留意跟錢有關的事，讓資源流動起來。","偏是"],
+["錨","Anchor","9♠","穩定、長久","堅持下去，穩穩的就好。","偏是"],
+["十字架","Cross","6♣","責任、考驗","這是你的責任，扛起來但別硬撐。","偏否"]
+].map((c,i)=>({n:i+1,name:c[0],en:c[1],pip:c[2],k:c[3],tip:c[4],yn:c[5],first:c[3].split("、")[0]}));
+// 當主角時的名詞，當形容時接在「它」後面的說法
+const NA=[
+["一則消息","很快就會發生"],["一個小機會","帶點小運氣，但時間不長"],["一段旅程或轉變","跟遠方或改變有關"],
+["家或安穩的基地","很穩定，跟家人有關"],["身體與根基","需要時間慢慢長"],["一團迷霧","還不明朗"],
+["一件複雜的事","要繞點路"],["一個結束","走到尾聲，需要休息"],["一份禮物或好意","讓人開心"],
+["一個突然的決定","來得很突然"],["一場爭執","反覆拉扯"],["一段對話","需要多溝通"],
+["一個新開始","還很新、很單純"],["工作或要小心的事","需要精明一點"],["一股力量或有權的人","很有份量"],
+["一個願望","有希望，方向清楚"],["一次轉變","正在變好"],["一位朋友","值得信任"],
+["一個機構或界線","比較正式，有距離感"],["一群人或社交場合","是公開的，大家都看得到"],["一個阻礙","會被拖慢"],
+["一個選擇","有好幾條路可選"],["正在消耗你的東西","一點一點在流失"],["一段感情","充滿愛"],
+["一個承諾或約定","有約束力"],["一個秘密或要學的事","還藏著沒看到的資訊"],["一份文件或訊息","要寫下來、留下紀錄"],
+["你自己（或一位男性）","跟某位男性有關"],["你自己（或一位女性）","跟某位女性有關"],["平靜與成熟","平和、不急"],
+["成功","很順利，充滿能量"],["情緒或名聲","牽動情緒，也會被人看見"],["答案","有解，關鍵就在眼前"],
+["金錢或資源","跟錢有關，正在流動"],["穩定","會持續很久"],["一份責任","有點沉重，是個考驗"]];
+D.forEach((c,i)=>{c.noun=NA[i][0];c.adj=NA[i][1]});
+const YN={"是":2,"偏是":1,"看情況":0,"偏否":-1,"否":-2};
+function leanOf(cards){const s=cards.reduce((t,c)=>t+YN[c.yn],0);return s>=3?"是":s>=1?"偏是":s<=-3?"否":s<=-1?"偏否":"看情況"}
+function esc(s){return s.replace(/[&<>"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]))}
+
+/* ---------- 牌面插畫（經典版型：上方小撲克牌、中間物件、下方牌名） ---------- */
+const C={k:'#2b2420',r:'#a8322d',b:'#2f4f7a',g:'#4f7a3a',gl:'#9cbf7e',br:'#8a5a35',bd:'#5a3820',au:'#d1a237',sk:'#ecc9a4',cr:'#fbf6ea',sky:'#bcd3e0',gr:'#8f8f8f',nt:'#1f2d4a',st:'#b8b0a2',sea:'#6a8fb3'};
+const gnd=(f=C.gl)=>`<path d="M0 64 Q40 58 80 64 L80 72 L0 72Z" fill="${f}" stroke="none"/>`;
+function star(cx,cy,r,f){let p=[];for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,q=i%2?r*.45:r;p.push((cx+q*Math.cos(a)).toFixed(1)+','+(cy+q*Math.sin(a)).toFixed(1))}return `<polygon points="${p.join(' ')}" fill="${f}" stroke="none"/>`}
+function rays(cx,cy,r1,r2,n,col,w){let s='';for(let i=0;i<n;i++){const a=i*2*Math.PI/n;s+=`<line x1="${(cx+r1*Math.cos(a)).toFixed(1)}" y1="${(cy+r1*Math.sin(a)).toFixed(1)}" x2="${(cx+r2*Math.cos(a)).toFixed(1)}" y2="${(cy+r2*Math.sin(a)).toFixed(1)}" stroke="${col}" stroke-width="${w}"/>`}return s}
+
+const ART={
+1:()=>gnd()+`<path d="M21 38 Q12 44 14 56" fill="none" stroke="${C.bd}" stroke-width="2.5"/>
+<g stroke="${C.bd}" stroke-width="3"><line x1="26" y1="44" x2="22" y2="62"/><line x1="31" y1="46" x2="32" y2="62"/><line x1="48" y1="46" x2="50" y2="62"/><line x1="53" y1="44" x2="59" y2="60"/></g>
+<ellipse cx="38" cy="40" rx="18" ry="9" fill="${C.br}"/><path d="M50 36 L58 20 L64 23 L57 41 Z" fill="${C.br}"/>
+<ellipse cx="63" cy="23" rx="7" ry="4" fill="${C.br}" transform="rotate(25 63 23)"/><path d="M52 34 L58 21" stroke="${C.bd}" stroke-width="2"/>
+<line x1="38" y1="37" x2="35" y2="50" stroke="${C.b}" stroke-width="3.5"/><path d="M34 21 L44 21 L42 38 L34 38 Z" fill="${C.r}"/>
+<line x1="42" y1="25" x2="54" y2="30" stroke="${C.r}" stroke-width="2.5"/><line x1="54" y1="30" x2="62" y2="25" stroke-width=".8"/>
+<circle cx="38" cy="16" r="4.5" fill="${C.sk}"/><path d="M33 14 L43 14 L41 8 L35 8 Z" fill="${C.k}"/>`,
+2:()=>gnd()+`<path d="M40 44 Q44 56 54 64" fill="none" stroke="${C.g}" stroke-width="3"/>
+<circle cx="31" cy="27" r="11" fill="${C.g}"/><circle cx="49" cy="27" r="11" fill="${C.g}"/><circle cx="40" cy="42" r="11" fill="${C.g}"/>
+<g stroke="${C.gl}" stroke-width="1.2"><line x1="40" y1="34" x2="31" y2="25"/><line x1="40" y1="34" x2="49" y2="25"/><line x1="40" y1="34" x2="40" y2="45"/></g>`,
+3:()=>`<path d="M0 56 Q10 52 20 56 T40 56 T60 56 T80 56 L80 72 L0 72Z" fill="${C.sea}" stroke="none"/>
+<path d="M8 44 L72 44 L63 57 L17 57 Z" fill="${C.br}"/><line x1="40" y1="6" x2="40" y2="44" stroke-width="2"/>
+<path d="M42 9 L42 40 L66 40 Z" fill="${C.cr}"/><path d="M38 12 L38 40 L18 40 Z" fill="${C.cr}"/><path d="M40 6 L50 9 L40 12 Z" fill="${C.r}"/>
+<circle cx="28" cy="50" r="1.6" fill="${C.au}"/><circle cx="40" cy="50" r="1.6" fill="${C.au}"/><circle cx="52" cy="50" r="1.6" fill="${C.au}"/>`,
+4:()=>gnd()+`<rect x="51" y="14" width="6" height="14" fill="${C.br}"/><rect x="18" y="32" width="44" height="32" fill="#e8d6ad"/>
+<polygon points="12,33 40,10 68,33" fill="${C.r}"/><rect x="35" y="46" width="10" height="18" fill="${C.br}"/>
+<rect x="22" y="38" width="9" height="9" fill="${C.sky}"/><rect x="49" y="38" width="9" height="9" fill="${C.sky}"/>
+<path d="M26.5 38 V47 M22 42.5 H31 M53.5 38 V47 M49 42.5 H58" stroke-width=".7"/>`,
+5:()=>gnd()+`<path d="M36 66 L37 38 L43 38 L44 66 Z" fill="${C.br}"/>
+<circle cx="26" cy="34" r="11" fill="${C.g}"/><circle cx="54" cy="34" r="11" fill="${C.g}"/><circle cx="40" cy="24" r="17" fill="${C.g}"/><circle cx="40" cy="38" r="10" fill="${C.g}" stroke="none"/>
+<circle cx="34" cy="18" r="3" fill="${C.gl}" stroke="none"/><circle cx="48" cy="26" r="2.5" fill="${C.gl}" stroke="none"/><circle cx="26" cy="32" r="2" fill="${C.gl}" stroke="none"/>`,
+6:()=>`<g stroke="${C.sea}" stroke-width="1.2"><line x1="26" y1="44" x2="23" y2="54"/><line x1="34" y1="45" x2="31" y2="56"/><line x1="42" y1="45" x2="39" y2="55"/></g>
+<g fill="#5c6470"><circle cx="24" cy="28" r="11"/><circle cx="40" cy="22" r="14"/><circle cx="54" cy="28" r="11"/><ellipse cx="40" cy="34" rx="24" ry="9"/></g>
+<g fill="#d4d8de"><circle cx="50" cy="50" r="9"/><circle cx="60" cy="45" r="11"/><circle cx="70" cy="50" r="7"/><ellipse cx="60" cy="54" rx="16" ry="6"/></g>`,
+7:()=>gnd()+`<path d="M10 62 C26 66 34 54 30 46 S24 32 38 30 S56 30 54 18" fill="none" stroke="${C.k}" stroke-width="8.5"/>
+<path d="M10 62 C26 66 34 54 30 46 S24 32 38 30 S56 30 54 18" fill="none" stroke="#3d6b35" stroke-width="7"/>
+<path d="M10 62 C26 66 34 54 30 46 S24 32 38 30 S56 30 54 18" fill="none" stroke="${C.au}" stroke-width="2" stroke-dasharray="2 5"/>
+<ellipse cx="56" cy="14" rx="6.5" ry="4.5" fill="#3d6b35" transform="rotate(-30 56 14)"/><circle cx="57" cy="12" r="1" fill="${C.k}"/>
+<path d="M61 10 L66 6 M62 9.5 L67 9" stroke="${C.r}" stroke-width="1"/>`,
+8:()=>gnd('#8a9a7a')+`<polygon points="31,6 49,6 57,20 51,64 29,64 23,20" fill="#4a3426"/>
+<polygon points="33,10 47,10 53,21 48,60 32,60 27,21" fill="none" stroke="${C.au}" stroke-width=".8"/>
+<line x1="40" y1="18" x2="40" y2="44" stroke="${C.au}" stroke-width="2.5"/><line x1="32" y1="26" x2="48" y2="26" stroke="${C.au}" stroke-width="2.5"/>`,
+9:()=>`<g stroke="${C.g}" stroke-width="1.5"><line x1="40" y1="66" x2="30" y2="28"/><line x1="40" y1="66" x2="40" y2="20"/><line x1="40" y1="66" x2="50" y2="28"/><line x1="40" y1="66" x2="33" y2="38"/><line x1="40" y1="66" x2="47" y2="38"/></g>
+<ellipse cx="25" cy="42" rx="7" ry="3" fill="${C.g}" transform="rotate(-30 25 42)"/><ellipse cx="55" cy="42" rx="7" ry="3" fill="${C.g}" transform="rotate(30 55 42)"/>
+<circle cx="30" cy="27" r="7" fill="${C.r}"/><circle cx="50" cy="27" r="7" fill="#c76b8f"/><circle cx="40" cy="19" r="7" fill="${C.au}"/><circle cx="33" cy="38" r="6" fill="#7a8fc4"/><circle cx="47" cy="38" r="6" fill="${C.cr}"/>
+<g fill="${C.au}" stroke="none"><circle cx="30" cy="27" r="2"/><circle cx="50" cy="27" r="2"/><circle cx="33" cy="38" r="1.6"/><circle cx="47" cy="38" r="1.6"/></g><circle cx="40" cy="19" r="2" fill="${C.r}" stroke="none"/>
+<polygon points="40,54 30,48 30,60" fill="${C.r}"/><polygon points="40,54 50,48 50,60" fill="${C.r}"/><circle cx="40" cy="54" r="2.5" fill="${C.r}"/>`,
+10:()=>gnd(C.au)+`<g stroke="#a8862a" stroke-width="1.2"><line x1="8" y1="66" x2="10" y2="50"/><line x1="14" y1="66" x2="14" y2="48"/><line x1="64" y1="66" x2="66" y2="48"/><line x1="70" y1="66" x2="72" y2="50"/></g>
+<line x1="24" y1="66" x2="54" y2="10" stroke="${C.br}" stroke-width="3.2"/><line x1="33" y1="49" x2="42" y2="53" stroke="${C.br}" stroke-width="2.5"/>
+<path d="M54 10 Q30 2 10 22 Q32 12 52 16 Z" fill="#aab3bc"/>`,
+11:()=>`<line x1="18" y1="64" x2="34" y2="36" stroke="${C.br}" stroke-width="4"/><path d="M34 36 Q44 14 60 18 Q72 22 66 36 Q60 48 70 56" fill="none" stroke-width="1.5"/>
+<line x1="62" y1="64" x2="46" y2="36" stroke="${C.bd}" stroke-width="4"/><path d="M46 36 Q36 16 22 20 Q10 26 16 38 Q22 48 12 54" fill="none" stroke-width="1.5"/>
+<circle cx="18" cy="64" r="2" fill="${C.au}"/><circle cx="62" cy="64" r="2" fill="${C.au}"/>`,
+12:()=>`<path d="M4 50 Q40 44 76 48" fill="none" stroke="${C.br}" stroke-width="3"/>
+<g stroke-width=".9"><line x1="27" y1="44" x2="27" y2="48"/><line x1="31" y1="44" x2="31" y2="47.5"/><line x1="51" y1="42" x2="51" y2="46.5"/><line x1="55" y1="42" x2="55" y2="47"/></g>
+<polygon points="19,37 9,44 20,42" fill="${C.b}"/><ellipse cx="28" cy="38" rx="10" ry="7" fill="${C.b}"/><circle cx="36" cy="31" r="5" fill="${C.b}"/>
+<polygon points="40,30 46,32 40,33.5" fill="${C.au}"/><circle cx="37" cy="30" r=".9" fill="${C.k}"/><path d="M22 36 Q28 33 33 38" fill="none" stroke="${C.sky}"/>
+<polygon points="61,35 71,42 60,40" fill="#b0623a"/><ellipse cx="52" cy="36" rx="10" ry="7" fill="#b0623a"/><circle cx="44" cy="29" r="5" fill="#b0623a"/>
+<polygon points="40,28 34,30 40,31.5" fill="${C.au}"/><circle cx="43" cy="28" r=".9" fill="${C.k}"/>`,
+13:()=>gnd()+`<g stroke="${C.sk}" stroke-width="3"><line x1="35" y1="30" x2="26" y2="42"/><line x1="45" y1="30" x2="54" y2="40"/><line x1="36" y1="52" x2="36" y2="62"/><line x1="44" y1="52" x2="44" y2="62"/></g>
+<path d="M34 28 L46 28 L52 52 L28 52 Z" fill="#6f8fc4"/><path d="M35 28 L40 33 L45 28" fill="none" stroke="${C.cr}" stroke-width="1.5"/>
+<circle cx="40" cy="19" r="7" fill="${C.sk}"/><path d="M33 18 Q34 9 40 9 Q46 9 47 18 Q43 13 40 13 Q36 13 33 18 Z" fill="#c08a3a"/>
+<ellipse cx="34" cy="63" rx="3" ry="1.5" fill="${C.k}"/><ellipse cx="46" cy="63" rx="3" ry="1.5" fill="${C.k}"/><circle cx="58" cy="58" r="5" fill="${C.r}"/><path d="M53 58 H63" stroke="${C.cr}"/>`,
+14:()=>gnd()+`<path d="M22 42 Q4 34 10 20 Q18 34 28 40 Z" fill="#c46a2b"/><path d="M10 20 Q12 26 15 28 Q11 26 10 20Z" fill="${C.cr}"/>
+<g stroke="${C.bd}" stroke-width="2.6"><line x1="26" y1="48" x2="24" y2="62"/><line x1="31" y1="50" x2="31" y2="62"/><line x1="43" y1="50" x2="44" y2="62"/><line x1="48" y1="48" x2="51" y2="62"/></g>
+<ellipse cx="37" cy="44" rx="15" ry="8" fill="#c46a2b"/><path d="M47 36 L52 26 L56 34 L67 40 L54 47 Z" fill="#c46a2b"/>
+<path d="M56 44 L67 40 L60 45 Z" fill="${C.cr}"/><circle cx="67" cy="40" r="1.4" fill="${C.k}"/><circle cx="55" cy="37" r=".9" fill="${C.k}"/>`,
+15:()=>gnd()+`<g fill="#56361e"><rect x="20" y="48" width="8" height="16" rx="2"/><rect x="30" y="50" width="8" height="14" rx="2"/><rect x="44" y="50" width="8" height="14" rx="2"/><rect x="52" y="48" width="8" height="16" rx="2"/></g>
+<ellipse cx="38" cy="44" rx="22" ry="14" fill="#6b4428"/><circle cx="54" cy="23" r="4" fill="#6b4428"/><circle cx="66" cy="23" r="4" fill="#6b4428"/>
+<circle cx="60" cy="32" r="10" fill="#6b4428"/><ellipse cx="66" cy="36" rx="5" ry="4" fill="#a87a52"/><circle cx="69.5" cy="35" r="1.5" fill="${C.k}"/><circle cx="60" cy="29" r="1" fill="${C.k}"/>`,
+16:()=>`<rect x="0" y="0" width="80" height="72" rx="3" fill="${C.nt}" stroke="none"/>`+star(40,32,13,C.au)+star(16,14,5,C.au)+star(64,14,6,C.au)+star(18,50,4,C.au)+star(64,52,5,C.au)+star(48,62,3,C.au)+
+`<g fill="#ffffff" stroke="none"><circle cx="28" cy="8" r=".8"/><circle cx="72" cy="32" r=".8"/><circle cx="8" cy="32" r=".8"/><circle cx="32" cy="62" r=".8"/><circle cx="54" cy="24" r=".6"/></g>`,
+17:()=>`<path d="M0 62 Q40 58 80 62 L80 72 L0 72Z" fill="${C.sea}" stroke="none"/>
+<g stroke="${C.r}" stroke-width="1.6"><line x1="38" y1="46" x2="37" y2="64"/><polyline points="44,46 50,55 42,57" fill="none"/></g>
+<ellipse cx="38" cy="40" rx="15" ry="8" fill="#ffffff" transform="rotate(-15 38 40)"/><path d="M24 44 Q32 40 40 46 L28 48 Z" fill="${C.k}"/>
+<path d="M46 36 Q55 26 50 14 L54 13 Q60 26 51 39 Z" fill="#ffffff"/><circle cx="52" cy="13" r="4.2" fill="#ffffff"/>
+<polygon points="55,11.5 71,16 55,15" fill="${C.r}"/><circle cx="52.5" cy="12" r=".8" fill="${C.k}"/>`,
+18:()=>gnd()+`<path d="M27 60 Q14 56 16 46" fill="none" stroke="#c9a06a" stroke-width="3"/>
+<path d="M26 64 Q24 40 38 34 Q50 36 50 64 Z" fill="#c9a06a"/><g stroke="#8a6236" stroke-width="2.2"><line x1="40" y1="48" x2="40" y2="64"/><line x1="46" y1="48" x2="47" y2="64"/></g>
+<circle cx="42" cy="26" r="9" fill="#c9a06a"/><ellipse cx="50" cy="30" rx="6" ry="4" fill="#e3c79a"/><ellipse cx="35" cy="27" rx="3.5" ry="7" fill="#8a6236"/>
+<circle cx="55.5" cy="29" r="1.7" fill="${C.k}"/><circle cx="45" cy="23" r="1" fill="${C.k}"/><path d="M35 35 Q42 39 49 35" fill="none" stroke="${C.r}" stroke-width="2.5"/>`,
+19:()=>gnd()+`<rect x="28" y="16" width="24" height="48" fill="${C.st}"/><rect x="26" y="11" width="28" height="7" fill="${C.st}"/>
+<rect x="26" y="5" width="6" height="7" fill="${C.st}"/><rect x="37" y="5" width="6" height="7" fill="${C.st}"/><rect x="48" y="5" width="6" height="7" fill="${C.st}"/>
+<rect x="37.5" y="24" width="5" height="8" rx="2.5" fill="${C.k}"/><rect x="37.5" y="38" width="5" height="8" rx="2.5" fill="${C.k}"/>
+<path d="M35 64 L35 55 Q40 49 45 55 L45 64 Z" fill="${C.br}"/><path d="M28 30 H34 M46 34 H52 M28 46 H33 M47 50 H52" stroke-width=".6"/>`,
+20:()=>`<path d="M0 46 Q40 40 80 46 L80 72 L0 72Z" fill="${C.gl}" stroke="none"/><polygon points="34,72 46,72 42,46 38,46" fill="#e2cfa3" stroke="none"/>
+<rect x="12" y="34" width="4" height="14" fill="${C.br}"/><circle cx="14" cy="28" r="10" fill="${C.g}"/><rect x="64" y="34" width="4" height="14" fill="${C.br}"/><circle cx="66" cy="28" r="10" fill="${C.g}"/>
+<ellipse cx="26" cy="47" rx="7" ry="4" fill="${C.g}"/><ellipse cx="54" cy="47" rx="7" ry="4" fill="${C.g}"/>
+<g stroke="none"><circle cx="16" cy="58" r="2" fill="${C.r}"/><circle cx="24" cy="62" r="2" fill="${C.au}"/><circle cx="10" cy="64" r="2" fill="#c76b8f"/><circle cx="58" cy="60" r="2" fill="${C.au}"/><circle cx="66" cy="64" r="2" fill="${C.r}"/><circle cx="72" cy="58" r="2" fill="#c76b8f"/></g>`,
+21:()=>gnd()+`<polygon points="2,64 28,14 54,64" fill="#7d8692"/><polygon points="28,64 56,22 80,64" fill="#9aa3ad"/>
+<polygon points="21.5,27 28,14 34.5,27 31,24 28,28 25,24" fill="#ffffff"/><polygon points="50,31 56,22 62,31 59,29 56,32 53,29" fill="#ffffff"/>`,
+22:()=>`<path d="M0 28 Q40 24 80 28 L80 72 L0 72Z" fill="${C.gl}" stroke="none"/>
+<path d="M40 72 L40 48 L8 30 M40 48 L72 30" fill="none" stroke="#e2cfa3" stroke-width="9" stroke-linejoin="miter" stroke-linecap="butt"/>
+<line x1="60" y1="66" x2="60" y2="42" stroke="${C.br}" stroke-width="2"/><polygon points="60,42 72,42 75,45.5 72,49 60,49" fill="${C.cr}"/><polygon points="60,51 50,51 47,54.5 50,58 60,58" fill="${C.cr}"/>`,
+23:()=>gnd()+`<path d="M18 52 Q8 50 10 40" fill="none" stroke="${C.gr}" stroke-width="1.5"/><ellipse cx="30" cy="52" rx="12" ry="7" fill="${C.gr}"/>
+<path d="M40 46 Q50 49 53 54 Q45 58 40 58 Z" fill="${C.gr}"/><circle cx="41" cy="46" r="3.5" fill="#d9a3a3"/><circle cx="46" cy="51" r=".9" fill="${C.k}"/>
+<path d="M63 32 Q73 30 71 21" fill="none" stroke="${C.gr}" stroke-width="1.4"/><ellipse cx="54" cy="32" rx="10" ry="6" fill="#a3a3a3"/>
+<path d="M45 27 Q36 30 34 34 Q41 37 45 37 Z" fill="#a3a3a3"/><circle cx="45" cy="27" r="3" fill="#d9a3a3"/><circle cx="40" cy="31" r=".9" fill="${C.k}"/>
+<polygon points="58,63 75,63 75,52" fill="${C.au}"/><circle cx="70" cy="59" r="1.4" fill="#a8862a" stroke="none"/>`,
+24:()=>`<path d="M40 64 C10 44 8 22 24 16 C32 13 38 18 40 24 C42 18 48 13 56 16 C72 22 70 44 40 64 Z" fill="${C.r}"/>
+<ellipse cx="27" cy="26" rx="5" ry="3" fill="#ffffff" fill-opacity=".45" stroke="none" transform="rotate(-35 27 26)"/>`,
+25:()=>`<circle cx="40" cy="42" r="16" fill="none" stroke="${C.au}" stroke-width="5"/><circle cx="40" cy="42" r="18.5" fill="none" stroke-width=".8"/><circle cx="40" cy="42" r="13.5" fill="none" stroke-width=".8"/>
+<rect x="35" y="23" width="10" height="4" fill="${C.au}"/><polygon points="33,24 47,24 51,18 46,12 34,12 29,18" fill="#6fa8d6"/><path d="M29 18 H51 M34 12 L40 24 L46 12" fill="none" stroke-width=".6"/>`+star(62,16,4,C.au)+star(18,62,3,C.au),
+26:()=>`<path d="M62 20 L66 24 L66 62 L62 58 Z" fill="${C.cr}"/><path d="M16 58 L62 58 L66 62 L20 62 Z" fill="${C.cr}"/>
+<rect x="16" y="18" width="46" height="40" fill="#7a2a2a"/><rect x="20" y="22" width="38" height="32" fill="none" stroke="${C.au}" stroke-width="1"/>
+<polygon points="39,30 46,38 39,46 32,38" fill="${C.au}"/><rect x="58" y="34" width="8" height="8" fill="${C.au}"/>`,
+27:()=>`<rect x="12" y="22" width="56" height="36" fill="#f1e6c8"/><path d="M12 22 L40 44 L68 22 M12 58 L34 40 M68 58 L46 40" fill="none"/>
+<circle cx="40" cy="44" r="5" fill="${C.r}"/><path d="M60 8 Q66 14 62 24" fill="none" stroke="${C.k}" stroke-width="1.2"/><path d="M60 8 Q72 6 74 14 Q68 12 62 20 Z" fill="${C.sky}"/>`,
+28:()=>gnd()+`<rect x="34" y="46" width="5" height="18" fill="#2b2f3a"/><rect x="41" y="46" width="5" height="18" fill="#2b2f3a"/>
+<path d="M32 26 L48 26 L50 50 L30 50 Z" fill="${C.b}"/><polygon points="37,26 40,32 43,26" fill="${C.cr}"/>
+<line x1="48" y1="30" x2="53" y2="42" stroke="${C.b}" stroke-width="3"/><line x1="53" y1="40" x2="56" y2="64" stroke="${C.br}" stroke-width="1.5"/>
+<circle cx="40" cy="19" r="6" fill="${C.sk}"/><rect x="34.5" y="4" width="11" height="9" fill="${C.k}"/><line x1="31" y1="13" x2="49" y2="13" stroke-width="2"/>`,
+29:()=>gnd()+`<path d="M34 28 L46 28 L56 64 L24 64 Z" fill="#8b3a62"/><path d="M34 28 L46 28 L44 40 L36 40 Z" fill="#a85580"/>
+<line x1="46" y1="30" x2="52" y2="40" stroke="${C.sk}" stroke-width="2.5"/><path d="M52 40 L60 32 Q62 38 58 44 Z" fill="${C.au}"/>
+<circle cx="40" cy="20" r="6" fill="${C.sk}"/><path d="M33 20 Q34 10 40 10 Q46 10 47 20 Q44 14 40 14 Q36 14 33 20 Z" fill="${C.br}"/><circle cx="40" cy="9" r="3.5" fill="${C.br}"/>`,
+30:()=>gnd()+`<line x1="40" y1="66" x2="40" y2="20" stroke="${C.g}" stroke-width="2"/><path d="M40 30 L30 34 M40 28 L50 32" stroke="${C.g}" stroke-width="1.5"/>
+<ellipse cx="33" cy="52" rx="8" ry="3" fill="${C.g}" transform="rotate(-35 33 52)"/><ellipse cx="47" cy="46" rx="8" ry="3" fill="${C.g}" transform="rotate(35 47 46)"/>`+
+[[40,14],[27,30],[53,28]].map(([x,y])=>`<ellipse cx="${x-4}" cy="${y}" rx="3" ry="8" fill="#ffffff" transform="rotate(-30 ${x-4} ${y})"/><ellipse cx="${x+4}" cy="${y}" rx="3" ry="8" fill="#ffffff" transform="rotate(30 ${x+4} ${y})"/><ellipse cx="${x}" cy="${y-1}" rx="3" ry="8.5" fill="#ffffff"/><circle cx="${x}" cy="${y+6}" r="1.2" fill="${C.au}" stroke="none"/>`).join(''),
+31:()=>rays(40,34,17,29,16,C.au,2.6)+`<circle cx="40" cy="34" r="14" fill="${C.au}"/><circle cx="40" cy="34" r="9" fill="#f0c95a" stroke="none"/>`,
+32:()=>`<rect x="0" y="0" width="80" height="72" rx="3" fill="${C.nt}" stroke="none"/><path d="M46 12 A24 24 0 0 0 46 60 A30 30 0 0 1 46 12 Z" fill="${C.au}"/>`+star(62,22,4,C.au)+star(66,50,3,C.au)+
+`<g fill="#ffffff" stroke="none"><circle cx="12" cy="10" r=".8"/><circle cx="72" cy="8" r=".8"/><circle cx="10" cy="60" r=".8"/></g>`,
+33:()=>`<circle cx="22" cy="36" r="10" fill="none" stroke="${C.au}" stroke-width="4"/><circle cx="22" cy="36" r="12" fill="none" stroke-width=".8"/><circle cx="22" cy="36" r="8" fill="none" stroke-width=".8"/>
+<rect x="32" y="34" width="38" height="4" fill="${C.au}"/><rect x="58" y="38" width="4" height="9" fill="${C.au}"/><rect x="65" y="38" width="4" height="6" fill="${C.au}"/>`+star(40,18,3.5,C.au)+star(54,58,3,C.au),
+34:()=>`<g stroke="${C.sky}" stroke-width="1.2" fill="none"><path d="M4 18 Q12 14 20 18"/><path d="M58 66 Q66 62 74 66"/><path d="M4 66 Q12 62 20 66"/></g>
+<polygon points="20,30 8,22 8,38" fill="${C.sea}"/><ellipse cx="34" cy="30" rx="16" ry="8" fill="${C.sea}"/><path d="M30 22 Q34 18 40 23" fill="${C.sea}"/>
+<circle cx="44" cy="28" r="1.8" fill="#ffffff"/><circle cx="44.4" cy="28" r=".8" fill="${C.k}"/><path d="M28 26 Q31 30 28 34 M23 27 Q26 30 23 33" fill="none" stroke-width=".7"/>
+<polygon points="58,52 70,45 70,59" fill="#c9a24a"/><ellipse cx="46" cy="52" rx="14" ry="7" fill="#c9a24a"/>
+<circle cx="37" cy="50" r="1.6" fill="#ffffff"/><circle cx="36.6" cy="50" r=".7" fill="${C.k}"/>`,
+35:()=>`<path d="M40 22 Q30 30 42 36 Q52 42 38 48" fill="none" stroke="${C.br}" stroke-width="2"/>
+<g stroke="#3e4b5a" stroke-width="4" fill="none"><circle cx="40" cy="10" r="5" stroke-width="3"/><line x1="40" y1="15" x2="40" y2="61"/><line x1="28" y1="22" x2="52" y2="22"/><path d="M16 46 Q22 62 40 62 Q58 62 64 46"/></g>
+<polygon points="11,49 16,39 22,48" fill="#3e4b5a"/><polygon points="58,48 64,39 69,49" fill="#3e4b5a"/>`,
+36:()=>rays(40,24,14,34,12,'#e7c66e',1.4)+`<path d="M12 66 Q40 52 68 66 Z" fill="${C.gl}"/><rect x="36" y="8" width="8" height="52" fill="#4a3426"/><rect x="24" y="20" width="32" height="8" fill="#4a3426"/>`
+};
+
+function cardSVG(c){
+  const rank=c.pip.slice(0,-1), suit=c.pip.slice(-1), col=/[♥♦]/.test(suit)?'#b0302c':'#1c1c1c';
+  return `<svg viewBox="0 0 100 148" role="img" aria-label="${c.n} ${c.name}" font-family="LXGW WenKai TC, Kaiti TC, KaiTi, serif">
+  <rect width="100" height="148" rx="6" fill="#f3ead6"/>
+  <rect x="4" y="4" width="92" height="140" rx="4" fill="none" stroke="#8a6a3a" stroke-width="1"/>
+  <rect x="6.5" y="6.5" width="87" height="135" rx="3" fill="none" stroke="#8a6a3a" stroke-width=".5"/>
+  <text x="12" y="19" font-size="10" font-weight="700" fill="#2b2420">${c.n}</text>
+  <rect x="37" y="8" width="26" height="35" rx="2" fill="#ffffff" stroke="#2b2420" stroke-width=".7"/>
+  <text x="39.5" y="16" font-size="7" font-weight="700" fill="${col}" font-family="Georgia, serif">${rank}</text>
+  <text x="50" y="35" font-size="17" text-anchor="middle" fill="${col}">${suit}</text>
+  <g transform="translate(10 49)" stroke="#2b2420" stroke-width="1" stroke-linejoin="round" stroke-linecap="round">${ART[c.n]()}</g>
+  <rect x="14" y="124" width="72" height="15" rx="2" fill="#e6d9b8" stroke="#8a6a3a" stroke-width=".6"/>
+  <text x="50" y="135" font-size="10" text-anchor="middle" fill="#2b2420" font-weight="700">${c.name}</text></svg>`;
+}
+
+/* ---------- 抽牌流程 ---------- */
+const $=id=>document.getElementById(id);
+const LABELS={1:["今日提醒"],3:["左・形容","核心","右・形容"]};
+let mode=3, order=[], picked=[];
+function rnd(n){try{const a=new Uint32Array(1);crypto.getRandomValues(a);return a[0]%n}catch(e){return Math.floor(Math.random()*n)}}
+function shuffled(){const a=D.map((_,i)=>i);for(let i=a.length-1;i>0;i--){const j=rnd(i+1);[a[i],a[j]]=[a[j],a[i]]}return a}
+
+function drawSlots(){
+  const s=$("slots");
+  s.style.setProperty("--n",mode);
+  s.style.setProperty("--mw",mode===1?"200px":"100%");
+  s.innerHTML=LABELS[mode].map((lab,i)=>{
+    const c=picked[i];
+    const inner=c?`<div class="cardx" id="cx${i}"><div class="face backside"></div><div class="face front">${cardSVG(c)}</div></div>`:`<div class="empty">第 ${i+1} 張</div>`;
+    return `<div class="slot">${inner}<div class="pos">${lab}</div></div>`}).join("");
+}
+function updateStatus(){
+  const left=mode-picked.length;
+  $("status").textContent=left>0?(picked.length===0?`默念你的問題，從下面挑 ${mode} 張牌`:`還要再挑 ${left} 張`):"牌選好了，看看它們想說什麼";
+  $("deck").hidden=left===0;
+}
+function showReading(){
+  const r=$("reading");
+  if(picked.length<mode){r.hidden=true;return}
+  const q=$("question").value.trim();
+  let html=q?`<p class="myq">你的問題：${esc(q)}</p>`:"";
+  if(mode===1){
+    const c=picked[0];
+    html+=`<div class="row"><b>${c.name}</b><span>${c.k}</span></div>
+      <p class="combo">${c.tip}</p>
+      <p class="lean">傾向<span class="tag">${c.yn}</span></p>
+      <p class="hint">單張牌適合當今天的小提醒。想知道事情的來龍去脈，用三張牌陣會更清楚。</p>`;
+  }else{
+    const[a,b,c]=picked;
+    html+=picked.map((x,i)=>`<div class="row"><b>${x.name}</b><span>${["左","核心","右"][i]}・${x.k}</span></div>`).join("")+
+      `<p class="combo">這件事的核心是「${b.noun}」。它${a.adj}，也${c.adj}。</p>
+      <div class="pairs"><span><b>${a.name}＋${b.name}</b>：${a.noun}，${b.adj}。</span><span><b>${b.name}＋${c.name}</b>：${b.noun}，${c.adj}。</span></div>
+      <p class="lean">整體傾向<span class="tag">${leanOf(picked)}</span></p>
+      <p class="hint">把這幾句套進你的問題。最貼近你處境的那個解釋，通常就是答案。</p>`;
+  }
+  html+=`<div class="acts"><button class="btn again" id="againBtn">再抽一次</button><button class="btn" id="shareBtn">分享結果連結</button></div>`;
+  r.innerHTML=html; r.hidden=false;
+  $("againBtn").onclick=()=>{newRound();$("status").scrollIntoView({behavior:reduce()?"auto":"smooth",block:"start"})};
+  r.scrollIntoView({behavior:reduce()?"auto":"smooth",block:"nearest"});
+}
+function reduce(){try{return matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){return false}}
+function pick(btn){
+  if(picked.length>=mode||btn.disabled)return;
+  btn.disabled=true;
+  picked.push(D[order[+btn.dataset.i]]);
+  const idx=picked.length-1;
+  drawSlots();
+  picked.forEach((_,i)=>{const el=$("cx"+i);if(!el)return;
+    if(i===idx){requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add("on")))}else el.classList.add("on")});
+  updateStatus();
+  setTimeout(showReading,picked.length===mode?650:0);
+}
+function newRound(){
+  order=shuffled(); picked=[];
+  const deck=$("deck");
+  const btn=i=>`<button class="dc backside" data-i="${i}" aria-label="第 ${i+1} 張蓋牌" style="--dx:${rnd(9)-4}px;--dy:${rnd(9)-4}px;--dr:${rnd(11)-5}deg"></button>`;
+  deck.innerHTML=[0,1,2].map(r=>`<div class="drow">${order.slice(r*12,r*12+12).map((_,j)=>btn(r*12+j)).join("")}</div>`).join("");
+  deck.querySelectorAll(".dc").forEach(b=>b.onclick=()=>pick(b));
+  deck.classList.remove("shuffling"); void deck.offsetWidth; deck.classList.add("shuffling");
+  $("reading").hidden=true;
+  drawSlots(); updateStatus();
+}
+function setMode(m){mode=m;$("m1").setAttribute("aria-pressed",m===1);$("m3").setAttribute("aria-pressed",m===3);newRound()}
+$("m1").onclick=()=>setMode(1);
+$("m3").onclick=()=>setMode(3);
+$("shuffleBtn").onclick=newRound;
+
+$("grid").innerHTML=D.map(c=>`<div class="tile"><div class="thumb">${cardSVG(c)}</div><small>${c.k}</small></div>`).join("");
+
+/* ---- 問問地瓜鳥: share links + stats ---- */
+const dgT=p=>{try{window.dgTrack&&window.dgTrack(p)}catch(e){}};
+function dgToast(m){let t=document.querySelector('.dg-toast');if(!t){t=document.createElement('div');t.className='dg-toast';document.body.appendChild(t)}t.textContent=m;t.hidden=false;clearTimeout(t._t);t._t=setTimeout(()=>t.hidden=true,2000)}
+function dgBase(){return location.href.split('#')[0].split('?')[0]}
+function dgShare(url,title,anchor){
+  dgT(location.pathname.replace(/^.*\//,'').replace('.html','')+'/share');
+  if(navigator.share){navigator.share({title:title,text:title,url:url}).catch(()=>{});return}
+  const fb=()=>{if(!anchor)return;let b=anchor.parentElement.querySelector('.dg-copy');if(!b){b=document.createElement('textarea');b.className='dg-copy';b.readOnly=true;b.rows=3;anchor.parentElement.after(b)}b.value=url;b.focus();b.select();dgToast('長按連結複製')};
+  try{navigator.clipboard.writeText(url).then(()=>dgToast('已複製連結，貼給朋友吧'),fb)}catch(e){fb()}
+}
+function dgSharedBanner(el,again){el.insertAdjacentHTML('afterbegin',`<div class="dg-shared"><span>這是朋友分享給你的結果</span><a href="${again}">換我抽一次 →</a></div>`)}
+
+let dgShared=false;
+function shareURL(){const u=new URLSearchParams();u.set('l',picked.map(c=>c.n).join('.'));const q=$("question").value.trim();if(q)u.set('q',q);return dgBase()+'?'+u.toString()}
+document.addEventListener('click',e=>{const el=e.target.closest('#shareBtn');if(!el)return;dgShare(shareURL(),'我抽到的雷諾曼｜問問地瓜鳥',el)});
+const _showReading=showReading;showReading=function(){_showReading();if(picked.length<mode)return;
+  if(dgShared){dgShared=false;dgSharedBanner($("reading"),dgBase())}else{dgT('lenormand/done/'+mode);picked.forEach(c=>dgT('lenormand/card/'+c.name))}};
+(function(){
+  const P=new URLSearchParams(location.search),l=P.get('l');
+  if(l){const ns=l.split('.').map(Number);
+    if((ns.length===1||ns.length===3)&&ns.every(n=>n>=1&&n<=36)&&new Set(ns).size===ns.length){
+      mode=ns.length;$("m1").setAttribute("aria-pressed",mode===1);$("m3").setAttribute("aria-pressed",mode===3);newRound();
+      picked=ns.map(n=>D[n-1]);$("question").value=P.get('q')||'';drawSlots();picked.forEach((_,i)=>$("cx"+i).classList.add("on"));updateStatus();
+      dgShared=true;dgT('lenormand/opened-share');showReading();return}}
+  newRound();
+})();
+</script>
+
+<footer class="dg-foot"><p>結果參考就好，決定權在你手上。</p><nav aria-label="其他占卜"><a href="index.html">首頁</a><a href="tarot.html">塔羅</a><a href="iching.html">易經</a><a href="lenormand.html">雷諾曼</a></nav><p class="by">by may22</p></footer>
+</body></html>
