@@ -24,12 +24,12 @@
 <style>
 /* Layout: airy pink hero (mascot + headline + sparkles), then a bento of five room-colored cards, each with its themed pig */
 :root{--bg:#fbf3f2;--surface:#ffffff;--surface-2:#f4ece9;--ink:#2a2220;--ink-soft:#6f6460;--line:rgba(42,34,32,.11);--accent:#c24f72;--potato:#e0698a;--glow:rgba(255,190,207,.55);--glow2:rgba(214,200,255,.35);--halo:#ffe1e8;--glass:rgba(255,255,255,.7);--shadow:rgba(80,40,50,.22);--star:#f2b7c6;--star2:#f4cf7a;
-  --r-tarot:#ece5f7;--k-tarot:#5d4b9e;--r-iching:#f5ecda;--k-iching:#a8322a;--r-leno:#f6e3df;--k-leno:#b5566e;--r-qian:#f9e5d4;--k-qian:#b3261e;--r-num:#e0ebf8;--k-num:#3d6aa3;
+  --row:#efebe3;--r-tarot:#ece5f7;--k-tarot:#5d4b9e;--r-iching:#f5ecda;--k-iching:#a8322a;--r-leno:#f6e3df;--k-leno:#b5566e;--r-qian:#f9e5d4;--k-qian:#b3261e;--r-num:#e0ebf8;--k-num:#3d6aa3;
   color-scheme:light;--round:"GenSenRounded","PingFang TC","Microsoft JhengHei",sans-serif}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1c1918;--surface:#272321;--surface-2:#2f2a28;--ink:#efe8e2;--ink-soft:#aba29b;--line:rgba(239,232,226,.12);--accent:#f394b0;--potato:#f7a6bd;--glow:rgba(240,120,155,.18);--glow2:rgba(150,130,230,.14);--halo:rgba(243,148,176,.16);--glass:#272321;--shadow:rgba(0,0,0,.5);--star:#9b5b6c;--star2:#a88a45;
-  --r-tarot:#2b2638;--k-tarot:#c5b6f2;--r-iching:#302a20;--k-iching:#eaa79d;--r-leno:#33262a;--k-leno:#f2a7b8;--r-qian:#33251f;--k-qian:#f3a08f;--r-num:#1f2a37;--k-num:#a3c5ef;color-scheme:dark}}
+  --row:#2e2a27;--r-tarot:#2b2638;--k-tarot:#c5b6f2;--r-iching:#302a20;--k-iching:#eaa79d;--r-leno:#33262a;--k-leno:#f2a7b8;--r-qian:#33251f;--k-qian:#f3a08f;--r-num:#1f2a37;--k-num:#a3c5ef;color-scheme:dark}}
 :root[data-theme="dark"]{--bg:#1c1918;--surface:#272321;--surface-2:#2f2a28;--ink:#efe8e2;--ink-soft:#aba29b;--line:rgba(239,232,226,.12);--accent:#f394b0;--potato:#f7a6bd;--glow:rgba(240,120,155,.18);--glow2:rgba(150,130,230,.14);--halo:rgba(243,148,176,.16);--glass:#272321;--shadow:rgba(0,0,0,.5);--star:#9b5b6c;--star2:#a88a45;
-  --r-tarot:#2b2638;--k-tarot:#c5b6f2;--r-iching:#302a20;--k-iching:#eaa79d;--r-leno:#33262a;--k-leno:#f2a7b8;--r-qian:#33251f;--k-qian:#f3a08f;--r-num:#1f2a37;--k-num:#a3c5ef;color-scheme:dark}
+  --row:#2e2a27;--r-tarot:#2b2638;--k-tarot:#c5b6f2;--r-iching:#302a20;--k-iching:#eaa79d;--r-leno:#33262a;--k-leno:#f2a7b8;--r-qian:#33251f;--k-qian:#f3a08f;--r-num:#1f2a37;--k-num:#a3c5ef;color-scheme:dark}
 *{box-sizing:border-box}
 html,body{background:var(--bg);color:var(--ink)}
 body{font-family:var(--round);-webkit-font-smoothing:antialiased;overflow-x:hidden;
@@ -63,17 +63,17 @@ h1 em::after{content:"";position:absolute;left:-2px;right:-2px;bottom:.08em;heig
 .sec span{font-size:13px;color:var(--ink-soft)}
 .opts{display:flex;flex-direction:column;gap:10px}
 .opt{--r:var(--surface-2);--k:var(--accent);display:grid;grid-template-columns:48px 1fr 18px;gap:14px;align-items:center;text-decoration:none;color:var(--ink);
-  background:var(--r);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:0 12px 24px -22px var(--shadow);transition:transform .1s ease,box-shadow .15s ease}
+  background:var(--row);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:0 10px 24px -20px var(--shadow);transition:transform .1s ease,box-shadow .15s ease}
 .opt:hover{box-shadow:0 16px 28px -20px var(--shadow)}
 .opt:active{transform:scale(.99)}
 .opt:focus-visible,.pick:focus-visible,summary:focus-visible,.share:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.opt .ic{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:18px;background:var(--surface);color:var(--k);box-shadow:inset 0 0 0 1px var(--line)}
+.opt .ic{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:18px;background:var(--r);color:var(--k)}
 .opt .t{min-width:0}
-.opt b{display:block;font-size:17.5px;font-weight:700;color:var(--k)}
+.opt b{display:block;font-size:17.5px;font-weight:700;color:var(--ink)}
 .opt .d{display:block;font-size:14px;line-height:1.5;color:var(--ink-soft);text-wrap:pretty}
-.opt svg{width:18px;height:18px;color:var(--k)}
+.opt svg{width:18px;height:18px;color:var(--ink-soft)}
 .tag,.soon{font-style:normal;font-size:11.5px;font-weight:700;border-radius:999px;padding:1px 8px;margin-left:6px;vertical-align:2px;white-space:nowrap}
-.tag{color:var(--k);background:var(--surface);box-shadow:inset 0 0 0 1px var(--line)}
+.tag{color:var(--accent);border:1px solid currentColor}
 .soon{color:var(--potato);border:1px solid currentColor}
 .opt[href="tarot.html"]{--r:var(--r-tarot);--k:var(--k-tarot)}
 .opt[href="iching.html"]{--r:var(--r-iching);--k:var(--k-iching)}
@@ -82,7 +82,7 @@ h1 em::after{content:"";position:absolute;left:-2px;right:-2px;bottom:.08em;heig
 .opt[href="numerology.html"]{--r:var(--r-num);--k:var(--k-num)}
 .opt.more{grid-template-columns:48px 1fr;background:transparent;border:1.5px dashed var(--star);box-shadow:none;cursor:default}
 .opt.more:active{transform:none}.opt.more:hover{box-shadow:none}
-.opt.more .ic{color:var(--accent);font-size:20px}
+.opt.more .ic{background:var(--surface-2);color:var(--accent);font-size:20px}
 .opt.more b{color:var(--ink)}
 /* random pick */
 .pick{display:flex;align-items:center;gap:12px;width:100%;font:inherit;text-align:left;color:var(--ink);cursor:pointer;
