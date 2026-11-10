@@ -1,5 +1,5 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<nav class="dg-nav inset" aria-label="問問小豬"><a class="home" href="index.html"><img src="img/pig-face.png" alt="" width="120" height="85">← 問問小豬</a><span class="seg"><a href="tarot.html">塔羅</a><a href="iching.html">易經</a><a href="lenormand.html" aria-current="page">雷諾曼</a><a href="qian.html">求籤</a></span></nav><div class="dg-greet inset"><img src="img/pig-crystal.webp" alt="小豬" width="400" height="439"><p>三張牌連成一句話，我們一起看看。</p></div>
+<nav class="dg-nav inset" aria-label="問問小豬"><a class="home" href="index.html"><img src="img/pig-face.png" alt="" width="120" height="85">← 問問小豬</a><span class="seg"><a href="tarot.html">塔羅</a><a href="iching.html">易經</a><a href="lenormand.html" aria-current="page">雷諾曼</a><a href="qian.html">求籤</a></span></nav><div class="dg-hrow inset"><h1 class="dg-brand"><span class="dg-ic" aria-hidden="true">雷</span>雷諾曼小抽屜</h1><nav class="dg-tabs" role="tablist" aria-label="雷諾曼小抽屜"><button type="button" role="tab" data-dgtab="draw" aria-selected="true">抽牌</button><button type="button" role="tab" data-dgtab="lib" aria-selected="false">牌義</button><button type="button" role="tab" data-dgtab="hist" aria-selected="false">紀錄</button></nav></div><div class="dg-greet inset"><img src="img/pig-crystal.webp" alt="小豬" width="400" height="439"><p>三張牌連成一句話，我們一起看看。</p></div>
 <title>雷諾曼｜問問小豬</title>
 <link rel="icon" href="img/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
@@ -162,6 +162,56 @@ footer strong{font-family:var(--display);font-size:1.1rem;color:var(--ink)}
 .dg-b{font:inherit;font-weight:700;font-size:15px;border:0;border-radius:14px;padding:10px 18px;background:var(--dg-acc);color:var(--dg-on-acc);text-decoration:none;cursor:pointer}
 .dg-b.ghost{background:none;color:var(--dg-ink);border:1.5px solid var(--dg-line)}
 .dg-b:focus-visible{outline:2px solid var(--dg-acc);outline-offset:2px}
+.dg-hrow{display:flex;align-items:center;justify-content:space-between;gap:10px 12px;flex-wrap:wrap;max-width:760px;margin:14px auto 4px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));font-family:var(--round)}
+.dg-hrow.inset{margin-left:calc(-1*max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)))}
+.dg-brand{display:flex;align-items:center;gap:10px;margin:0;font-family:var(--round);font-weight:700;font-size:20px;letter-spacing:.06em;color:var(--dg-ink);line-height:1.3}
+.dg-ic{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--dg-acc-soft);color:var(--dg-acc);font-size:18px;letter-spacing:0;flex:none}
+.dg-tabs{display:flex;gap:2px;background:var(--dg-surface-2);border:1px solid var(--dg-line-a);border-radius:999px;padding:3px}
+.dg-tabs button{font:inherit;font-family:var(--round);font-size:14px;border:0;background:none;color:var(--dg-soft);padding:6px 12px;border-radius:999px;cursor:pointer}
+.dg-tabs button[aria-selected="true"]{background:var(--dg-acc);color:var(--dg-on-acc);font-weight:700}
+.dg-tabs button:focus-visible{outline:2px solid var(--dg-acc);outline-offset:2px}
+.dg-hero{margin:6px 0 18px;font-family:var(--round)}
+.dg-hero .dg-eb,.hero .eyebrow{font-size:13px;letter-spacing:.2em;color:var(--dg-acc-dim);font-weight:400}
+.dg-hero h1,.hero h1{font-family:var(--round);font-size:clamp(28px,7vw,38px);font-weight:700;margin:4px 0 6px;color:var(--dg-ink);line-height:1.3;text-wrap:balance}
+.dg-hero p,.hero p{color:var(--dg-soft);margin:0;max-width:34em;line-height:1.75;font-size:16px}
+.dg-hero ol{display:flex;flex-wrap:wrap;gap:6px 18px;margin:10px 0 0;padding:0;list-style:none;counter-reset:s;font-size:14px;color:var(--dg-soft)}
+.dg-hero ol li{counter-increment:s;display:flex;gap:6px}.dg-hero ol li::before{content:counter(s);font-weight:700;color:var(--dg-acc)}
+.dg-filters{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 16px}
+.dg-chip{font:inherit;font-family:var(--round);font-size:15px;border:1px solid var(--dg-line);background:var(--dg-surface);color:var(--dg-ink);border-radius:999px;padding:7px 16px;cursor:pointer}
+.dg-chip[aria-pressed="true"]{border-color:var(--dg-acc);background:var(--dg-acc-soft);color:var(--dg-acc);font-weight:700}
+.dg-libgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(82px,1fr));gap:14px 12px}
+.dg-libc{border:0;background:none;padding:0;text-align:center;font-family:var(--round);font-size:12.5px;line-height:1.4;color:var(--dg-soft);cursor:pointer;min-width:0}
+.dg-libc b{display:block;color:var(--dg-ink);font-size:14px;margin-top:4px}
+.dg-libc .dg-face{width:100%;filter:drop-shadow(0 3px 5px var(--dg-shadow))}
+.dg-libc .dg-face.leno{aspect-ratio:100/148}.dg-libc .dg-face svg{display:block;width:100%;height:100%}
+.dg-libc .dg-face.hexbox{aspect-ratio:7/12;background:var(--dg-surface);border:1px solid var(--dg-line);border-radius:8px;display:grid;place-items:center}
+.dg-libc .dg-face.slipt{aspect-ratio:7/12;background:#f4e3c1;border-radius:6px;box-shadow:inset 0 0 0 3px #f4e3c1,inset 0 0 0 4px #a8322a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#3b1613}
+.slipt em{font-style:normal;font-size:12px}.slipt strong{font-size:18px;writing-mode:vertical-rl;letter-spacing:.15em}
+.slipt .tone,.dg-bsheet .tone{font-size:11px;font-weight:700;border-radius:999px;padding:1px 8px;color:#fff}
+.tone.t0{background:#a8322a}.tone.t1{background:#a77a2a}.tone.t2{background:#5d6470}
+.hexf{display:flex;flex-direction:column-reverse;gap:5px;width:62%}.hexf i{display:flex;gap:6px;height:6px}.hexf b{flex:1;background:var(--dg-ink);border-radius:1px}
+.hexf.big{width:150px;gap:9px}.hexf.big i{height:14px;gap:16px}
+.dg-scrim{position:fixed;inset:0;z-index:55;background:var(--dg-scrim);display:flex;align-items:flex-end;justify-content:center}
+.dg-bsheet{background:var(--dg-surface);color:var(--dg-ink);width:100%;max-width:640px;max-height:88%;overflow:auto;border-radius:20px 20px 0 0;border:1px solid var(--dg-line);font-family:var(--round);line-height:1.7;
+  padding-block:18px calc(24px + env(safe-area-inset-bottom,0px));padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px));animation:dgup .3s ease}
+@keyframes dgup{from{transform:translateY(40px);opacity:0}}
+.dg-bsheet .slip{clear:both}
+.dg-sx{float:right;width:34px;height:34px;border-radius:50%;border:1px solid var(--dg-line);background:none;color:var(--dg-ink);font:inherit;cursor:pointer}
+.dg-big{width:150px;margin:8px auto 12px;filter:drop-shadow(0 6px 12px var(--dg-shadow))}.dg-big.leno{aspect-ratio:100/148}.dg-big svg{display:block;width:100%;height:100%}
+.dg-big.hexbig{display:flex;justify-content:center;filter:none}
+.dg-bsheet h3{text-align:center;font-size:24px;margin:0;font-weight:700}
+.dg-en{text-align:center;color:var(--dg-soft);font-size:13px;letter-spacing:.04em}
+.dg-kws{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:10px 0 4px}.dg-kws span{font-size:13px;background:var(--dg-acc-soft);color:var(--dg-acc);padding:2px 10px;border-radius:6px}
+.dg-classic{font-size:17px;font-weight:700;text-align:center;margin:10px 0 2px}.dg-sub2{text-align:center;color:var(--dg-soft);margin:0}
+.dg-two{display:grid;grid-template-columns:1fr;gap:12px;margin-top:14px}@media(min-width:520px){.dg-two{grid-template-columns:1fr 1fr}}
+.dg-two>div{background:var(--dg-bg);border:1px solid var(--dg-line);border-radius:12px;padding:12px}.dg-two h4{margin:0 0 4px;font-size:15px;color:var(--dg-acc)}.dg-two p{margin:0;font-size:15px}
+.dg-hist{display:grid;gap:10px}
+.dg-hi{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;text-align:left;background:var(--dg-surface);border:1px solid var(--dg-line);border-radius:14px;padding:14px 16px;font-family:var(--round);color:var(--dg-ink);cursor:pointer}
+.dg-ht{min-width:0}.dg-ht b{display:block;font-size:16px}.dg-ht span{display:block;font-size:13px;color:var(--dg-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dg-go{font-size:22px;color:var(--dg-soft)}
+.dg-empty{text-align:center;color:var(--dg-soft);padding:40px 10px;font-family:var(--round);line-height:1.8}
+.dg-center{display:flex;justify-content:center;margin-top:14px}
+.dg-link{font:inherit;font-family:var(--round);font-size:14px;background:none;border:0;color:var(--dg-soft);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .dg-copy{width:100%;margin-top:10px;font:inherit;font-size:14px;padding:10px;border-radius:12px;border:1px solid var(--dg-line);background:var(--dg-surface-2);color:var(--dg-ink)}
 </style>
 <style>
@@ -178,13 +228,9 @@ body{background:var(--dg-bg)!important;background-image:repeating-linear-gradien
 </style>
 
 <div class="wrap">
-  <header>
-    <h1>雷諾曼小抽屜</h1>
-    <p class="lead">雷諾曼有 36 張牌，每張都是生活裡的具體小事，例如信、狗、鑰匙。它講話很直接，適合問「最近會怎樣」。</p>
-    <ol class="steps">
+  <div class="dg-hero" id="lv-hero"><div class="dg-eb">LENORMAND</div><h1>最近會怎樣？</h1><p>雷諾曼有 36 張牌，每張都是生活裡的具體小事，例如信、狗、鑰匙。它講話很直接，適合問「最近會怎樣」。</p><ol>
       <li>想一個具體的問題</li><li>選一張或三張</li><li>從牌堆親手點牌</li>
-    </ol>
-  </header>
+    </ol></div>
 
   <section class="play">
     <div class="controls">
@@ -202,17 +248,17 @@ body{background:var(--dg-bg)!important;background-image:repeating-linear-gradien
     <div class="deck" id="deck" aria-label="蓋著的牌堆"></div>
   </section>
 
-  <details class="learn">
+  <section id="lv-lib" hidden></section><section id="lv-hist" hidden></section>
+  <details class="dg-learn dg-card" id="dg-learn">
     <summary>第一次玩？雷諾曼怎麼讀</summary>
-    <p>雷諾曼的牌沒有正逆位，意思都很具體。讀法像造句：一張牌當「主角」，旁邊的牌負責「形容」它。例如「心＋老鼠」是被消磨的感情，「老鼠＋心」則是為感情焦慮。</p>
-    <p>三張牌陣：中間那張是核心，左右兩張在形容它。單張牌比較像今天的小提醒，順便看看事情偏「是」還是偏「否」。</p>
-    <p>男士、女士這兩張通常代表你自己。抽到了，代表答案跟你自己的想法有關。</p>
-  </details>
-
-  <details id="gallery">
-    <summary>36 張牌一覽</summary>
-    <div class="grid" id="grid"></div>
-  </details>
+    <div class="dg-learn-b">
+      <p><b>36 張生活小事</b>雷諾曼有 36 張牌，每張都是具體的東西，像信、狗、鑰匙、房子。牌沒有正逆位，意思直接，適合問「最近會發生什麼」。</p>
+      <p><b>像造句一樣讀</b>一張牌當<b class="in">主角</b>，旁邊的牌負責<b class="in">形容</b>它。例如「心＋老鼠」是被消磨的感情，「老鼠＋心」則是為感情焦慮。</p>
+      <p><b>三張牌陣</b>中間那張是<b class="in">核心</b>，左右兩張在形容它。單張牌比較像今天的小提醒，順便看看事情偏「是」還是偏「否」。</p>
+      <p><b>男士和女士</b>這兩張通常代表你自己，或某位重要的人。抽到了，代表答案跟你自己的想法有關。</p>
+      <p><b>選你想問的方面</b>抽牌前可以選感情、工作或財運，每張牌會改用那個方面的說法，抽完也能切換。</p>
+    </div>
+  </details><div id="grid" hidden></div>
 </div>
 
 <script>
@@ -556,6 +602,28 @@ async function dgDrawCardImg(x,src,cx,cy,w,h,rev){const im=await dgImg(src);x.sa
   x.shadowColor='rgba(0,0,0,.18)';x.shadowBlur=18;x.shadowOffsetY=8;dgRR(x,-w/2,-h/2,w,h,14);x.fillStyle='#fff';x.fill();x.shadowColor='transparent';x.clip();
   if(im)x.drawImage(im,-w/2,-h/2,w,h);else{x.fillStyle='#ddd';x.fillRect(-w/2,-h/2,w,h)}x.restore()}
 
+/* ---- 問問小豬: shared tabs, sheet, history helpers ---- */
+function dgSheet(html){let s=document.querySelector('.dg-scrim');if(s)s.remove();
+  s=document.createElement('div');s.className='dg-scrim';
+  s.innerHTML=`<div class="dg-bsheet" role="dialog" aria-modal="true"><button class="dg-sx" type="button" aria-label="關閉">✕</button>${html}</div>`;
+  document.body.appendChild(s);s.addEventListener('click',e=>{if(e.target===s||e.target.closest('.dg-sx'))s.remove()});}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){const s=document.querySelector('.dg-scrim');if(s)s.remove()}});
+const dgStore={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+function dgEsc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function dgWhen(t){try{return new Date(t).toLocaleString('zh-TW',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'})}catch(e){return ''}}
+/* views: {draw:[els], lib:[els], hist:[els]} ; onShow(name) */
+function dgTabs(views,onShow){
+  document.addEventListener('click',e=>{const b=e.target.closest('[data-dgtab]');if(!b)return;const t=b.dataset.dgtab;
+    document.querySelectorAll('[data-dgtab]').forEach(x=>x.setAttribute('aria-selected',x===b));
+    Object.entries(views).forEach(([k,els])=>els().forEach(el=>{if(el)el.hidden=k!==t}));
+    if(onShow)onShow(t);window.scrollTo({top:0})});
+}
+function dgHistHTML(list,row,empty){
+  if(!list.length)return `<div class="dg-empty">${empty}</div>`;
+  return `<div class="dg-hist">${list.map((r,i)=>`<button class="dg-hi" type="button" data-hopen="${i}">${row(r)}<span class="dg-go" aria-hidden="true">›</span></button>`).join('')}</div>
+  <div class="dg-center"><button class="dg-link" type="button" data-hclear>清除全部紀錄</button></div>`;
+}
+
 /* ---- 問問小豬: richer Lenormand reading ---- */
 const LT=[null,
 ['有人主動靠近，或對方的消息很快就來。','新的機會或消息很快就到。','錢進來得快，去得也快。'],
@@ -634,12 +702,35 @@ function lenoCardSpec(){const cs=picked;let msg=mode===3?`這件事的核心是�
         x.fillStyle=T.soft;x.font=`400 28px ${DG_F}`;x.fillText(labels[i],cx,y+ch+44)}
       x.textAlign='left'}}}
 document.addEventListener('click',e=>{if(e.target.closest('#cardBtn')&&picked.length===mode)dgShowCard(lenoCardSpec(),'問問小豬-雷諾曼')});
+/* ---- leno: library + history tabs ---- */
+let lenoLibF='all',dgOpening=false;
+function lenoLib(){const f=lenoLibF,list=D.filter(c=>f==='all'||(f==='y'?/是/.test(c.yn):f==='n'?/否/.test(c.yn):c.yn==='看情況'));
+  $("lv-lib").innerHTML=`<div class="dg-hero"><div class="dg-eb">36 CARDS</div><h1>牌義圖鑑</h1><p>點任一張牌，看它的意思，還有在感情、工作、財運上的說法。</p></div>
+  <div class="dg-filters">${[['all','全部 36'],['y','偏「是」'],['m','看情況'],['n','偏「否」']].map(([k,v])=>`<button class="dg-chip" type="button" data-lf="${k}" aria-pressed="${f===k}">${v}</button>`).join('')}</div>
+  <div class="dg-libgrid">${list.map(c=>`<button class="dg-libc" type="button" data-lc="${c.n}"><div class="dg-face leno">${cardSVG(c)}</div><b>${c.name}</b>${c.first}</button>`).join('')}</div>`}
+function lenoSheet(n){const c=D[n-1];dgSheet(`<div class="dg-big leno">${cardSVG(c)}</div><h3>${c.n}. ${c.name}</h3><div class="dg-en">${c.en}・${c.pip}</div>
+  <div class="dg-kws">${c.k.split('、').map(k=>`<span>${k}</span>`).join('')}<span>傾向：${c.yn}</span></div>
+  <div class="dg-two"><div><h4>感情</h4><p>${LT[n][0]}</p></div><div><h4>工作</h4><p>${LT[n][1]}</p></div><div><h4>財運</h4><p>${LT[n][2]}</p></div><div><h4>小豬提醒</h4><p>${c.tip}</p></div></div>`)}
+function lenoSave(){const h=dgStore.get('leno-history',[]);h.unshift({t:Date.now(),q:$("question").value.trim(),topic:dgTopic,ns:picked.map(c=>c.n)});dgStore.set('leno-history',h.slice(0,60))}
+function lenoHist(){const h=dgStore.get('leno-history',[]);
+  $("lv-hist").innerHTML=`<div class="dg-hero"><div class="dg-eb">HISTORY</div><h1>抽牌紀錄</h1><p>只存在這台裝置上，點一筆可以重看當時的解讀。</p></div>`+
+  dgHistHTML(h,r=>`<span class="dg-ht"><b>${r.q?dgEsc(r.q):'沒有寫下問題'}</b><span>${r.ns.map(n=>D[n-1].name).join('・')}</span><span>${TN[r.topic]||'整體'}・${dgWhen(r.t)}</span></span>`,'還沒有紀錄。<br>抽完牌之後，會自動存在這台裝置上。')}
+function lenoOpen(r){mode=r.ns.length;$("m1").setAttribute("aria-pressed",mode===1);$("m3").setAttribute("aria-pressed",mode===3);newRound();
+  picked=r.ns.map(n=>D[n-1]);$("question").value=r.q||'';dgSetTopic(r.topic);drawSlots();picked.forEach((_,i)=>$("cx"+i).classList.add("on"));updateStatus();
+  dgOpening=true;showReading();dgOpening=false}
+document.addEventListener('click',e=>{
+  const f=e.target.closest('[data-lf]');if(f){lenoLibF=f.dataset.lf;lenoLib();return}
+  const c=e.target.closest('[data-lc]');if(c){lenoSheet(+c.dataset.lc);return}
+  const o=e.target.closest('#lv-hist [data-hopen]');if(o){const r=dgStore.get('leno-history',[])[+o.dataset.hopen];if(r){document.querySelector('[data-dgtab="draw"]').click();lenoOpen(r)}return}
+  const x=e.target.closest('#lv-hist [data-hclear]');if(x){if(x.dataset.sure){dgStore.set('leno-history',[]);lenoHist()}else{x.dataset.sure=1;x.textContent='再點一次，確定清除'}}
+});
+dgTabs({draw:()=>[$("lv-hero"),document.querySelector('.play'),$("dg-learn")],lib:()=>[$("lv-lib")],hist:()=>[$("lv-hist")]},t=>{if(t==='lib')lenoLib();if(t==='hist')lenoHist()});
 
 let dgShared=false;
 function shareURL(){const u=new URLSearchParams();u.set('l',picked.map(c=>c.n).join('.'));const q=$("question").value.trim();if(q)u.set('q',q);if(dgTopic!=='general')u.set('t',dgTopic);return dgBase()+'?'+u.toString()}
 document.addEventListener('click',e=>{const el=e.target.closest('#shareBtn');if(!el)return;dgShare(shareURL(),'我抽到的雷諾曼｜問問小豬',el)});
 const _showReading=showReading;showReading=function(){_showReading();if(picked.length<mode)return;
-  if(dgShared){dgShared=false;dgSharedBanner($("reading"),dgBase())}else{dgT('lenormand/done/'+mode);dgT('lenormand/asked/'+dgTopic);picked.forEach(c=>dgT('lenormand/card/'+c.name))}};
+  if(dgShared){dgShared=false;dgSharedBanner($("reading"),dgBase())}else if(!dgOpening){lenoSave();dgT('lenormand/done/'+mode);dgT('lenormand/asked/'+dgTopic);picked.forEach(c=>dgT('lenormand/card/'+c.name))}};
 (function(){
   const P=new URLSearchParams(location.search),l=P.get('l');
   if(l){const ns=l.split('.').map(Number);

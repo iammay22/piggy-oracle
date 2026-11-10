@@ -78,17 +78,67 @@
 .dg-b{font:inherit;font-weight:700;font-size:15px;border:0;border-radius:14px;padding:10px 18px;background:var(--dg-acc);color:var(--dg-on-acc);text-decoration:none;cursor:pointer}
 .dg-b.ghost{background:none;color:var(--dg-ink);border:1.5px solid var(--dg-line)}
 .dg-b:focus-visible{outline:2px solid var(--dg-acc);outline-offset:2px}
+.dg-hrow{display:flex;align-items:center;justify-content:space-between;gap:10px 12px;flex-wrap:wrap;max-width:760px;margin:14px auto 4px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));font-family:var(--round)}
+.dg-hrow.inset{margin-left:calc(-1*max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)))}
+.dg-brand{display:flex;align-items:center;gap:10px;margin:0;font-family:var(--round);font-weight:700;font-size:20px;letter-spacing:.06em;color:var(--dg-ink);line-height:1.3}
+.dg-ic{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--dg-acc-soft);color:var(--dg-acc);font-size:18px;letter-spacing:0;flex:none}
+.dg-tabs{display:flex;gap:2px;background:var(--dg-surface-2);border:1px solid var(--dg-line-a);border-radius:999px;padding:3px}
+.dg-tabs button{font:inherit;font-family:var(--round);font-size:14px;border:0;background:none;color:var(--dg-soft);padding:6px 12px;border-radius:999px;cursor:pointer}
+.dg-tabs button[aria-selected="true"]{background:var(--dg-acc);color:var(--dg-on-acc);font-weight:700}
+.dg-tabs button:focus-visible{outline:2px solid var(--dg-acc);outline-offset:2px}
+.dg-hero{margin:6px 0 18px;font-family:var(--round)}
+.dg-hero .dg-eb,.hero .eyebrow{font-size:13px;letter-spacing:.2em;color:var(--dg-acc-dim);font-weight:400}
+.dg-hero h1,.hero h1{font-family:var(--round);font-size:clamp(28px,7vw,38px);font-weight:700;margin:4px 0 6px;color:var(--dg-ink);line-height:1.3;text-wrap:balance}
+.dg-hero p,.hero p{color:var(--dg-soft);margin:0;max-width:34em;line-height:1.75;font-size:16px}
+.dg-hero ol{display:flex;flex-wrap:wrap;gap:6px 18px;margin:10px 0 0;padding:0;list-style:none;counter-reset:s;font-size:14px;color:var(--dg-soft)}
+.dg-hero ol li{counter-increment:s;display:flex;gap:6px}.dg-hero ol li::before{content:counter(s);font-weight:700;color:var(--dg-acc)}
+.dg-filters{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 16px}
+.dg-chip{font:inherit;font-family:var(--round);font-size:15px;border:1px solid var(--dg-line);background:var(--dg-surface);color:var(--dg-ink);border-radius:999px;padding:7px 16px;cursor:pointer}
+.dg-chip[aria-pressed="true"]{border-color:var(--dg-acc);background:var(--dg-acc-soft);color:var(--dg-acc);font-weight:700}
+.dg-libgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(82px,1fr));gap:14px 12px}
+.dg-libc{border:0;background:none;padding:0;text-align:center;font-family:var(--round);font-size:12.5px;line-height:1.4;color:var(--dg-soft);cursor:pointer;min-width:0}
+.dg-libc b{display:block;color:var(--dg-ink);font-size:14px;margin-top:4px}
+.dg-libc .dg-face{width:100%;filter:drop-shadow(0 3px 5px var(--dg-shadow))}
+.dg-libc .dg-face.leno{aspect-ratio:100/148}.dg-libc .dg-face svg{display:block;width:100%;height:100%}
+.dg-libc .dg-face.hexbox{aspect-ratio:7/12;background:var(--dg-surface);border:1px solid var(--dg-line);border-radius:8px;display:grid;place-items:center}
+.dg-libc .dg-face.slipt{aspect-ratio:7/12;background:#f4e3c1;border-radius:6px;box-shadow:inset 0 0 0 3px #f4e3c1,inset 0 0 0 4px #a8322a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#3b1613}
+.slipt em{font-style:normal;font-size:12px}.slipt strong{font-size:18px;writing-mode:vertical-rl;letter-spacing:.15em}
+.slipt .tone,.dg-bsheet .tone{font-size:11px;font-weight:700;border-radius:999px;padding:1px 8px;color:#fff}
+.tone.t0{background:#a8322a}.tone.t1{background:#a77a2a}.tone.t2{background:#5d6470}
+.hexf{display:flex;flex-direction:column-reverse;gap:5px;width:62%}.hexf i{display:flex;gap:6px;height:6px}.hexf b{flex:1;background:var(--dg-ink);border-radius:1px}
+.hexf.big{width:150px;gap:9px}.hexf.big i{height:14px;gap:16px}
+.dg-scrim{position:fixed;inset:0;z-index:55;background:var(--dg-scrim);display:flex;align-items:flex-end;justify-content:center}
+.dg-bsheet{background:var(--dg-surface);color:var(--dg-ink);width:100%;max-width:640px;max-height:88%;overflow:auto;border-radius:20px 20px 0 0;border:1px solid var(--dg-line);font-family:var(--round);line-height:1.7;
+  padding-block:18px calc(24px + env(safe-area-inset-bottom,0px));padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px));animation:dgup .3s ease}
+@keyframes dgup{from{transform:translateY(40px);opacity:0}}
+.dg-bsheet .slip{clear:both}
+.dg-sx{float:right;width:34px;height:34px;border-radius:50%;border:1px solid var(--dg-line);background:none;color:var(--dg-ink);font:inherit;cursor:pointer}
+.dg-big{width:150px;margin:8px auto 12px;filter:drop-shadow(0 6px 12px var(--dg-shadow))}.dg-big.leno{aspect-ratio:100/148}.dg-big svg{display:block;width:100%;height:100%}
+.dg-big.hexbig{display:flex;justify-content:center;filter:none}
+.dg-bsheet h3{text-align:center;font-size:24px;margin:0;font-weight:700}
+.dg-en{text-align:center;color:var(--dg-soft);font-size:13px;letter-spacing:.04em}
+.dg-kws{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:10px 0 4px}.dg-kws span{font-size:13px;background:var(--dg-acc-soft);color:var(--dg-acc);padding:2px 10px;border-radius:6px}
+.dg-classic{font-size:17px;font-weight:700;text-align:center;margin:10px 0 2px}.dg-sub2{text-align:center;color:var(--dg-soft);margin:0}
+.dg-two{display:grid;grid-template-columns:1fr;gap:12px;margin-top:14px}@media(min-width:520px){.dg-two{grid-template-columns:1fr 1fr}}
+.dg-two>div{background:var(--dg-bg);border:1px solid var(--dg-line);border-radius:12px;padding:12px}.dg-two h4{margin:0 0 4px;font-size:15px;color:var(--dg-acc)}.dg-two p{margin:0;font-size:15px}
+.dg-hist{display:grid;gap:10px}
+.dg-hi{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;text-align:left;background:var(--dg-surface);border:1px solid var(--dg-line);border-radius:14px;padding:14px 16px;font-family:var(--round);color:var(--dg-ink);cursor:pointer}
+.dg-ht{min-width:0}.dg-ht b{display:block;font-size:16px}.dg-ht span{display:block;font-size:13px;color:var(--dg-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dg-go{font-size:22px;color:var(--dg-soft)}
+.dg-empty{text-align:center;color:var(--dg-soft);padding:40px 10px;font-family:var(--round);line-height:1.8}
+.dg-center{display:flex;justify-content:center;margin-top:14px}
+.dg-link{font:inherit;font-family:var(--round);font-size:14px;background:none;border:0;color:var(--dg-soft);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .dg-copy{width:100%;margin-top:10px;font:inherit;font-size:14px;padding:10px;border-radius:12px;border:1px solid var(--dg-line);background:var(--dg-surface-2);color:var(--dg-ink)}
 </style><style>
 /* room look */
 :root:root:root:root{--dg-bg:#fbf0e3;--dg-surface:#fffaf3;--dg-surface-2:#f5e3ce;--dg-hover:#efd8bc;--dg-ink:#4a1c15;--dg-soft:#8a5a4a;--dg-line:#ecd2b6;--dg-line-a:rgba(74,28,21,.14);--dg-acc:#b3261e;--dg-acc-dim:#d98b80;--dg-acc-soft:rgba(179,38,30,.08);--dg-on-acc:#fff6e6;--dg-glass:#fffaf3;--dg-shadow:rgba(120,40,20,.18);--dg-place:#c4a28a;--dg-scrim:rgba(74,28,21,.45);color-scheme:light}
 body{margin:0;background:var(--dg-bg);background-image:radial-gradient(70% 40% at 50% 0%,rgba(233,184,79,.22),transparent 70%),repeating-radial-gradient(circle at 50% -20%,rgba(179,38,30,.035) 0 2px,transparent 2px 28px);color:var(--dg-ink);-webkit-font-smoothing:antialiased}
 </style><body>
-<nav class="dg-nav" aria-label="問問小豬"><a class="home" href="index.html"><img src="img/pig-face.png" alt="" width="120" height="85">← 問問小豬</a><span class="seg"><a href="tarot.html">塔羅</a><a href="iching.html">易經</a><a href="lenormand.html">雷諾曼</a><a href="qian.html" aria-current="page">求籤</a></span></nav>
+<nav class="dg-nav" aria-label="問問小豬"><a class="home" href="index.html"><img src="img/pig-face.png" alt="" width="120" height="85">← 問問小豬</a><span class="seg"><a href="tarot.html">塔羅</a><a href="iching.html">易經</a><a href="lenormand.html">雷諾曼</a><a href="qian.html" aria-current="page">求籤</a></span></nav><div class="dg-hrow"><h1 class="dg-brand"><span class="dg-ic" aria-hidden="true">籤</span>擲筊求籤</h1><nav class="dg-tabs" role="tablist" aria-label="擲筊求籤"><button type="button" role="tab" data-dgtab="draw" aria-selected="true">求籤</button><button type="button" role="tab" data-dgtab="lib" aria-selected="false">籤詩</button><button type="button" role="tab" data-dgtab="hist" aria-selected="false">紀錄</button></nav></div><div class="dg-greet"><img src="img/pig-tube.webp" alt="小豬" width="400" height="415"><p>先擲筊請示，再抽一支籤喔。</p></div>
 <style>
 /* Layout: one column temple room — dark lacquer red, gold for anything you touch, cream paper for the slip */
 .q-wrap{max-width:640px;margin:0 auto;padding-block:18px 10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));font-family:var(--round);color:var(--dg-ink)}
-.q-hero{text-align:center;margin:6px 0 18px}
+.q-hero{display:none}
 .q-host{width:120px;height:auto;display:block;margin:0 auto 4px}
 .q-eyebrow{font-size:13px;letter-spacing:.24em;color:var(--dg-acc);font-weight:700}
 .q-hero h1{font-size:clamp(28px,7vw,36px);margin:6px 0 8px;font-weight:700;text-wrap:balance}
@@ -153,14 +203,23 @@ body{margin:0;background:var(--dg-bg);background-image:radial-gradient(70% 40% a
 </style>
 
 <main class="q-wrap">
-  <header class="q-hero">
-    <img class="q-host" src="img/pig-tube.webp" alt="抱著籤筒的小豬" width="400" height="415">
-    <div class="q-eyebrow">六十甲子籤</div>
-    <h1>擲筊，求一支籤</h1>
-    <p>先擲到聖筊才能抽籤，抽到之後再擲一次，確認就是這支。</p>
-  </header>
-  <div class="q-steps" id="qsteps"></div>
-  <section class="q-panel" id="stage" aria-live="polite"></section>
+  <div id="qv-draw">
+    <div class="dg-hero"><div class="dg-eb">FORTUNE STICKS</div><h1>擲筊，求一支籤</h1><p>先擲到聖筊才能抽籤，抽到之後再擲一次，確認就是這支。</p></div>
+    <div class="q-steps" id="qsteps"></div>
+    <section class="q-panel" id="stage" aria-live="polite"></section>
+  </div>
+  <section id="qv-lib" hidden></section>
+  <section id="qv-hist" hidden></section>
+  <details class="dg-learn dg-card" id="dg-learn">
+    <summary>第一次玩？求籤怎麼讀</summary>
+    <div class="dg-learn-b">
+      <p><b>求籤的流程</b>先在心裡說出名字和想問的事，<b class="in">擲筊請示</b>可不可以求籤；擲到聖筊後<b class="in">搖籤筒</b>抽一支，再<b class="in">擲筊確認</b>是不是這一支，確認了才算數。</p>
+      <p><b>三種筊</b><b class="in">聖筊</b>是一平一凸，代表同意。<b class="in">笑筊</b>是兩面都平，神明笑了，通常是問題還不夠清楚。<b class="in">陰筊</b>是兩面都凸，代表不同意，或時機還沒到。</p>
+      <p><b>籤詩怎麼看</b>籤詩是七個字一句、一共四句的古詩，常用比喻和歷史典故，不一定字面就看得懂。先讀下面的白話，再看你問的那一方面，最後看小豬想說的話。</p>
+      <p><b>順、平、守是什麼</b>這是小豬把籤詩整理出來的傾向：順是可以往前，平是有順有卡，守是先守住、等時機。各宮廟對同一支籤的說法可能不同，參考就好。</p>
+      <p><b>一件事求一支籤</b>同一件事不要一直重抽。抽到不喜歡的籤，與其重來，不如想想它在提醒你什麼。</p>
+    </div>
+  </details>
 </main>
 
 <script>
@@ -284,7 +343,7 @@ function toss(){
     if(kind==='聖'){
       $('#jres').innerHTML=`<div class="q-res ok"><img class="q-pig" src="img/pig-great.webp" alt="小豬說好棒好棒" width="400" height="406">聖筊<small>${confirm?'就是這一支籤。':'可以求籤了。'}</small></div>`;
       $('#jbtns').innerHTML=confirm?`<button class="q-btn" id="next">看籤詩</button>`:`<button class="q-btn" id="next">去搖籤筒</button>`;
-      $('#next').onclick=()=>{if(confirm){dgT('qian/done/'+S.n);dgT('qian/asked/'+S.topic);go('result')}else go('draw')};
+      $('#next').onclick=()=>{if(confirm){dgT('qian/done/'+S.n);dgT('qian/asked/'+S.topic);qianSave();go('result')}else go('draw')};
     }else{
       S.miss++;
       const msg=kind==='笑'?'笑筊：兩面都是平的。神明笑了，可能是問題還不夠清楚。':'陰筊：兩面都是凸的。代表現在不太適合，或答案是否定的。';
@@ -398,6 +457,50 @@ async function dgShowCard(spec,name){
 async function dgDrawCardImg(x,src,cx,cy,w,h,rev){const im=await dgImg(src);x.save();x.translate(cx,cy);if(rev)x.rotate(Math.PI);
   x.shadowColor='rgba(0,0,0,.18)';x.shadowBlur=18;x.shadowOffsetY=8;dgRR(x,-w/2,-h/2,w,h,14);x.fillStyle='#fff';x.fill();x.shadowColor='transparent';x.clip();
   if(im)x.drawImage(im,-w/2,-h/2,w,h);else{x.fillStyle='#ddd';x.fillRect(-w/2,-h/2,w,h)}x.restore()}
+
+/* ---- 問問小豬: shared tabs, sheet, history helpers ---- */
+function dgSheet(html){let s=document.querySelector('.dg-scrim');if(s)s.remove();
+  s=document.createElement('div');s.className='dg-scrim';
+  s.innerHTML=`<div class="dg-bsheet" role="dialog" aria-modal="true"><button class="dg-sx" type="button" aria-label="關閉">✕</button>${html}</div>`;
+  document.body.appendChild(s);s.addEventListener('click',e=>{if(e.target===s||e.target.closest('.dg-sx'))s.remove()});}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){const s=document.querySelector('.dg-scrim');if(s)s.remove()}});
+const dgStore={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+function dgEsc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function dgWhen(t){try{return new Date(t).toLocaleString('zh-TW',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'})}catch(e){return ''}}
+/* views: {draw:[els], lib:[els], hist:[els]} ; onShow(name) */
+function dgTabs(views,onShow){
+  document.addEventListener('click',e=>{const b=e.target.closest('[data-dgtab]');if(!b)return;const t=b.dataset.dgtab;
+    document.querySelectorAll('[data-dgtab]').forEach(x=>x.setAttribute('aria-selected',x===b));
+    Object.entries(views).forEach(([k,els])=>els().forEach(el=>{if(el)el.hidden=k!==t}));
+    if(onShow)onShow(t);window.scrollTo({top:0})});
+}
+function dgHistHTML(list,row,empty){
+  if(!list.length)return `<div class="dg-empty">${empty}</div>`;
+  return `<div class="dg-hist">${list.map((r,i)=>`<button class="dg-hi" type="button" data-hopen="${i}">${row(r)}<span class="dg-go" aria-hidden="true">›</span></button>`).join('')}</div>
+  <div class="dg-center"><button class="dg-link" type="button" data-hclear>清除全部紀錄</button></div>`;
+}
+
+
+/* ---- library + history ---- */
+let qLibF='all';
+function qianLib(){const list=READ.map((r,i)=>i+1).filter(n=>qLibF==='all'||READ[n-1][0]===+qLibF);
+  $('#qv-lib').innerHTML=`<div class="dg-hero"><div class="dg-eb">60 POEMS</div><h1>籤詩圖鑑</h1><p>六十甲子籤的六十首籤詩，點任一支看原文和白話。</p></div>
+  <div class="dg-filters">${[['all','全部 60'],['0','順'],['1','平'],['2','守']].map(([k,v])=>`<button class="dg-chip" type="button" data-qf="${k}" aria-pressed="${qLibF===k}">${v}</button>`).join('')}</div>
+  <div class="dg-libgrid">${list.map(n=>`<button class="dg-libc" type="button" data-qc="${n}"><div class="dg-face slipt"><em>第${cnum(n)}籤</em><strong>${GZ[n-1]}</strong><span class="tone t${READ[n-1][0]}">${TONE[READ[n-1][0]]}</span></div><b>${POEM[n-1].split('|')[0].slice(0,4)}…</b></button>`).join('')}</div>`}
+function qianSheet(n){const r=READ[n-1];dgSheet(`<div class="slip" style="margin-top:10px"><div class="slip-h"><b>第${cnum(n)}籤　${GZ[n-1]}</b><span class="tone t${r[0]}">${TONE[r[0]]}・${TONE_TIP[r[0]]}</span></div><div class="poem">${POEM[n-1].split('|').map(l=>`<div>${l}</div>`).join('')}</div></div>
+  <p class="dg-classic" style="margin-top:14px">${r[1]}</p>
+  <div class="dg-two"><div><h4>感情</h4><p>${r[2]}</p></div><div><h4>工作</h4><p>${r[3]}</p></div><div><h4>財運</h4><p>${r[4]}</p></div><div><h4>小豬想說</h4><p>${r[5]}</p></div></div>`)}
+function qianSave(){const h=dgStore.get('qian-history',[]);h.unshift({t:Date.now(),q:S.q,topic:S.topic,n:S.n});dgStore.set('qian-history',h.slice(0,60))}
+function qianHist(){const h=dgStore.get('qian-history',[]);
+  $('#qv-hist').innerHTML=`<div class="dg-hero"><div class="dg-eb">HISTORY</div><h1>求籤紀錄</h1><p>只存在這台裝置上，點一筆可以重看那支籤。</p></div>`+
+  dgHistHTML(h,r=>`<span class="dg-ht"><b>${r.q?dgEsc(r.q):'沒有寫下問題'}</b><span>第${cnum(r.n)}籤 ${GZ[r.n-1]}・${TONE[READ[r.n-1][0]]}</span><span>${TOPICS[r.topic]||'整體'}・${dgWhen(r.t)}</span></span>`,'還沒有紀錄。<br>求到籤之後，會自動存在這台裝置上。')}
+document.addEventListener('click',e=>{
+  const f=e.target.closest('[data-qf]');if(f){qLibF=f.dataset.qf;qianLib();return}
+  const c=e.target.closest('[data-qc]');if(c){qianSheet(+c.dataset.qc);return}
+  const o=e.target.closest('#qv-hist [data-hopen]');if(o){const r=dgStore.get('qian-history',[])[+o.dataset.hopen];if(r){document.querySelector('[data-dgtab="draw"]').click();S.n=r.n;S.q=r.q||'';S.topic=r.topic||'general';S.shared=false;go('result')}return}
+  const x=e.target.closest('#qv-hist [data-hclear]');if(x){if(x.dataset.sure){dgStore.set('qian-history',[]);qianHist()}else{x.dataset.sure=1;x.textContent='再點一次，確定清除'}}
+});
+dgTabs({draw:()=>[$('#qv-draw'),$('#dg-learn')],lib:()=>[$('#qv-lib')],hist:()=>[$('#qv-hist')]},t=>{if(t==='lib')qianLib();if(t==='hist')qianHist()});
 
 function qianCardSpec(){const r=READ[S.n-1],ti={love:2,work:3,money:4}[S.topic]||0;
   return {eyebrow:'六十甲子籤',title:`第${cnum(S.n)}籤　${GZ[S.n-1]}`,q:S.q,pig:'img/pig-tube.webp',msgTitle:ti?'你問的'+TOPICS[S.topic]:'白話',msg:ti?r[ti]+' '+r[5]:r[1],

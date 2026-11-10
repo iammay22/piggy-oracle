@@ -1,5 +1,5 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<nav class="dg-nav" aria-label="問問小豬"><a class="home" href="index.html"><img src="img/pig-face.png" alt="" width="120" height="85">← 問問小豬</a><span class="seg"><a href="tarot.html">塔羅</a><a href="iching.html" aria-current="page">易經</a><a href="lenormand.html">雷諾曼</a><a href="qian.html">求籤</a></span></nav><div class="dg-greet"><img src="img/pig-coins.webp" alt="小豬" width="400" height="401"><p>三枚銅錢準備好了，擲六次就成一卦。</p></div>
+<nav class="dg-nav" aria-label="問問小豬"><a class="home" href="index.html"><img src="img/pig-face.png" alt="" width="120" height="85">← 問問小豬</a><span class="seg"><a href="tarot.html">塔羅</a><a href="iching.html" aria-current="page">易經</a><a href="lenormand.html">雷諾曼</a><a href="qian.html">求籤</a></span></nav><div class="dg-hrow"><h1 class="dg-brand"><span class="dg-ic" aria-hidden="true">易</span>易卦小館</h1><nav class="dg-tabs" role="tablist" aria-label="易卦小館"><button type="button" role="tab" data-tab="cast" aria-selected="true">起卦</button><button type="button" role="tab" data-tab="lib" aria-selected="false">卦義</button><button type="button" role="tab" data-tab="hist" aria-selected="false">紀錄</button></nav></div><div class="dg-greet"><img src="img/pig-coins.webp" alt="小豬" width="400" height="401"><p>三枚銅錢準備好了，擲六次就成一卦。</p></div>
 <title>易經起卦｜問問小豬</title>
 <link rel="icon" href="img/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
@@ -235,6 +235,56 @@ summary::before{content:"＋ "} details[open] summary::before{content:"－ "}
 .dg-b{font:inherit;font-weight:700;font-size:15px;border:0;border-radius:14px;padding:10px 18px;background:var(--dg-acc);color:var(--dg-on-acc);text-decoration:none;cursor:pointer}
 .dg-b.ghost{background:none;color:var(--dg-ink);border:1.5px solid var(--dg-line)}
 .dg-b:focus-visible{outline:2px solid var(--dg-acc);outline-offset:2px}
+.dg-hrow{display:flex;align-items:center;justify-content:space-between;gap:10px 12px;flex-wrap:wrap;max-width:760px;margin:14px auto 4px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));font-family:var(--round)}
+.dg-hrow.inset{margin-left:calc(-1*max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)))}
+.dg-brand{display:flex;align-items:center;gap:10px;margin:0;font-family:var(--round);font-weight:700;font-size:20px;letter-spacing:.06em;color:var(--dg-ink);line-height:1.3}
+.dg-ic{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--dg-acc-soft);color:var(--dg-acc);font-size:18px;letter-spacing:0;flex:none}
+.dg-tabs{display:flex;gap:2px;background:var(--dg-surface-2);border:1px solid var(--dg-line-a);border-radius:999px;padding:3px}
+.dg-tabs button{font:inherit;font-family:var(--round);font-size:14px;border:0;background:none;color:var(--dg-soft);padding:6px 12px;border-radius:999px;cursor:pointer}
+.dg-tabs button[aria-selected="true"]{background:var(--dg-acc);color:var(--dg-on-acc);font-weight:700}
+.dg-tabs button:focus-visible{outline:2px solid var(--dg-acc);outline-offset:2px}
+.dg-hero{margin:6px 0 18px;font-family:var(--round)}
+.dg-hero .dg-eb,.hero .eyebrow{font-size:13px;letter-spacing:.2em;color:var(--dg-acc-dim);font-weight:400}
+.dg-hero h1,.hero h1{font-family:var(--round);font-size:clamp(28px,7vw,38px);font-weight:700;margin:4px 0 6px;color:var(--dg-ink);line-height:1.3;text-wrap:balance}
+.dg-hero p,.hero p{color:var(--dg-soft);margin:0;max-width:34em;line-height:1.75;font-size:16px}
+.dg-hero ol{display:flex;flex-wrap:wrap;gap:6px 18px;margin:10px 0 0;padding:0;list-style:none;counter-reset:s;font-size:14px;color:var(--dg-soft)}
+.dg-hero ol li{counter-increment:s;display:flex;gap:6px}.dg-hero ol li::before{content:counter(s);font-weight:700;color:var(--dg-acc)}
+.dg-filters{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 16px}
+.dg-chip{font:inherit;font-family:var(--round);font-size:15px;border:1px solid var(--dg-line);background:var(--dg-surface);color:var(--dg-ink);border-radius:999px;padding:7px 16px;cursor:pointer}
+.dg-chip[aria-pressed="true"]{border-color:var(--dg-acc);background:var(--dg-acc-soft);color:var(--dg-acc);font-weight:700}
+.dg-libgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(82px,1fr));gap:14px 12px}
+.dg-libc{border:0;background:none;padding:0;text-align:center;font-family:var(--round);font-size:12.5px;line-height:1.4;color:var(--dg-soft);cursor:pointer;min-width:0}
+.dg-libc b{display:block;color:var(--dg-ink);font-size:14px;margin-top:4px}
+.dg-libc .dg-face{width:100%;filter:drop-shadow(0 3px 5px var(--dg-shadow))}
+.dg-libc .dg-face.leno{aspect-ratio:100/148}.dg-libc .dg-face svg{display:block;width:100%;height:100%}
+.dg-libc .dg-face.hexbox{aspect-ratio:7/12;background:var(--dg-surface);border:1px solid var(--dg-line);border-radius:8px;display:grid;place-items:center}
+.dg-libc .dg-face.slipt{aspect-ratio:7/12;background:#f4e3c1;border-radius:6px;box-shadow:inset 0 0 0 3px #f4e3c1,inset 0 0 0 4px #a8322a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#3b1613}
+.slipt em{font-style:normal;font-size:12px}.slipt strong{font-size:18px;writing-mode:vertical-rl;letter-spacing:.15em}
+.slipt .tone,.dg-bsheet .tone{font-size:11px;font-weight:700;border-radius:999px;padding:1px 8px;color:#fff}
+.tone.t0{background:#a8322a}.tone.t1{background:#a77a2a}.tone.t2{background:#5d6470}
+.hexf{display:flex;flex-direction:column-reverse;gap:5px;width:62%}.hexf i{display:flex;gap:6px;height:6px}.hexf b{flex:1;background:var(--dg-ink);border-radius:1px}
+.hexf.big{width:150px;gap:9px}.hexf.big i{height:14px;gap:16px}
+.dg-scrim{position:fixed;inset:0;z-index:55;background:var(--dg-scrim);display:flex;align-items:flex-end;justify-content:center}
+.dg-bsheet{background:var(--dg-surface);color:var(--dg-ink);width:100%;max-width:640px;max-height:88%;overflow:auto;border-radius:20px 20px 0 0;border:1px solid var(--dg-line);font-family:var(--round);line-height:1.7;
+  padding-block:18px calc(24px + env(safe-area-inset-bottom,0px));padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px));animation:dgup .3s ease}
+@keyframes dgup{from{transform:translateY(40px);opacity:0}}
+.dg-bsheet .slip{clear:both}
+.dg-sx{float:right;width:34px;height:34px;border-radius:50%;border:1px solid var(--dg-line);background:none;color:var(--dg-ink);font:inherit;cursor:pointer}
+.dg-big{width:150px;margin:8px auto 12px;filter:drop-shadow(0 6px 12px var(--dg-shadow))}.dg-big.leno{aspect-ratio:100/148}.dg-big svg{display:block;width:100%;height:100%}
+.dg-big.hexbig{display:flex;justify-content:center;filter:none}
+.dg-bsheet h3{text-align:center;font-size:24px;margin:0;font-weight:700}
+.dg-en{text-align:center;color:var(--dg-soft);font-size:13px;letter-spacing:.04em}
+.dg-kws{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:10px 0 4px}.dg-kws span{font-size:13px;background:var(--dg-acc-soft);color:var(--dg-acc);padding:2px 10px;border-radius:6px}
+.dg-classic{font-size:17px;font-weight:700;text-align:center;margin:10px 0 2px}.dg-sub2{text-align:center;color:var(--dg-soft);margin:0}
+.dg-two{display:grid;grid-template-columns:1fr;gap:12px;margin-top:14px}@media(min-width:520px){.dg-two{grid-template-columns:1fr 1fr}}
+.dg-two>div{background:var(--dg-bg);border:1px solid var(--dg-line);border-radius:12px;padding:12px}.dg-two h4{margin:0 0 4px;font-size:15px;color:var(--dg-acc)}.dg-two p{margin:0;font-size:15px}
+.dg-hist{display:grid;gap:10px}
+.dg-hi{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;text-align:left;background:var(--dg-surface);border:1px solid var(--dg-line);border-radius:14px;padding:14px 16px;font-family:var(--round);color:var(--dg-ink);cursor:pointer}
+.dg-ht{min-width:0}.dg-ht b{display:block;font-size:16px}.dg-ht span{display:block;font-size:13px;color:var(--dg-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dg-go{font-size:22px;color:var(--dg-soft)}
+.dg-empty{text-align:center;color:var(--dg-soft);padding:40px 10px;font-family:var(--round);line-height:1.8}
+.dg-center{display:flex;justify-content:center;margin-top:14px}
+.dg-link{font:inherit;font-family:var(--round);font-size:14px;background:none;border:0;color:var(--dg-soft);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .dg-copy{width:100%;margin-top:10px;font:inherit;font-size:14px;padding:10px;border-radius:12px;border:1px solid var(--dg-line);background:var(--dg-surface-2);color:var(--dg-ink)}
 </style>
 <style>
@@ -259,20 +309,11 @@ body{background-image:radial-gradient(90% 50% at 50% 0%,#fbf5e8 0%,transparent 7
 </style>
 
 <div class="wrap">
-  <header class="head">
-    <div class="logo">
-      <span class="seal" aria-hidden="true">易</span>
-      <h1>易卦小館</h1>
-    </div>
-    <nav class="top-tabs" role="tablist">
-      <button role="tab" data-tab="cast" aria-selected="true">起卦</button>
-      <button role="tab" data-tab="hist" aria-selected="false">紀錄</button>
-    </nav>
-  </header>
+  
 
-  <main id="v-cast"></main>
+  <div class="dg-hero" id="ic-hero"><div class="dg-eb">I CHING</div><h1>想問什麼方向？</h1><p>心裡想著一件事，選一種方式起卦。易經會告訴你現在的狀態，和接下來的走向。</p></div><main id="v-cast"></main><main id="v-lib" hidden></main>
   <main id="v-hist" hidden></main>
-  <details class="panel dg-learn">
+  <details class="dg-learn dg-card" id="dg-learn">
     <summary>第一次玩？易經怎麼讀</summary>
     <div class="dg-learn-b">
       <p><b>卦是怎麼組成的</b>易經有 64 個卦，每個卦由六條線組成，叫做「爻」。一條完整的長線是<b class="in">陽爻</b>，中間斷開的是<b class="in">陰爻</b>。六條線<b class="in">由下往上</b>排，最下面是初爻，最上面是上爻。</p>
@@ -552,6 +593,28 @@ async function dgShowCard(spec,name){
 async function dgDrawCardImg(x,src,cx,cy,w,h,rev){const im=await dgImg(src);x.save();x.translate(cx,cy);if(rev)x.rotate(Math.PI);
   x.shadowColor='rgba(0,0,0,.18)';x.shadowBlur=18;x.shadowOffsetY=8;dgRR(x,-w/2,-h/2,w,h,14);x.fillStyle='#fff';x.fill();x.shadowColor='transparent';x.clip();
   if(im)x.drawImage(im,-w/2,-h/2,w,h);else{x.fillStyle='#ddd';x.fillRect(-w/2,-h/2,w,h)}x.restore()}
+
+/* ---- 問問小豬: shared tabs, sheet, history helpers ---- */
+function dgSheet(html){let s=document.querySelector('.dg-scrim');if(s)s.remove();
+  s=document.createElement('div');s.className='dg-scrim';
+  s.innerHTML=`<div class="dg-bsheet" role="dialog" aria-modal="true"><button class="dg-sx" type="button" aria-label="關閉">✕</button>${html}</div>`;
+  document.body.appendChild(s);s.addEventListener('click',e=>{if(e.target===s||e.target.closest('.dg-sx'))s.remove()});}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){const s=document.querySelector('.dg-scrim');if(s)s.remove()}});
+const dgStore={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+function dgEsc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function dgWhen(t){try{return new Date(t).toLocaleString('zh-TW',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'})}catch(e){return ''}}
+/* views: {draw:[els], lib:[els], hist:[els]} ; onShow(name) */
+function dgTabs(views,onShow){
+  document.addEventListener('click',e=>{const b=e.target.closest('[data-dgtab]');if(!b)return;const t=b.dataset.dgtab;
+    document.querySelectorAll('[data-dgtab]').forEach(x=>x.setAttribute('aria-selected',x===b));
+    Object.entries(views).forEach(([k,els])=>els().forEach(el=>{if(el)el.hidden=k!==t}));
+    if(onShow)onShow(t);window.scrollTo({top:0})});
+}
+function dgHistHTML(list,row,empty){
+  if(!list.length)return `<div class="dg-empty">${empty}</div>`;
+  return `<div class="dg-hist">${list.map((r,i)=>`<button class="dg-hi" type="button" data-hopen="${i}">${row(r)}<span class="dg-go" aria-hidden="true">›</span></button>`).join('')}</div>
+  <div class="dg-center"><button class="dg-link" type="button" data-hclear>清除全部紀錄</button></div>`;
+}
 function ichingCardSpec(r){const ben=hexOf(r.vals),bian=hexOf(r.vals,true),mv=r.vals.some(v=>v===6||v===9),k=keyReading(r.vals),strip=s=>String(s||'').replace(/<[^>]+>/g,'');
   const it=k.items&&k.items[0];
   return {eyebrow:'易經・'+MNAME[r.method],title:mv?`${ben.name}　→　${bian.name}`:ben.full,q:r.q,pig:'img/pig-coins.webp',msgTitle:'小豬想說',msg:ben.adv+(it?' '+strip(it.gl):''),
@@ -567,6 +630,21 @@ function ichingCardSpec(r){const ben=hexOf(r.vals),bian=hexOf(r.vals,true),mv=r.
       if(it){x.textAlign='center';x.fillStyle=T.ink;x.font=`700 34px ${DG_F}`;dgWrap(x,strip(it.src),W/2,top+570,820,46,2)}
       x.textAlign='left'}}}
 document.addEventListener('click',e=>{if(e.target.closest('[data-act="imgcard"]')&&S.res)dgShowCard(ichingCardSpec(S.res),'問問小豬-易經')});
+/* ---- iching: 卦義 library tab ---- */
+let icLibF='all';
+function icBars(a,cls){return `<div class="hexf ${cls||''}">${a.split('').map(y=>y==='1'?'<i><b></b></i>':'<i><b></b><b></b></i>').join('')}</div>`}
+function icLib(){const f=icLibF,list=HEX.filter(h=>f==='all'||h.lv===f);
+  $('#v-lib').innerHTML=`<div class="dg-hero"><div class="dg-eb">64 HEXAGRAMS</div><h1>卦義圖鑑</h1><p>點任一個卦，看卦辭、象辭，以及在運勢、感情、事業上的白話解釋。</p></div>
+  <div class="dg-filters">${[['all','全部 64'],['大吉','大吉'],['吉','吉'],['平','平'],['小心','小心']].map(([k,v])=>`<button class="dg-chip" type="button" data-if="${k}" aria-pressed="${f===k}">${v}</button>`).join('')}</div>
+  <div class="dg-libgrid">${list.map(h=>`<button class="dg-libc" type="button" data-ic="${h.n}"><div class="dg-face hexbox">${icBars(h.a)}</div><b>${h.n}. ${h.name}</b>${h.lv}</button>`).join('')}</div>`}
+function icSheet(n){const h=HEX[n-1];dgSheet(`<div class="dg-big hexbig">${icBars(h.a,'big')}</div><h3>第${h.n}卦　${h.full}</h3><div class="dg-en">上${h.up}・下${h.lo}・${h.lv}</div>
+  <p class="dg-classic">${h.ci}</p><p class="dg-sub2">象曰：${h.xiang}</p>
+  <div class="dg-two"><div><h4>運勢</h4><p>${h.fort}</p></div><div><h4>感情</h4><p>${h.love}</p></div><div><h4>事業</h4><p>${h.work}</p></div><div><h4>建議</h4><p>${h.adv}</p></div></div>`)}
+document.addEventListener('click',e=>{
+  const tb=e.target.closest('[data-tab]');if(tb){const t=tb.dataset.tab;$('#v-lib').hidden=t!=='lib';['#ic-hero','#dg-learn'].forEach(s=>{const el=$(s);if(el)el.hidden=t!=='cast'});if(t==='lib')icLib();return}
+  const f=e.target.closest('[data-if]');if(f){icLibF=f.dataset.if;icLib();return}
+  const c=e.target.closest('[data-ic]');if(c)icSheet(+c.dataset.ic);
+});
 
 function shareURL(r){const u=new URLSearchParams();u.set('v',r.vals.join(''));u.set('m',r.method);if(r.detail)u.set('d',r.detail);if(r.q)u.set('q',r.q);return dgBase()+'?'+u.toString()}
 document.addEventListener('click',e=>{const el=e.target.closest('[data-act="share"]');if(!el||!S.res)return;dgShare(shareURL(S.res),'我起到的卦｜問問小豬',el)});
