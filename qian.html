@@ -220,6 +220,13 @@ body{margin:0;background:var(--dg-bg);background-image:radial-gradient(70% 40% a
 .lines li span{color:var(--dg-ink)}
 @media (max-width:420px){.lines li{grid-template-columns:1fr}}
 .mine{background:var(--dg-acc-soft);border-radius:14px;padding:12px 14px}
+.me{align-self:stretch;text-align:left;background:var(--dg-surface-2);border-radius:14px;padding:10px 14px}
+.me summary{cursor:pointer;font-weight:700;font-size:15px}
+.me .q-note{margin:8px 0}
+.me-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.me-row label{display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--dg-soft)}
+.me-row input{font:inherit;font-size:16px;color:var(--dg-ink);background:var(--dg-surface);border:1px solid var(--dg-line);border-radius:10px;padding:8px 10px;min-width:0}
+.me-row input:focus-visible,.me summary:focus-visible{outline:2px solid var(--dg-acc);outline-offset:2px}
 .mine b{color:var(--dg-acc)}
 /* 月老籤紙 */
 .slip.yl{background:#fff3f1;color:#4a1a22;box-shadow:inset 0 0 0 3px #fff3f1,inset 0 0 0 5px #c2324a,inset 0 0 0 7px #fff3f1,inset 0 0 0 8px #c2324a,0 16px 30px -14px rgba(120,30,50,.45)}
@@ -348,7 +355,8 @@ const JIAO_SVG=(flat)=>`<svg viewBox="0 0 120 74" aria-hidden="true"><defs>
 <ellipse cx="60" cy="66" rx="48" ry="5" fill="rgba(0,0,0,.14)"/>${flat
   ?'<path d="M8 54 A52 46 0 0 1 112 54 Q60 66 8 54 Z" fill="url(#jf)" stroke="#2a1614" stroke-width="3.2" stroke-linejoin="round"/><path d="M22 51 A38 33 0 0 1 98 51 Q60 59 22 51 Z" fill="#f7b28c" opacity=".75"/><path d="M34 47 Q60 30 86 47" fill="none" stroke="#e57a52" stroke-width="2" stroke-linecap="round" opacity=".8"/>'
   :'<path d="M8 54 A52 46 0 0 1 112 54 Q60 66 8 54 Z" fill="url(#jr)" stroke="#2a1614" stroke-width="3.2" stroke-linejoin="round"/><path d="M28 30 Q46 16 70 15" fill="none" stroke="#ffd2cb" stroke-width="5" stroke-linecap="round" opacity=".7"/><circle cx="82" cy="20" r="2.5" fill="#ffd2cb" opacity=".7"/>'}</svg>`;
-const S={step:'ask',k:'jz',q:'',topic:'general',sit:'',miss:0,n:0,shared:false};
+const S={step:'ask',k:'jz',q:'',topic:'general',sit:'',miss:0,n:0,shared:false,me:{name:'',bd:''}};
+function meLine(){const m=S.me||{};if(!m.name&&!m.bd)return '';const d=m.bd?m.bd.split('-'):null;return (m.name||'')+(m.name&&d?'，':'')+(d?`${+d[0]} 年 ${+d[1]} 月 ${+d[2]} 日生`:'')}
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const rnd=n=>{const a=new Uint32Array(1);crypto.getRandomValues(a);return a[0]%n};
@@ -366,11 +374,16 @@ function vAsk(){
   <div class="kinds" role="group" aria-label="想求哪一種籤">${Object.entries(KINDS).map(([k,v])=>`<button type="button" data-k="${k}" aria-pressed="${S.k===k}"><b>${v[0]}</b><span>${v[1]}</span></button>`).join('')}</div>
   <div class="q-lab">${S.k==='yl'?'在心裡向月老報上名字和生日，說出你想求的姻緣':'在心裡說出你的名字，和想問的事'}</div>
   <textarea id="qq" rows="2" maxlength="80" placeholder="${S.k==='yl'?'例如：我什麼時候會遇到對的人？':'例如：我這次換工作會順利嗎？'}（可留白）">${esc(S.q)}</textarea>
+  <details class="me" ${S.me.name||S.me.bd?'open':''}><summary>報上名字和生日（可以不填）</summary>
+    <p class="q-note" style="text-align:left">在廟裡求籤，會先跟${S.k==='yl'?'月老':'神明'}說自己的名字和生日。只存在你的手機，不會傳出去，也不會放進分享連結。</p>
+    <div class="me-row"><label>名字<input id="meName" maxlength="12" placeholder="小名也可以" value="${esc(S.me.name)}" autocomplete="nickname"></label>
+    <label>生日<input id="meBd" type="date" min="1920-01-01" max="2026-12-31" value="${esc(S.me.bd)}"></label></div></details>
   ${S.k==='yl'?'':`<div class="dg-topics" role="group" aria-label="想問哪方面" style="align-self:stretch"><span>想問哪方面</span>${Object.entries(TOPICS).map(([k,v])=>`<button type="button" data-t="${k}" aria-pressed="${S.topic===k}">${v}</button>`).join('')}</div>`}
   <div id="sitbox" style="align-self:stretch">${sitsHTML()}</div>
   <p class="q-note">一次問一件事就好，選好你的情況，解籤會更貼近你。</p>
   <button class="q-btn" id="toJiao">準備好了，擲筊請示</button>`;
   $('#qq').addEventListener('input',e=>S.q=e.target.value);
+  const sv=()=>{S.me={name:$('#meName').value.trim(),bd:$('#meBd').value};dgStore.set('qian-me',S.me)};$('#meName').addEventListener('input',sv);$('#meBd').addEventListener('change',sv);
   $('#toJiao').onclick=()=>{S.miss=0;go('jiao')};
 }
 document.addEventListener('click',e=>{
@@ -379,7 +392,7 @@ document.addEventListener('click',e=>{
 });
 function vJiao(){
   const confirm=S.step==='confirm';
-  $('#stage').innerHTML=`${confirm?`<div class="q-num">抽到${S.k==='yl'?'月老籤':''}第${cnum(S.n)}籤</div><p class="q-note">再擲一次筊，請示是不是這一支。</p>`:`<p class="q-note">${S.q?`「${esc(S.q)}」<br>`:''}請示可不可以求籤。擲到<b>聖筊</b>（一平一凸）就可以抽籤。</p>`}
+  $('#stage').innerHTML=`${confirm?`<div class="q-num">抽到${S.k==='yl'?'月老籤':''}第${cnum(S.n)}籤</div><p class="q-note">再擲一次筊，請示是不是這一支。</p>`:`<p class="q-note">${meLine()?`${esc(meLine())}<br>`:''}${S.q?`「${esc(S.q)}」<br>`:''}請示${S.k==='yl'?'月老':''}可不可以求籤。擲到<b>聖筊</b>（一平一凸）就可以抽籤。</p>`}
   <img class="q-toss" src="img/pig-toss.webp" alt="準備擲筊的小豬" width="400" height="409"><div class="jiao" id="jiao">${JIAO_SVG(true)}${JIAO_SVG(false)}</div>
   <div id="jres"></div>
   <div class="q-row" id="jbtns"><button class="q-btn" id="toss">擲筊</button></div>`;
@@ -455,7 +468,7 @@ function vResult(){
       <h3>${m?'其他方面':'各方面'}</h3><dl class="asp">${other}</dl>
       <div class="say"><img class="slip-pig" src="img/pig-${['happy','cheer','pat'][r[0]]}.webp" alt="" width="400" height="392"><b>小豬想說：</b>${r[5]}</div>
       <p class="src">籤詩原文為傳統六十甲子籤；白話、傾向與建議是小豬的解讀，各宮廟的說法可能不同。</p></div>`}
-  $('#stage').innerHTML=`${S.q?`<p class="q-note">「${esc(S.q)}」</p>`:''}${body}
+  $('#stage').innerHTML=`${S.me.name&&!S.shared?`<p class="q-note" style="margin-bottom:-6px">${esc(S.me.name)} 求的籤</p>`:''}${S.q?`<p class="q-note">「${esc(S.q)}」</p>`:''}${body}
   <div class="q-row"><button class="q-btn" id="share">分享這支籤</button><button class="q-btn ghost" id="card">做成圖卡</button></div>
   <div class="q-row"><button class="q-link" id="copy">複製文字</button><button class="q-link" id="again">再求一次</button></div>`;
   $('#share').onclick=async()=>{const u=shareURL();dgT('qian/share');try{if(navigator.share){await navigator.share({title:'問問小豬・求籤',text:`我抽到${S.k==='yl'?'月老籤':''}第${cnum(S.n)}籤`,url:u});return}await navigator.clipboard.writeText(u);dgToast('連結已複製')}catch(err){}};
@@ -494,6 +507,7 @@ const DG_F='"GenSenRounded","PingFang TC","Microsoft JhengHei",sans-serif';
 async function dgMakeCard(spec){
   try{await Promise.all([document.fonts.load('700 40px GenSenRounded'),document.fonts.load('400 40px GenSenRounded')])}catch(e){}
   const W=1080,H=1350,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');
+  if(spec.full){await spec.full(x,{W,H});return new Promise(r=>c.toBlob(b=>r(b),'image/png'))}
   const T={bg:dgVar('--dg-bg','#f8f1f0'),sf:dgVar('--dg-surface','#fff'),s2:dgVar('--dg-surface-2','#f1e7e5'),ink:dgVar('--dg-ink','#2a2022'),soft:dgVar('--dg-soft','#6f6265'),acc:dgVar('--dg-acc','#b84d6c'),line:dgVar('--dg-line','#ead9d6')};
   x.fillStyle=T.bg;x.fillRect(0,0,W,H);
   x.fillStyle=T.acc;x.globalAlpha=.07;for(let i=0;i<26;i++){x.beginPath();x.arc((i*397)%W,(i*263)%H,6+(i%4)*3,0,7);x.fill()}x.globalAlpha=1;
@@ -583,7 +597,59 @@ document.addEventListener('click',e=>{
 });
 dgTabs({draw:()=>[$('#qv-draw'),$('#dg-learn')],lib:()=>[$('#qv-lib')],hist:()=>[$('#qv-hist')]},t=>{if(t==='lib')qianLib();if(t==='hist')qianHist()});
 
-function qianCardSpec(){if(S.k==='yl')return ylCardSpec();const r=READ[S.n-1],ti={love:2,work:3,money:4}[S.topic]||0,mm=mineLine();
+
+/* ---- 籤詩圖卡：一張直式籤紙＋你的情況 ---- */
+function qFitText(x,text,maxW,maxH,size,minSize,lhR){
+  for(let fs=size;fs>=minSize;fs-=2){x.font=`400 ${fs}px ${DG_F}`;const lines=[];let line='';
+    for(const ch of String(text)){if(x.measureText(line+ch).width>maxW&&line&&!'，。、！？；：」）'.includes(ch)){lines.push(line);line=ch}else line+=ch}
+    if(line)lines.push(line);if(lines.length*fs*lhR<=maxH||fs===minSize)return {fs,lines}}
+}
+async function qFullCard(x,{W,H}){
+  const yl=S.k==='yl',r=yl?YBN[S.n]:READ[S.n-1],m=mineLine();
+  const C=yl?{bg:'#fbecee',paper:'#fff6f4',ink:'#4a1a22',soft:'#8b5a63',acc:'#c2324a',box:'#f7e0e2',pat:'rgba(194,50,74,.06)'}
+            :{bg:'#f6ead8',paper:'#f8e9cb',ink:'#3b1613',soft:'#8a5a4a',acc:'#a8322a',box:'#efdcc0',pat:'rgba(168,50,42,.05)'};
+  const toneC=yl?['#c2324a','#b07a3a','#6a6470'][r[1]]:['#a8322a','#a77a2a','#5d6470'][r[0]];
+  const toneT=yl?YTONE[r[1]]+'・'+YTONE_TIP[r[1]]:TONE[r[0]]+'・'+TONE_TIP[r[0]];
+  x.fillStyle=C.bg;x.fillRect(0,0,W,H);
+  x.strokeStyle=C.pat;x.lineWidth=3;for(let i=-H;i<W;i+=44){x.beginPath();x.moveTo(i,0);x.lineTo(i+H*.45,H);x.stroke()}
+  x.textAlign='center';x.textBaseline='alphabetic';
+  const me=(S.me&&S.me.name&&!S.shared)?S.me.name+'的':'';
+  x.fillStyle=C.acc;x.font=`700 34px ${DG_F}`;x.fillText(me+(yl?'月老籤':'六十甲子籤'),W/2,112);
+  x.fillStyle=C.ink;x.font=`700 70px ${DG_F}`;x.fillText(yl?`第${cnum(S.n)}籤`:`第${cnum(S.n)}籤　${GZ[S.n-1]}`,W/2,196);
+  x.font=`700 30px ${DG_F}`;const pw=x.measureText(toneT).width+64;x.fillStyle=toneC;dgRR(x,W/2-pw/2,224,pw,54,27);x.fill();
+  x.fillStyle='#fff';x.fillText(toneT,W/2,261);
+  // 籤紙
+  const sx=150,sy=310,sw=W-300,sh=500;
+  x.save();x.shadowColor='rgba(80,30,20,.22)';x.shadowBlur=30;x.shadowOffsetY=12;x.fillStyle=C.paper;dgRR(x,sx,sy,sw,sh,10);x.fill();x.restore();
+  x.strokeStyle=C.acc;x.lineWidth=6;dgRR(x,sx+16,sy+16,sw-32,sh-32,6);x.stroke();x.lineWidth=2;dgRR(x,sx+30,sy+30,sw-60,sh-60,4);x.stroke();
+  x.fillStyle=C.ink;
+  if(yl){const lines=r[2].split('|'),src=r[3].split(/[，（]/)[0],areaH=sh-(src?150:100);
+    const fs=Math.min(54,Math.floor((sw-130)/Math.max(...lines.map(l=>l.length))),Math.floor(areaH/(lines.length*1.5)));
+    x.font=`700 ${fs}px ${DG_F}`;const lh=fs*1.5,y0=sy+60+(areaH-lines.length*lh)/2+fs;
+    lines.forEach((l,i)=>x.fillText(l,W/2,y0+i*lh));
+    if(src){x.fillStyle=C.soft;x.font=`400 28px ${DG_F}`;x.fillText('—— '+src,W/2,sy+sh-62)}
+  }else{const cols=POEM[S.n-1].split('|'),fs=52,step=56,cw=124,x0=W/2+cw*1.5,top=sy+(sh-step*7)/2+fs*.88;x.font=`700 ${fs}px ${DG_F}`;
+    cols.forEach((l,i)=>[...l].forEach((ch,j)=>x.fillText(ch,x0-i*cw,top+j*step)))}
+  // 問題
+  let y=sy+sh+64;
+  if(S.q){x.fillStyle=C.soft;x.font=`400 34px ${DG_F}`;let q=S.q;if(q.length>24)q=q.slice(0,23)+'…';x.fillText('「'+q+'」',W/2,y);y+=34}
+  // 解讀框
+  const bx=90,bw=W-180,by=y,bh=H-120-by;x.fillStyle=C.box;dgRR(x,bx,by,bw,bh,32);x.fill();
+  const pig=await dgImg(yl?'img/pig-'+['love','pat','hug'][r[1]]+'.webp':'img/pig-'+['happy','cheer','pat'][r[0]]+'.webp');
+  const pgw=190;if(pig){const ph=pig.height*pgw/pig.width;x.drawImage(pig,bx+bw-pgw-18,by+bh-ph-10,pgw,ph)}
+  x.textAlign='left';const tx=bx+40,tw=bw-80-pgw;
+  const label=m?(yl?m[0]+'的你':m[0]):'籤詩的意思',body=m?m[1]:(yl?r[4]:r[1]),pigSay=yl?r[9]:r[5];
+  x.fillStyle=C.acc;x.font=`700 34px ${DG_F}`;x.fillText(label,tx,by+62);
+  const fit=qFitText(x,body,tw,bh-160,36,28,1.45);x.fillStyle=C.ink;x.font=`400 ${fit.fs}px ${DG_F}`;
+  fit.lines.forEach((l,i)=>x.fillText(l,tx,by+118+i*fit.fs*1.45));
+  x.fillStyle=C.soft;x.font=`700 28px ${DG_F}`;x.fillText('小豬想說：'+pigSay,tx,by+bh-36);
+  // 頁尾
+  x.font=`700 26px ${DG_F}`;x.fillStyle=C.soft;x.fillText('問問小豬',90,H-56);x.font=`400 24px ${DG_F}`;x.fillText(DG_SITE,90+x.measureText('問問小豬　').width*1.1,H-56);
+  x.textAlign='right';x.fillText('by may22',W-90,H-56);x.textAlign='left';
+}
+function qianCardSpec(){return {full:qFullCard};
+}
+function qianCardSpecOld(){if(S.k==='yl')return ylCardSpec();const r=READ[S.n-1],ti={love:2,work:3,money:4}[S.topic]||0,mm=mineLine();
   return {eyebrow:'六十甲子籤',title:`第${cnum(S.n)}籤　${GZ[S.n-1]}`,q:S.q,pig:'img/pig-tube.webp',msgTitle:mm?mm[0]:'白話',msg:mm?mm[1]+' '+r[5]:r[1],
     body:async(x,{top,W,T})=>{const sw=640,sh=570,sx=(W-sw)/2,sy=top+10;
       x.save();x.shadowColor='rgba(0,0,0,.15)';x.shadowBlur=18;x.shadowOffsetY=8;x.fillStyle='#f4e3c1';dgRR(x,sx,sy,sw,sh,10);x.fill();x.restore();
@@ -605,7 +671,8 @@ function ylCardSpec(){const r=YBN[S.n],m=mineLine(),lines=r[2].split('|');
       x.fillStyle='#4a1a22';const fs=Math.min(46,Math.floor(580/Math.max(...lines.map(l=>l.length))),Math.floor((sh-210)/(lines.length*1.45)));x.font=`700 ${fs}px ${DG_F}`;
       const lh=fs*1.45,h0=sy+120+((sh-210)-lines.length*lh)/2+fs;lines.forEach((l,i)=>x.fillText(l,W/2,h0+i*lh));
       const shortSrc=r[3].split(/[，（]/)[0];if(shortSrc){x.fillStyle='#8b5a63';x.font=`400 26px ${DG_F}`;x.fillText('—— '+shortSrc,W/2,sy+sh-50)}x.textAlign='left'}}}
-(function(){const P=new URLSearchParams(location.search),n=+P.get('n'),yl=P.get('k')==='yl';
+(function(){try{const m=dgStore.get('qian-me',null);if(m&&typeof m==='object')S.me={name:String(m.name||'').slice(0,12),bd:String(m.bd||'').slice(0,10)}}catch(e){}
+  const P=new URLSearchParams(location.search),n=+P.get('n'),yl=P.get('k')==='yl';
   if(yl?YBN[n]:(n>=1&&n<=60)){S.k=yl?'yl':'jz';S.n=n;S.topic=yl?'love':(TOPICS[P.get('t')]?P.get('t'):'general');S.sit=P.get('s')||'';S.q=P.get('q')||'';S.shared=true;S.step='result';dgT('qian/opened-share')}
   render();
 })();

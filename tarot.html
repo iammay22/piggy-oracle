@@ -897,6 +897,7 @@ const DG_F='"GenSenRounded","PingFang TC","Microsoft JhengHei",sans-serif';
 async function dgMakeCard(spec){
   try{await Promise.all([document.fonts.load('700 40px GenSenRounded'),document.fonts.load('400 40px GenSenRounded')])}catch(e){}
   const W=1080,H=1350,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');
+  if(spec.full){await spec.full(x,{W,H});return new Promise(r=>c.toBlob(b=>r(b),'image/png'))}
   const T={bg:dgVar('--dg-bg','#f8f1f0'),sf:dgVar('--dg-surface','#fff'),s2:dgVar('--dg-surface-2','#f1e7e5'),ink:dgVar('--dg-ink','#2a2022'),soft:dgVar('--dg-soft','#6f6265'),acc:dgVar('--dg-acc','#b84d6c'),line:dgVar('--dg-line','#ead9d6')};
   x.fillStyle=T.bg;x.fillRect(0,0,W,H);
   x.fillStyle=T.acc;x.globalAlpha=.07;for(let i=0;i<26;i++){x.beginPath();x.arc((i*397)%W,(i*263)%H,6+(i%4)*3,0,7);x.fill()}x.globalAlpha=1;
