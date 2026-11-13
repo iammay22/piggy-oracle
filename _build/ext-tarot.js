@@ -95,17 +95,28 @@ const _readingText=readingText;readingText=function(r){
   const t=_readingText(r),i=t.lastIndexOf('\n\n'),st=dgStory(r),a=dgActions(r);
   return t.slice(0,i)+(st.length?'\n\n牌和牌一起看：\n'+st.join('\n'):'')+'\n\n可以這樣做：\n'+a.acts.map(x=>'・'+x).join('\n')+t.slice(i);
 };
-function tarotCardSpec(r){const sp=SP[r.spread],n=r.cards.length,a=dgActions(r),d0=BYID[r.cards[0].id];
-  return {eyebrow:'塔羅・'+sp.n,title:n===1?d0.name+(r.cards[0].rev?'（逆位）':''):'我抽到的牌',q:r.q,pig:'img/pig-card.webp',
-    msgTitle:n===1?'這張牌想告訴你':'小豬建議你',msg:n===1?(r.cards[0].rev?d0.r:d0.u):a.acts[0],
-    body:async(x,{top,W,T})=>{const cs=r.cards;
-      if(n<=3){const cw=n===1?300:250,ch=cw*12/7,gap=40,tot=n*cw+(n-1)*gap,cy=top+ch/2+10;
-        for(let i=0;i<n;i++){const c=cs[i],cx=(W-tot)/2+cw/2+i*(cw+gap);await dgDrawCardImg(x,'cards/'+c.id+'.webp',cx,cy,cw,ch,c.rev);
-          x.textAlign='center';x.fillStyle=T.soft;x.font=`400 28px ${DG_F}`;x.fillText(lab(sp.pos[i][0],r).replace(/[「」]/g,''),cx,cy+ch/2+44);
-          x.fillStyle=T.ink;x.font=`700 32px ${DG_F}`;x.fillText(BYID[c.id].name+(c.rev?'・逆':''),cx,cy+ch/2+86)}
-      }else{const cw=150,ch=cw*12/7,gx=24;
-        for(let i=0;i<n;i++){const c=cs[i],col=i%5,row=Math.floor(i/5),per=Math.min(5,n-row*5),off=(W-(per*cw+(per-1)*gx))/2;
-          const cx=off+cw/2+col*(cw+gx),cy=top+ch/2+row*(ch+70);await dgDrawCardImg(x,'cards/'+c.id+'.webp',cx,cy,cw,ch,c.rev);
-          x.textAlign='center';x.fillStyle=T.ink;x.font=`700 24px ${DG_F}`;x.fillText(BYID[c.id].name+(c.rev?'逆':''),cx,cy+ch/2+34)}}
-      x.textAlign='left'}}}
+/* ================= 塔羅 ================= */
+function tarotFull(r){const C=DG_PAL.tarot,sp=SP[r.spread],cs=r.cards,n=cs.length,a=dgActions(r),d0=BYID[cs[0].id],t=r.topic;
+  let title,chip,label,body;
+  if(n===1){const c=cs[0];title=d0.name+(c.rev?'（逆位）':'');chip={t:(c.rev?'逆位・':'正位・')+(c.rev?d0.kr:d0.k).slice(0,3).join('、'),c:tone(c)>0?C.acc:C.dim};
+    const tl=t!=='general'&&topicLine(d0,c.rev,t);label=tl?`放到${TOPICS[t]}上`:'這張牌想告訴你';body=(c.rev?d0.r:d0.u)+(tl?'\n'+tl:'')}
+  else{title=sp.n;chip={t:`${n} 張牌・問${TOPICS[t]}`};label='牌和牌一起看';
+    if(r.spread==='celtic')body=`${t!=='general'?`放在${TOPICS[t]}上來看，`:''}這件事的核心是${dgP(cs[0])}，橫在面前的是${dgP(cs[1])}。最可能的結果是${dgP(cs[9])}。`;
+    else body=dgStory(r)[0]||''}
+  return async(x,{W,H})=>dgPoster(x,{W,H},{C,eyebrow:'我的塔羅・'+TOPICS[t],title,chip,q:r.q,label,body,say:'小豬建議：'+a.acts[0],pig:'img/pig-card.webp',
+    visual:async(x,top)=>{x.textAlign='center';
+      if(n===1){const cw=290,ch=cw*12/7;dgFrameCard(x,C,await dgImg('cards/'+cs[0].id+'.webp'),W/2,top+ch/2+6,cw,ch,cs[0].rev);return top+ch+14}
+      if(n<=5){const cw=n===3?218:160,ch=cw*12/7,gap=n===3?44:20,tot=n*cw+(n-1)*gap,cy=top+ch/2;
+        for(let i=0;i<n;i++){const c=cs[i],cx=(W-tot)/2+cw/2+i*(cw+gap);dgFrameCard(x,C,await dgImg('cards/'+c.id+'.webp'),cx,cy+6,cw,ch,c.rev);
+          x.textAlign='center';x.fillStyle=C.soft;x.font=`400 ${n===3?28:22}px ${DG_F}`;x.fillText(lab(sp.pos[i][0],r).replace(/[「」]/g,''),cx,cy+ch/2+(n===3?54:46));
+          x.fillStyle=C.ink;x.font=`700 ${n===3?32:24}px ${DG_F}`;x.fillText(BYID[c.id].name+(c.rev?'・逆':''),cx,cy+ch/2+(n===3?96:80))}
+        return top+ch+(n===3?100:84)}
+      const cw=118,ch=cw*12/7,gx=44;let bottom=top;
+      for(let i=0;i<n;i++){const c=cs[i],col=i%5,row=Math.floor(i/5),off=(W-(5*cw+4*gx))/2,cx=off+cw/2+col*(cw+gx),cy=top+ch/2+row*(ch+92);
+        dgFrameCard(x,C,await dgImg('cards/'+c.id+'.webp'),cx,cy+6,cw,ch,c.rev);
+        x.fillStyle=C.soft;x.font=`400 20px ${DG_F}`;x.fillText(`${i+1} ${sp.pos[i][0]}`,cx,cy+ch/2+40);
+        x.fillStyle=C.ink;x.font=`700 22px ${DG_F}`;x.fillText(BYID[c.id].name+(c.rev?'・逆':''),cx,cy+ch/2+68);bottom=cy+ch/2+70}
+      return bottom}})}
+
+function tarotCardSpec(r){return {full:tarotFull(r)}}
 document.addEventListener('click',e=>{if(e.target.closest('[data-act="imgcard"]')&&S.reading)dgShowCard(tarotCardSpec(S.reading),'問問小豬-塔羅')});

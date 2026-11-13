@@ -230,8 +230,9 @@ function meDays(){const Dd=$('#meD'),keep=Dd.value,y=+$('#meY').value||2000,m=+$
   let s='<option value="">日</option>';for(let d=1;d<=max;d++)s+=`<option value="${d}">${d} 日</option>`;Dd.innerHTML=s;if(keep&&+keep<=max)Dd.value=keep}
 function meGetBd(){const y=$('#meY').value,m=$('#meM').value,d=$('#meD').value;if(!(y&&m&&d))return '';
   const dt=new Date(+y,+m-1,+d);if(dt>new Date())return '';return `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`}
-/* 生日匿名記錄：只送日期本身，同一台手機同一個生日只送一次 */
-function meSendBd(){const bd=S.me.bd;if(bd){try{if(dgStore.get('qian-bd-sent','')!==bd){dgStore.set('qian-bd-sent',bd);dgT('qian/birthday/'+bd)}}catch(e){}}const nm=(S.me.name||'').replace(/\//g,'').trim();if(nm){try{if(dgStore.get('qian-name-sent','')!==nm){dgStore.set('qian-name-sent',nm);dgT('qian/name/'+nm)}}catch(e){}}}
+/* 生日與名字記錄：按「準備好了，擲筊請示」時送出，讓後台填寫名單分頁能同秒配對 */
+function meSendBd(){const bd=S.me.bd;if(!bd)return;dgT('qian/birthday/'+bd)}
+function meSendName(){const nm=S.me.name;if(!nm)return;dgT('qian/name/'+nm)}
 function meLine(){const m=S.me||{};if(!m.name&&!m.bd)return '';const d=m.bd?m.bd.split('-'):null;return (m.name||'')+(m.name&&d?'，':'')+(d?`${+d[0]} 年 ${+d[1]} 月 ${+d[2]} 日生`:'')}
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -251,7 +252,7 @@ function vAsk(){
   <div class="q-lab">${S.k==='yl'?'在心裡向月老報上名字和生日，說出你想求的姻緣':'在心裡說出你的名字，和想問的事'}</div>
   <textarea id="qq" rows="2" maxlength="80" placeholder="${S.k==='yl'?'例如：我什麼時候會遇到對的人？':'例如：我這次換工作會順利嗎？'}（可留白）">${esc(S.q)}</textarea>
   <details class="me" ${S.me.name||S.me.bd?'open':''}><summary>報上名字和生日（可以不填）</summary>
-    <p class="q-note" style="text-align:left">在廟裡求籤，會先跟${S.k==='yl'?'月老':'神明'}說自己的名字和生日。</p>
+    <p class="q-note" style="text-align:left">在廟裡求籤，會先跟${S.k==='yl'?'月老':'神明'}說自己的名字和生日。填寫的資料僅供站內統計參考，不會放進分享連結。</p>
     <label class="me-f">名字<input id="meName" maxlength="12" placeholder="小名也可以" value="${esc(S.me.name)}" autocomplete="nickname"></label>
     <div class="me-f"><span>生日</span><div class="ymd" id="meBd"></div></div></details>
   ${S.k==='yl'?'':`<div class="dg-topics" role="group" aria-label="想問哪方面" style="align-self:stretch"><span>想問哪方面</span>${Object.entries(TOPICS).map(([k,v])=>`<button type="button" data-t="${k}" aria-pressed="${S.topic===k}">${v}</button>`).join('')}</div>`}
@@ -261,7 +262,7 @@ function vAsk(){
   $('#qq').addEventListener('input',e=>S.q=e.target.value);
   meYMD();
   const sv=()=>{S.me={name:$('#meName').value.trim(),bd:meGetBd()};dgStore.set('qian-me',S.me)};$('#meName').addEventListener('input',sv);$('#meBd').addEventListener('change',sv);
-  $('#toJiao').onclick=()=>{S.miss=0;sv();meSendBd();go('jiao')};
+  $('#toJiao').onclick=()=>{S.miss=0;sv();meSendName();meSendBd();go('jiao')};
 }
 document.addEventListener('click',e=>{
   const k=e.target.closest('.kinds button');if(k){S.k=k.dataset.k;S.sit='';if(S.k==='jz'&&S.topic==='love')S.topic='love';vAsk();return}
@@ -397,12 +398,11 @@ function qFitText(x,text,maxW,maxH,size,minSize,lhR){
 }
 async function qFullCard(x,{W,H}){
   const yl=S.k==='yl',r=yl?YBN[S.n]:READ[S.n-1],m=mineLine();
-  const C=yl?{bg:'#fbecee',paper:'#fff6f4',ink:'#4a1a22',soft:'#8b5a63',acc:'#c2324a',box:'#f7e0e2',pat:'rgba(194,50,74,.06)'}
-            :{bg:'#f6ead8',paper:'#f8e9cb',ink:'#3b1613',soft:'#8a5a4a',acc:'#a8322a',box:'#efdcc0',pat:'rgba(168,50,42,.05)'};
+  const C=yl?{g1:'#f8d6dc',g2:'#fdf0f1',paper:'#fff6f4',ink:'#4a1a22',soft:'#8b5a63',acc:'#c2324a',glow:'rgba(180,50,74,.22)'}
+            :{g1:'#f4dcbc',g2:'#fcf3e5',paper:'#f8e9cb',ink:'#3b1613',soft:'#8a5a4a',acc:'#a8322a',glow:'rgba(150,80,30,.22)'};
   const toneC=yl?['#c2324a','#b07a3a','#6a6470'][r[1]]:['#a8322a','#a77a2a','#5d6470'][r[0]];
   const toneT=yl?YTONE[r[1]]+'・'+YTONE_TIP[r[1]]:TONE[r[0]]+'・'+TONE_TIP[r[0]];
-  x.fillStyle=C.bg;x.fillRect(0,0,W,H);
-  x.strokeStyle=C.pat;x.lineWidth=3;for(let i=-H;i<W;i+=44){x.beginPath();x.moveTo(i,0);x.lineTo(i+H*.45,H);x.stroke()}
+  dgBackdrop(x,C,W,H);
   x.textAlign='center';x.textBaseline='alphabetic';
   const me=(S.me&&S.me.name&&!S.shared)?S.me.name+'的':'';
   x.fillStyle=C.acc;x.font=`700 34px ${DG_F}`;x.fillText(me+(yl?'月老籤':'六十甲子籤'),W/2,112);
@@ -425,7 +425,7 @@ async function qFullCard(x,{W,H}){
   let y=sy+sh+64;
   if(S.q){x.fillStyle=C.soft;x.font=`400 34px ${DG_F}`;let q=S.q;if(q.length>24)q=q.slice(0,23)+'…';x.fillText('「'+q+'」',W/2,y);y+=34}
   // 解讀框
-  const bx=90,bw=W-180,by=y,bh=H-120-by;x.fillStyle=C.box;dgRR(x,bx,by,bw,bh,32);x.fill();
+  const bx=84,bw=W-168,by=y,bh=H-116-by;dgGlass(x,C,bx,by,bw,bh,36);
   const pig=await dgImg(yl?'img/pig-'+['love','pat','hug'][r[1]]+'.webp':'img/pig-'+['happy','cheer','pat'][r[0]]+'.webp');
   const pgw=190;if(pig){const ph=pig.height*pgw/pig.width;x.drawImage(pig,bx+bw-pgw-18,by+bh-ph-10,pgw,ph)}
   x.textAlign='left';const tx=bx+40,tw=bw-80-pgw;

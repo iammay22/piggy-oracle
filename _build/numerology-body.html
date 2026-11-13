@@ -439,8 +439,8 @@ function renderSolo(){
     <div class="acts"><button class="dg-b" type="button" id="cardSolo">做成圖卡</button><button class="dg-b ghost" type="button" id="shareSolo">分享結果</button><button class="dg-b ghost" type="button" id="toPair">和誰配對看看</button></div>`;
   $('soloOut').querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{topic=b.dataset.t;dgT('numerology/topic/'+topic);renderSolo();$('soloOut').querySelectorAll('.pig').forEach(p=>p.classList.remove('pop'))});
   $('shareSolo').onclick=e=>dgShare(soloURL(),`我是生命靈數 ${r.n} 號・${c.n}`,e.currentTarget);
-  $('cardSolo').onclick=()=>dgShowCard(soloCard(),`生命靈數${r.n}號`);
-  $('cardGrid').onclick=()=>dgShowCard(gridCard(),'生日九宮格');
+  $('cardSolo').onclick=()=>dgShowCard({full:numSoloFull()},`生命靈數${r.n}號`);
+  $('cardGrid').onclick=()=>dgShowCard({full:numGridFull()},'生日九宮格');
   $('toPair').onclick=()=>{setYMD('dA',r.ymd);setMode('pair');$('nA').focus()};
 }
 
@@ -462,7 +462,7 @@ function renderPair(){
     <div class="acts"><button class="dg-b" type="button" id="cardPair">做成圖卡</button><button class="dg-b ghost" type="button" id="sharePair">傳給對方看</button></div>`;
   if(!reduce)requestAnimationFrame(()=>requestAnimationFrame(()=>{const i=$('pairOut').querySelector('.meter i');if(i)i.style.width=sc+'%'}));
   $('sharePair').onclick=e=>dgShare(pairURL(),`我們是生命靈數「${R.t}」，合拍度 ${sc}%`,e.currentTarget);
-  $('cardPair').onclick=()=>dgShowCard(pairCard(),`生命靈數配對`);
+  $('cardPair').onclick=()=>dgShowCard({full:numPairFull()},`生命靈數配對`);
   $('pairOut').querySelectorAll('[data-pt]').forEach(b=>b.onclick=()=>{ptopic=b.dataset.pt;syncPtopic();dgT('numerology/topic/'+ptopic);renderPair();say(`換成${PTOPICS.find(t=>t[0]===ptopic)[1]}來看，你們是「${rel(pair.a.n,pair.b.n,ptopic).t}」！`);$('pairOut').querySelectorAll('.pig').forEach(x=>x.classList.remove('pop'))});
 }
 
@@ -511,6 +511,7 @@ function dgRR(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x
 async function dgMakeCard(spec){
   try{await Promise.all([document.fonts.load('700 40px GenSenRounded'),document.fonts.load('400 40px GenSenRounded')])}catch(e){}
   const W=1080,H=1350,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');
+  if(spec.full){await spec.full(x,{W,H});return new Promise(r=>c.toBlob(b=>r(b),'image/png'))}
   const T={bg:dgVar('--dg-bg','#eaf4fc'),sf:dgVar('--dg-surface','#fff'),s2:dgVar('--dg-surface-2','#dcecf8'),ink:dgVar('--dg-ink','#1f2b38'),soft:dgVar('--dg-soft','#5a6a7b'),acc:dgVar('--dg-acc','#2f72ad'),line:dgVar('--dg-line','#cfe1f0'),heart:dgVar('--heart','#e9799a')};
   x.fillStyle=T.bg;x.fillRect(0,0,W,H);
   x.fillStyle=T.acc;x.globalAlpha=.07;for(let i=0;i<26;i++){x.beginPath();x.arc((i*397)%W,(i*263)%H,6+(i%4)*3,0,7);x.fill()}x.globalAlpha=1;
@@ -570,6 +571,41 @@ function pairCard(){const p=pair,R=rel(p.a.n,p.b.n,ptopic),sc=R.sc,lab=PTOPICS.f
     x.fillStyle=T.soft;x.font=`400 26px ${DG_F}`;x.fillText(lab+'合拍度',hx,hy+92);
     x.fillStyle=T.ink;x.font=`400 32px ${DG_F}`;x.textAlign='left';dgWrap(x,R.d,130,top+540,W-260,46,3);
   }}}
+
+/*POSTER_JS*/
+/* ================= 生命靈數 ================= */
+function numSoloFull(){const C=DG_PAL.num,r=solo,c=N[r.n],tl=TOPICS.find(t=>t[0]===topic)[1];
+  return async(x,{W,H})=>dgPoster(x,{W,H},{C,eyebrow:'我的生命靈數'+(r.master?`・大師數 ${r.master}`:''),title:`${r.n} 號・${c.n}`,chip:{t:c.one},q:'',
+    label:topic==='general'?'你是這樣的人':`${tl}上的你`,body:topic==='general'?c.g:c[topic],say:'小豬想說：'+c.pig,pig:'img/pig-happy.webp',
+    visual:async(x,top)=>{const h=await drawPigNum(x,r.n,W/2-30,top-10,360);x.textAlign='center';
+      x.font=`700 30px ${DG_F}`;const ks=c.kw,ws=ks.map(k=>x.measureText(k).width+52),tot=ws.reduce((a,b)=>a+b,0)+(ks.length-1)*16;let cx=W/2-tot/2,y=top+h+6;
+      ks.forEach((k,i)=>{x.save();x.shadowColor=C.glow;x.shadowBlur=12;x.fillStyle='#fff';dgRR(x,cx,y,ws[i],56,28);x.fill();x.restore();x.fillStyle=C.acc;x.textAlign='center';x.fillText(k,cx+ws[i]/2,y+38);cx+=ws[i]+16});
+      return y+56}})}
+function numGridFull(){const C=DG_PAL.num,r=solo,g=gridData(r.ymd);
+  const body=g.lines.length?g.lines.slice(0,3).map(L=>`${L.n}：${L.d}`).join('\n'):'九宮格裡還沒有連線。沒有連線也沒關係，每個空格都是還能長大的地方。';
+  return async(x,{W,H})=>dgPoster(x,{W,H},{C,eyebrow:'我的生日九宮格',title:pretty(r.ymd),chip:{t:g.lines.length?`${g.lines.length} 條連線`:'還沒有連線'},q:'',
+    label:g.lines.length?'你的連線':'小豬的提醒',body,say:g.lines.length>3?`還有 ${g.lines.slice(3).map(L=>L.n).join('、')}，到網站上看完整說明～`:'小豬想說：每個數字都是你的一部分喔',pig:'img/pig-think.webp',
+    visual:async(x,top)=>{const cs=140,gx=W/2-cs*1.5,gy=top,Cc=d=>{const p=GPOS(d);return[gx+p.c*cs+cs/2,gy+p.r*cs+cs/2]};
+      x.save();x.shadowColor=C.glow;x.shadowBlur=14;for(let d=1;d<=9;d++){const p=GPOS(d);x.fillStyle='rgba(255,255,255,.85)';dgRR(x,gx+p.c*cs+8,gy+p.r*cs+8,cs-16,cs-16,28);x.fill()}x.restore();
+      x.strokeStyle=C.acc;x.globalAlpha=.35;x.lineWidth=18;x.lineCap='round';
+      g.lines.forEach(L=>{const[a,b]=[Cc(L.k[0]),Cc(L.k[2])];x.beginPath();x.moveTo(a[0],a[1]);x.lineTo(b[0],b[1]);x.stroke()});x.globalAlpha=1;
+      x.textAlign='center';x.textBaseline='middle';
+      for(let d=1;d<=9;d++){const[cx,cy]=Cc(d),k=g.cnt[d];
+        if(k){const rr=44,gr=x.createRadialGradient(cx-rr*.3,cy-rr*.4,rr*.1,cx,cy,rr);gr.addColorStop(0,'#fff1b8');gr.addColorStop(.62,'#fdd85f');gr.addColorStop(1,'#fdd85f');
+          x.fillStyle=gr;x.beginPath();x.arc(cx,cy,rr,0,7);x.fill();x.fillStyle='#5a4b9c';x.font=`700 50px ${DG_F}`;x.fillText(d,cx,cy+2);
+          if(k>1){x.fillStyle=C.acc;x.font=`700 26px ${DG_F}`;x.fillText('×'+k,cx+44,cy-40)}}
+        else{x.globalAlpha=.4;x.fillStyle=C.soft;x.font=`400 44px ${DG_F}`;x.fillText(d,cx,cy+2);x.globalAlpha=1}}
+      x.textBaseline='alphabetic';return gy+cs*3}})}
+function numPairFull(){const C=DG_PAL.num,p=pair,R=rel(p.a.n,p.b.n,ptopic),lab=PTOPICS.find(t=>t[0]===ptopic)[1];
+  return async(x,{W,H})=>dgPoster(x,{W,H},{C,eyebrow:'生命靈數配對・'+lab,title:R.t,chip:{t:`${lab}合拍度 ${R.sc}%`,c:'#e0607e'},q:'',
+    label:'你們是這樣的組合',body:R.d,say:'小豬建議：'+R.tip,pig:'img/pig-love.webp',
+    visual:async(x,top)=>{const w=300,h1=await drawPigNum(x,p.a.n,W/2-230,top-10,w);await drawPigNum(x,p.b.n,W/2+230,top-10,w);
+      const hx=W/2,hy=top+h1/2,s=1.3;x.save();x.translate(hx-38*s,hy-35*s);x.scale(s,s);
+      x.fillStyle='#e0607e';x.fill(new Path2D('M38 68C14 50 2 38 2 22 2 10 11 2 21 2c7 0 13 4 17 10C42 6 48 2 55 2c10 0 19 8 19 20 0 16-12 28-36 46z'));x.restore();
+      x.textAlign='center';x.fillStyle=C.ink;x.font=`700 36px ${DG_F}`;const ny=top+h1+30;
+      x.fillText(p.na||'第一個人',W/2-230,ny);x.fillText(p.nb||'第二個人',W/2+230,ny);
+      x.fillStyle=C.soft;x.font=`400 26px ${DG_F}`;x.fillText(`${p.a.n} 號・${GNAME[GROUP[p.a.n]]}`,W/2-230,ny+42);x.fillText(`${p.b.n} 號・${GNAME[GROUP[p.b.n]]}`,W/2+230,ny+42);
+      return ny+44}})}
 
 /* ---------- 打開別人分享的連結 ---------- */
 (function(){

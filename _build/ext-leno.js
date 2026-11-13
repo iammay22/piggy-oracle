@@ -63,17 +63,26 @@ const _showReadingX=showReading;showReading=function(){_showReadingX();if(picked
   const r=$("reading"),hint=r.querySelector('.hint');if(hint)hint.insertAdjacentHTML('beforebegin','<div class="dg-extra">'+dgLenoExtra()+'</div>')};
 document.addEventListener('click',e=>{const b=e.target.closest('.dg-topics button');if(!b)return;dgSetTopic(b.dataset.t);dgT('lenormand/topic/'+b.dataset.t);
   if(picked.length===mode&&!$("reading").hidden){const x=$("reading").querySelector('.dg-extra');if(x)x.innerHTML=dgLenoExtra()}});
-function lenoCardSpec(){const cs=picked;let msg=mode===3?`這件事的核心是「${cs[1].noun}」。它${cs[0].adj}，也${cs[2].adj}。`:cs[0].tip;
-  return {eyebrow:'雷諾曼'+(dgTopic!=='general'?'・'+TN[dgTopic]:''),title:mode===3?'三張牌連成一句話':'今日提醒',q:$("question").value.trim(),pig:'img/pig-crystal.webp',msgTitle:'整體傾向：'+leanOf(cs),msg,
-    body:async(x,{top,W,T})=>{const n=cs.length,cw=n===1?280:240,ch=cw*1.48,gap=40,tot=n*cw+(n-1)*gap,labels=n===3?['左・形容','核心','右・形容']:['今日提醒'];
-      for(let i=0;i<n;i++){const c=cs[i],cx=(W-tot)/2+cw/2+i*(cw+gap),y=top+20;
-        x.save();x.shadowColor='rgba(0,0,0,.15)';x.shadowBlur=16;x.shadowOffsetY=6;x.fillStyle='#f3ead6';dgRR(x,cx-cw/2,y,cw,ch,16);x.fill();x.restore();
-        x.strokeStyle='#8a6a3a';x.lineWidth=3;dgRR(x,cx-cw/2+10,y+10,cw-20,ch-20,10);x.stroke();
-        x.fillStyle='#2b2420';x.font=`700 30px ${DG_F}`;x.textAlign='left';x.fillText(String(c.n),cx-cw/2+26,y+54);
-        x.fillStyle='#fff';dgRR(x,cx-34,y+30,68,88,6);x.fill();x.strokeStyle='#2b2420';x.lineWidth=2;x.stroke();
-        x.fillStyle=/[♥♦]/.test(c.pip)?'#b0302c':'#1c1c1c';x.textAlign='center';x.font='700 30px Georgia,serif';x.fillText(c.pip,cx,y+86);
-        x.fillStyle='#2b2420';x.font=`700 ${c.name.length>3?44:54}px ${DG_F}`;x.fillText(c.name,cx,y+ch*.62);
-        x.fillStyle='#6b5a44';x.font=`400 24px ${DG_F}`;dgWrap(x,c.k,cx,y+ch*.62+48,cw-40,32,2);
-        x.fillStyle=T.soft;x.font=`400 28px ${DG_F}`;x.fillText(labels[i],cx,y+ch+44)}
-      x.textAlign='left'}}}
+/* ================= 雷諾曼 ================= */
+function lenoFull(){const C=DG_PAL.leno,cs=picked,t=dgTopic,ti={love:0,work:1,money:2}[t],lean=leanOf(cs),L=(lean==='是'||lean==='偏是')?0:lean==='看情況'?1:2;
+  const core=mode===3?cs[1]:cs[0];
+  let body=mode===3?`這件事的核心是「${cs[1].noun}」。它${cs[0].adj}，也${cs[2].adj}。`:cs[0].tip;
+  if(t!=='general')body+=`\n放到${TN[t]}上：${LT[core.n][ti]}`;
+  const acts=[(mode===3?cs[1]:cs[0]).tip,LA[t][L]];const say=mode===3?acts[0]:LA[t][L];
+  return async(x,{W,H})=>dgPoster(x,{W,H},{C,eyebrow:'我的雷諾曼・'+TN[t],title:mode===3?cs.map(c=>c.name).join('・'):cs[0].name,chip:{t:'整體傾向：'+lean,c:[C.acc,'#b0884a',C.dim][L]},
+    q:$("question").value.trim(),label:mode===3?'三張牌連成一句話':'今日提醒',body,say:'小豬建議：'+say,pig:'img/pig-crystal.webp',
+    visual:async(x,top)=>{const n=cs.length,cw=n===1?330:262,ch=cw*1.45,gap=36,tot=n*cw+(n-1)*gap,labels=n===3?['左・形容','核心','右・形容']:[''];
+      for(let i=0;i<n;i++){const c=cs[i],cx=(W-tot)/2+cw/2+i*(cw+gap),y=top,s=cw/262;
+        x.save();x.shadowColor=C.glow;x.shadowBlur=26;x.shadowOffsetY=10;x.fillStyle=C.paper;dgRR(x,cx-cw/2,y,cw,ch,18);x.fill();x.restore();
+        if(n===3&&i===1){x.strokeStyle=C.acc;x.lineWidth=5;dgRR(x,cx-cw/2-6,y-6,cw+12,ch+12,22);x.stroke()}
+        x.strokeStyle='#e3cbbd';x.lineWidth=2;dgRR(x,cx-cw/2+12,y+12,cw-24,ch-24,12);x.stroke();
+        x.fillStyle=C.soft;x.font=`700 ${Math.round(28*s)}px ${DG_F}`;x.textAlign='left';x.fillText(String(c.n),cx-cw/2+28,y+52*s);
+        const pw=74*s,phh=98*s;x.fillStyle='#fff';dgRR(x,cx-pw/2,y+40*s,pw,phh,8);x.fill();x.strokeStyle='#3a2a2a';x.lineWidth=2;x.stroke();
+        x.fillStyle=/[♥♦]/.test(c.pip)?'#b0302c':'#1c1c1c';x.textAlign='center';x.font=`700 ${Math.round(32*s)}px Georgia,serif`;x.fillText(c.pip,cx,y+40*s+phh*.64);
+        x.fillStyle=C.ink;x.font=`700 ${Math.round((c.name.length>3?42:56)*s)}px ${DG_F}`;x.fillText(c.name,cx,y+ch*.6);
+        x.fillStyle=C.soft;x.font=`400 ${Math.round(24*s)}px ${DG_F}`;dgLines(x,c.k,cw-50).slice(0,2).forEach((l,j)=>x.fillText(l,cx,y+ch*.6+48*s+j*34*s));
+        if(labels[i]){x.fillStyle=n===3&&i===1?C.acc:C.soft;x.font=`${i===1?700:400} 28px ${DG_F}`;x.fillText(labels[i],cx,y+ch+46)}}
+      return top+ch+(n===3?50:0)}})}
+
+function lenoCardSpec(){return {full:lenoFull()}}
 document.addEventListener('click',e=>{if(e.target.closest('#cardBtn')&&picked.length===mode)dgShowCard(lenoCardSpec(),'問問小豬-雷諾曼')});

@@ -577,8 +577,8 @@ function renderSolo(){
     <div class="acts"><button class="dg-b" type="button" id="cardSolo">做成圖卡</button><button class="dg-b ghost" type="button" id="shareSolo">分享結果</button><button class="dg-b ghost" type="button" id="toPair">和誰配對看看</button></div>`;
   $('soloOut').querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{topic=b.dataset.t;dgT('numerology/topic/'+topic);renderSolo();$('soloOut').querySelectorAll('.pig').forEach(p=>p.classList.remove('pop'))});
   $('shareSolo').onclick=e=>dgShare(soloURL(),`我是生命靈數 ${r.n} 號・${c.n}`,e.currentTarget);
-  $('cardSolo').onclick=()=>dgShowCard(soloCard(),`生命靈數${r.n}號`);
-  $('cardGrid').onclick=()=>dgShowCard(gridCard(),'生日九宮格');
+  $('cardSolo').onclick=()=>dgShowCard({full:numSoloFull()},`生命靈數${r.n}號`);
+  $('cardGrid').onclick=()=>dgShowCard({full:numGridFull()},'生日九宮格');
   $('toPair').onclick=()=>{setYMD('dA',r.ymd);setMode('pair');$('nA').focus()};
 }
 
@@ -600,7 +600,7 @@ function renderPair(){
     <div class="acts"><button class="dg-b" type="button" id="cardPair">做成圖卡</button><button class="dg-b ghost" type="button" id="sharePair">傳給對方看</button></div>`;
   if(!reduce)requestAnimationFrame(()=>requestAnimationFrame(()=>{const i=$('pairOut').querySelector('.meter i');if(i)i.style.width=sc+'%'}));
   $('sharePair').onclick=e=>dgShare(pairURL(),`我們是生命靈數「${R.t}」，合拍度 ${sc}%`,e.currentTarget);
-  $('cardPair').onclick=()=>dgShowCard(pairCard(),`生命靈數配對`);
+  $('cardPair').onclick=()=>dgShowCard({full:numPairFull()},`生命靈數配對`);
   $('pairOut').querySelectorAll('[data-pt]').forEach(b=>b.onclick=()=>{ptopic=b.dataset.pt;syncPtopic();dgT('numerology/topic/'+ptopic);renderPair();say(`換成${PTOPICS.find(t=>t[0]===ptopic)[1]}來看，你們是「${rel(pair.a.n,pair.b.n,ptopic).t}」！`);$('pairOut').querySelectorAll('.pig').forEach(x=>x.classList.remove('pop'))});
 }
 
@@ -649,6 +649,7 @@ function dgRR(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x
 async function dgMakeCard(spec){
   try{await Promise.all([document.fonts.load('700 40px GenSenRounded'),document.fonts.load('400 40px GenSenRounded')])}catch(e){}
   const W=1080,H=1350,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');
+  if(spec.full){await spec.full(x,{W,H});return new Promise(r=>c.toBlob(b=>r(b),'image/png'))}
   const T={bg:dgVar('--dg-bg','#eaf4fc'),sf:dgVar('--dg-surface','#fff'),s2:dgVar('--dg-surface-2','#dcecf8'),ink:dgVar('--dg-ink','#1f2b38'),soft:dgVar('--dg-soft','#5a6a7b'),acc:dgVar('--dg-acc','#2f72ad'),line:dgVar('--dg-line','#cfe1f0'),heart:dgVar('--heart','#e9799a')};
   x.fillStyle=T.bg;x.fillRect(0,0,W,H);
   x.fillStyle=T.acc;x.globalAlpha=.07;for(let i=0;i<26;i++){x.beginPath();x.arc((i*397)%W,(i*263)%H,6+(i%4)*3,0,7);x.fill()}x.globalAlpha=1;
@@ -708,6 +709,102 @@ function pairCard(){const p=pair,R=rel(p.a.n,p.b.n,ptopic),sc=R.sc,lab=PTOPICS.f
     x.fillStyle=T.soft;x.font=`400 26px ${DG_F}`;x.fillText(lab+'合拍度',hx,hy+92);
     x.fillStyle=T.ink;x.font=`400 32px ${DG_F}`;x.textAlign='left';dgWrap(x,R.d,130,top+540,W-260,46,3);
   }}}
+
+/* ---- 問問小豬: 新版整張圖卡（照求籤圖卡的風格） ---- */
+const DG_PUNCT='，。、！？；：」』）…～,.!?;:)';
+function dgLines(x,text,maxW){const out=[];
+  for(const para of String(text).split('\n')){let line='';
+    for(const ch of para){if(x.measureText(line+ch).width>maxW&&line&&!DG_PUNCT.includes(ch)){let carry='';while(line.length>1&&'「『（('.includes(line.slice(-1))){carry=line.slice(-1)+carry;line=line.slice(0,-1)}out.push(line);line=carry+ch}else line+=ch}
+    out.push(line)}
+  return out}
+/* 字多就縮小，縮到最小還放不下才截斷 */
+function dgFit(x,text,maxW,maxH,size,minSize,lhR,weight){
+  for(let fs=size;fs>=minSize;fs-=2){x.font=`${weight||400} ${fs}px ${DG_F}`;const L=dgLines(x,text,maxW);
+    if(L.length*fs*lhR<=maxH)return {fs,lines:L,lh:fs*lhR}}
+  const fs=minSize,lh=fs*lhR;x.font=`${weight||400} ${fs}px ${DG_F}`;let L=dgLines(x,text,maxW);const k=Math.max(1,Math.floor(maxH/lh));
+  if(L.length>k){L=L.slice(0,k);let l=L[k-1];while(l&&x.measureText(l+'…').width>maxW)l=l.slice(0,-1);L[k-1]=l+'…'}
+  return {fs,lines:L,lh}}
+const DG_PAL={
+  tarot:{g1:'#d8ccf2',g2:'#f1ecfb',paper:'#ffffff',ink:'#2b2540',soft:'#6f6889',acc:'#6a55b0',glow:'rgba(106,85,176,.28)',dim:'#8d86a3'},
+  iching:{g1:'#f5dcc0',g2:'#fcf3e6',paper:'#fffaf2',ink:'#2b2420',soft:'#7a6c5d',acc:'#a8322a',glow:'rgba(150,80,30,.22)',dim:'#8a7f72'},
+  leno:{g1:'#f7d9cc',g2:'#fdf2ea',paper:'#fffdfb',ink:'#3a2a2a',soft:'#7a6863',acc:'#c0536f',glow:'rgba(180,80,90,.22)',dim:'#8b7d76'},
+  num:{g1:'#cde2f8',g2:'#eef6fe',paper:'#ffffff',ink:'#1f2b38',soft:'#5a6a7b',acc:'#2f72ad',glow:'rgba(47,114,173,.22)',dim:'#7b8a99'}};
+const DG_SPARK=[[66,150,20,0],[1012,118,24,1],[150,300,11,2],[958,286,14,3],[48,520,15,1],[1034,560,19,0],[96,770,11,3],[1000,812,14,2],[44,1010,13,0],[1040,1040,17,1],[200,86,11,3],[884,64,12,2],[262,236,9,1],[826,222,10,0],[1046,330,9,3],[34,330,9,2]];
+function dgSparkle(x,cx,cy,r){x.beginPath();x.moveTo(cx,cy-r);x.quadraticCurveTo(cx,cy,cx+r,cy);x.quadraticCurveTo(cx,cy,cx,cy+r);x.quadraticCurveTo(cx,cy,cx-r,cy);x.quadraticCurveTo(cx,cy,cx,cy-r);x.closePath();x.fill()}
+function dgBackdrop(x,C,W,H){
+  const g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,C.g1);g.addColorStop(.55,C.g2);g.addColorStop(1,C.g2);x.fillStyle=g;x.fillRect(0,0,W,H);
+  const r=x.createRadialGradient(W/2,330,40,W/2,330,640);r.addColorStop(0,'rgba(255,255,255,.55)');r.addColorStop(1,'rgba(255,255,255,0)');x.fillStyle=r;x.fillRect(0,0,W,H);
+  // 拱門
+  x.save();x.beginPath();x.moveTo(40,H+10);x.lineTo(40,330);x.bezierCurveTo(40,120,250,40,W/2,40);x.bezierCurveTo(W-250,40,W-40,120,W-40,330);x.lineTo(W-40,H+10);x.closePath();
+  x.fillStyle='rgba(255,255,255,.32)';x.fill();x.strokeStyle='rgba(255,255,255,.85)';x.lineWidth=3;x.stroke();x.restore();
+  // 星星
+  const cols=[C.acc,'#f39ab9','#8fbcec','#f2c063'];
+  x.save();DG_SPARK.forEach(([sx,sy,sr,ci])=>{x.globalAlpha=.75;x.shadowColor='rgba(255,255,255,.9)';x.shadowBlur=10;x.fillStyle=cols[ci];dgSparkle(x,sx,sy,sr)});x.restore();
+}
+function dgFrameCard(x,C,im,cx,cy,w,h,rev){x.save();x.translate(cx,cy);
+  x.shadowColor=C.glow;x.shadowBlur=26;x.shadowOffsetY=8;x.fillStyle='#fff';dgRR(x,-w/2-9,-h/2-9,w+18,h+18,16);x.fill();x.shadowColor='transparent';
+  if(rev)x.rotate(Math.PI);dgRR(x,-w/2,-h/2,w,h,8);x.clip();if(im)x.drawImage(im,-w/2,-h/2,w,h);else{x.fillStyle='#ddd';x.fillRect(-w/2,-h/2,w,h)}x.restore()}
+function dgGlass(x,C,bx,by,bw,bh,r){x.save();x.shadowColor=C.glow;x.shadowBlur=30;x.shadowOffsetY=10;x.fillStyle='rgba(255,255,255,.62)';dgRR(x,bx,by,bw,bh,r);x.fill();x.restore();
+  x.strokeStyle='rgba(255,255,255,.95)';x.lineWidth=2.5;dgRR(x,bx,by,bw,bh,r);x.stroke()}
+function dgPill(x,text,cx,y,bg,fg,fs){x.font=`700 ${fs||30}px ${DG_F}`;const h=Math.round((fs||30)*1.8),w=x.measureText(text).width+h*1.1;
+  x.fillStyle=bg;dgRR(x,cx-w/2,y,w,h,h/2);x.fill();x.fillStyle=fg;x.textAlign='center';x.fillText(text,cx,y+h*.68);return h}
+/* o: {C, eyebrow, title, chip:{t,c}, visual:async(x,top)=>bottom, q, label, body, say, pig} */
+async function dgPoster(x,{W,H},o){
+  const C=o.C;dgBackdrop(x,C,W,H);x.textBaseline='alphabetic';x.textAlign='center';
+  x.fillStyle=C.acc;x.font=`700 34px ${DG_F}`;x.fillText(o.eyebrow,W/2,112);
+  let fs=70;x.font=`700 ${fs}px ${DG_F}`;while(x.measureText(o.title).width>W-160&&fs>44){fs-=2;x.font=`700 ${fs}px ${DG_F}`}
+  x.fillStyle=C.ink;x.fillText(o.title,W/2,196);
+  let y=226;if(o.chip){y+=dgPill(x,o.chip.t,W/2,y,o.chip.c||C.acc,'#fff',30)}
+  y=await o.visual(x,y+40);x.textAlign='center';
+  if(o.q){y+=58;x.fillStyle=C.soft;x.font=`400 34px ${DG_F}`;let q=o.q;while(x.measureText('「'+q+'」').width>W-200&&q.length>2)q=q.slice(0,-2)+'…';x.fillText('「'+q+'」',W/2,y);y+=34}else y+=40;
+  // 解讀框
+  const bx=84,bw=W-168,by=y,bh=H-116-by;dgGlass(x,C,bx,by,bw,bh,36);
+  const pig=o.pig?await dgImg(o.pig):null,pgw=180;let ph=0;if(pig){ph=pig.height*pgw/pig.width;x.drawImage(pig,bx+bw-pgw-14,by+bh-ph-8,pgw,ph)}
+  x.textAlign='left';const tx=bx+40,tw=bw-80-(pig?pgw-10:0);
+  x.fillStyle=C.acc;x.font=`700 34px ${DG_F}`;x.fillText(o.label,tx,by+62);
+  let sayH=0,sayL=null;if(o.say){sayL=dgFit(x,o.say,tw,80,28,24,1.4,700);sayH=sayL.lines.length*sayL.lh+20}
+  const fit=dgFit(x,o.body,tw,bh-96-sayH-12,36,26,1.45);x.fillStyle=C.ink;x.font=`400 ${fit.fs}px ${DG_F}`;
+  fit.lines.forEach((l,i)=>x.fillText(l,tx,by+112+i*fit.lh));
+  if(sayL){x.fillStyle=C.soft;x.font=`700 ${sayL.fs}px ${DG_F}`;const y0=by+bh-34-(sayL.lines.length-1)*sayL.lh;sayL.lines.forEach((l,i)=>x.fillText(l,tx,y0+i*sayL.lh))}
+  // 頁尾
+  x.font=`700 26px ${DG_F}`;x.fillStyle=C.soft;x.fillText('問問小豬',90,H-56);const w1=x.measureText('問問小豬　').width;x.font=`400 24px ${DG_F}`;x.fillText(DG_SITE,90+w1,H-56);
+  x.textAlign='right';x.fillText('by may22',W-90,H-56);x.textAlign='left';
+}
+
+
+/* ================= 生命靈數 ================= */
+function numSoloFull(){const C=DG_PAL.num,r=solo,c=N[r.n],tl=TOPICS.find(t=>t[0]===topic)[1];
+  return async(x,{W,H})=>dgPoster(x,{W,H},{C,eyebrow:'我的生命靈數'+(r.master?`・大師數 ${r.master}`:''),title:`${r.n} 號・${c.n}`,chip:{t:c.one},q:'',
+    label:topic==='general'?'你是這樣的人':`${tl}上的你`,body:topic==='general'?c.g:c[topic],say:'小豬想說：'+c.pig,pig:'img/pig-happy.webp',
+    visual:async(x,top)=>{const h=await drawPigNum(x,r.n,W/2-30,top-10,360);x.textAlign='center';
+      x.font=`700 30px ${DG_F}`;const ks=c.kw,ws=ks.map(k=>x.measureText(k).width+52),tot=ws.reduce((a,b)=>a+b,0)+(ks.length-1)*16;let cx=W/2-tot/2,y=top+h+6;
+      ks.forEach((k,i)=>{x.save();x.shadowColor=C.glow;x.shadowBlur=12;x.fillStyle='#fff';dgRR(x,cx,y,ws[i],56,28);x.fill();x.restore();x.fillStyle=C.acc;x.textAlign='center';x.fillText(k,cx+ws[i]/2,y+38);cx+=ws[i]+16});
+      return y+56}})}
+function numGridFull(){const C=DG_PAL.num,r=solo,g=gridData(r.ymd);
+  const body=g.lines.length?g.lines.slice(0,3).map(L=>`${L.n}：${L.d}`).join('\n'):'九宮格裡還沒有連線。沒有連線也沒關係，每個空格都是還能長大的地方。';
+  return async(x,{W,H})=>dgPoster(x,{W,H},{C,eyebrow:'我的生日九宮格',title:pretty(r.ymd),chip:{t:g.lines.length?`${g.lines.length} 條連線`:'還沒有連線'},q:'',
+    label:g.lines.length?'你的連線':'小豬的提醒',body,say:g.lines.length>3?`還有 ${g.lines.slice(3).map(L=>L.n).join('、')}，到網站上看完整說明～`:'小豬想說：每個數字都是你的一部分喔',pig:'img/pig-think.webp',
+    visual:async(x,top)=>{const cs=140,gx=W/2-cs*1.5,gy=top,Cc=d=>{const p=GPOS(d);return[gx+p.c*cs+cs/2,gy+p.r*cs+cs/2]};
+      x.save();x.shadowColor=C.glow;x.shadowBlur=14;for(let d=1;d<=9;d++){const p=GPOS(d);x.fillStyle='rgba(255,255,255,.85)';dgRR(x,gx+p.c*cs+8,gy+p.r*cs+8,cs-16,cs-16,28);x.fill()}x.restore();
+      x.strokeStyle=C.acc;x.globalAlpha=.35;x.lineWidth=18;x.lineCap='round';
+      g.lines.forEach(L=>{const[a,b]=[Cc(L.k[0]),Cc(L.k[2])];x.beginPath();x.moveTo(a[0],a[1]);x.lineTo(b[0],b[1]);x.stroke()});x.globalAlpha=1;
+      x.textAlign='center';x.textBaseline='middle';
+      for(let d=1;d<=9;d++){const[cx,cy]=Cc(d),k=g.cnt[d];
+        if(k){const rr=44,gr=x.createRadialGradient(cx-rr*.3,cy-rr*.4,rr*.1,cx,cy,rr);gr.addColorStop(0,'#fff1b8');gr.addColorStop(.62,'#fdd85f');gr.addColorStop(1,'#fdd85f');
+          x.fillStyle=gr;x.beginPath();x.arc(cx,cy,rr,0,7);x.fill();x.fillStyle='#5a4b9c';x.font=`700 50px ${DG_F}`;x.fillText(d,cx,cy+2);
+          if(k>1){x.fillStyle=C.acc;x.font=`700 26px ${DG_F}`;x.fillText('×'+k,cx+44,cy-40)}}
+        else{x.globalAlpha=.4;x.fillStyle=C.soft;x.font=`400 44px ${DG_F}`;x.fillText(d,cx,cy+2);x.globalAlpha=1}}
+      x.textBaseline='alphabetic';return gy+cs*3}})}
+function numPairFull(){const C=DG_PAL.num,p=pair,R=rel(p.a.n,p.b.n,ptopic),lab=PTOPICS.find(t=>t[0]===ptopic)[1];
+  return async(x,{W,H})=>dgPoster(x,{W,H},{C,eyebrow:'生命靈數配對・'+lab,title:R.t,chip:{t:`${lab}合拍度 ${R.sc}%`,c:'#e0607e'},q:'',
+    label:'你們是這樣的組合',body:R.d,say:'小豬建議：'+R.tip,pig:'img/pig-love.webp',
+    visual:async(x,top)=>{const w=300,h1=await drawPigNum(x,p.a.n,W/2-230,top-10,w);await drawPigNum(x,p.b.n,W/2+230,top-10,w);
+      const hx=W/2,hy=top+h1/2,s=1.3;x.save();x.translate(hx-38*s,hy-35*s);x.scale(s,s);
+      x.fillStyle='#e0607e';x.fill(new Path2D('M38 68C14 50 2 38 2 22 2 10 11 2 21 2c7 0 13 4 17 10C42 6 48 2 55 2c10 0 19 8 19 20 0 16-12 28-36 46z'));x.restore();
+      x.textAlign='center';x.fillStyle=C.ink;x.font=`700 36px ${DG_F}`;const ny=top+h1+30;
+      x.fillText(p.na||'第一個人',W/2-230,ny);x.fillText(p.nb||'第二個人',W/2+230,ny);
+      x.fillStyle=C.soft;x.font=`400 26px ${DG_F}`;x.fillText(`${p.a.n} 號・${GNAME[GROUP[p.a.n]]}`,W/2-230,ny+42);x.fillText(`${p.b.n} 號・${GNAME[GROUP[p.b.n]]}`,W/2+230,ny+42);
+      return ny+44}})}
 
 /* ---------- 打開別人分享的連結 ---------- */
 (function(){

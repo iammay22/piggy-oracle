@@ -377,20 +377,20 @@ for key, src, dst, inset in [('tarot', 'src-tarot.html', 'tarot.html', False), (
         s = sub1(s, '<section id="v-hist" hidden></section>', '<section id="v-hist" hidden></section>' + TAROT_LEARN)
         s = sub1(s, '<button class="link" data-act="copy">複製解讀</button>', '<button class="btn ghost" data-act="share">分享結果連結</button><button class="btn ghost" data-act="imgcard">做成圖卡</button><button class="link" data-act="copy">複製解讀</button>')
         s = sub1(s, "return t+'\\n整體：\\n'+out.join('\\n');", "return t+'\\n整體：\\n'+out.join('\\n')+'\\n\\n'+shareURL(r);")
-        s = sub1(s, '\nrenderSetup();\n</script>', '\n' + COMMON_JS + open('ext-card.js',encoding='utf8').read() + open('ext-ui.js',encoding='utf8').read() + open('ext-tarot.js',encoding='utf8').read() + open('ext-tarot-ui.js',encoding='utf8').read() + TAROT_JS + '</script>')
+        s = sub1(s, '\nrenderSetup();\n</script>', '\n' + COMMON_JS + open('ext-card.js',encoding='utf8').read() + open('ext-poster.js',encoding='utf8').read() + open('ext-ui.js',encoding='utf8').read() + open('ext-tarot.js',encoding='utf8').read() + open('ext-tarot-ui.js',encoding='utf8').read() + TAROT_JS + '</script>')
     if key == 'iching':
         s = re.sub(r'<header class="head">.*?</header>', '', s, count=1, flags=re.S)
         s = sub1(s, '<main id="v-cast"></main>', '<div class="dg-hero" id="ic-hero"><div class="dg-eb">I CHING</div><h1>想問什麼方向？</h1><p>心裡想著一件事，選一種方式起卦。易經會告訴你現在的狀態，和接下來的走向。</p></div><main id="v-cast"></main><main id="v-lib" hidden></main>')
         s = sub1(s, '<main id="v-hist" hidden></main>', '<main id="v-hist" hidden></main>' + ICHING_LEARN)
         s = sub1(s, '<button class="btn ghost" data-act="copy">複製結果</button>', '<button class="btn ghost" data-act="share">分享結果連結</button><button class="btn ghost" data-act="imgcard">做成圖卡</button><button class="btn ghost" data-act="copy">複製結果</button>')
         s = sub1(s, "建議：${ben.adv}`;", "建議：${ben.adv}\\n\\n`+shareURL(r);")
-        s = sub1(s, '\nrender();\n</script>', '\n' + COMMON_JS + open('ext-card.js',encoding='utf8').read() + open('ext-ui.js',encoding='utf8').read() + open('ext-iching-card.js',encoding='utf8').read() + open('ext-iching-ui.js',encoding='utf8').read() + ICHING_JS + '</script>')
+        s = sub1(s, '\nrender();\n</script>', '\n' + COMMON_JS + open('ext-card.js',encoding='utf8').read() + open('ext-poster.js',encoding='utf8').read() + open('ext-ui.js',encoding='utf8').read() + open('ext-iching-card.js',encoding='utf8').read() + open('ext-iching-ui.js',encoding='utf8').read() + ICHING_JS + '</script>')
     if key == 'lenormand':
         s = re.sub(r'<header>\s*<h1>雷諾曼小抽屜</h1>\s*<p class="lead">(.*?)</p>\s*(<ol class="steps">.*?</ol>)\s*</header>', lambda m: '<div class="dg-hero" id="lv-hero"><div class="dg-eb">LENORMAND</div><h1>最近會怎樣？</h1><p>' + m.group(1) + '</p>' + m.group(2).replace(' class="steps"', '') + '</div>', s, count=1, flags=re.S)
         s = re.sub(r'<details class="learn">.*?</details>\s*<details id="gallery">.*?</details>', '<section id="lv-lib" hidden></section><section id="lv-hist" hidden></section>' + LENO_LEARN + '<div id="grid" hidden></div>', s, count=1, flags=re.S)
         s = sub1(s, 'html+=`<button class="btn again" id="againBtn">再抽一次</button>`;', 'html+=`<div class="acts"><button class="btn again" id="againBtn">再抽一次</button><button class="btn" id="shareBtn">分享結果連結</button><button class="btn" id="cardBtn">做成圖卡</button></div>`;')
         s = re.sub(r'\s*<footer>.*?</footer>', '', s, count=1, flags=re.S)
-        s = sub1(s, '\nnewRound();\n</script>', '\n' + COMMON_JS + open('ext-card.js',encoding='utf8').read() + open('ext-ui.js',encoding='utf8').read() + open('ext-leno.js',encoding='utf8').read() + open('ext-leno-ui.js',encoding='utf8').read() + LENO_JS + '</script>')
+        s = sub1(s, '\nnewRound();\n</script>', '\n' + COMMON_JS + open('ext-card.js',encoding='utf8').read() + open('ext-poster.js',encoding='utf8').read() + open('ext-ui.js',encoding='utf8').read() + open('ext-leno.js',encoding='utf8').read() + open('ext-leno-ui.js',encoding='utf8').read() + LENO_JS + '</script>')
         s = sub1(s, 'aria-label="你的問題">', 'aria-label="你的問題">\n    <div class="dg-topics" role="group" aria-label="想問哪方面"><span>想問哪方面</span><button type="button" data-t="general" aria-pressed="true">整體</button><button type="button" data-t="love" aria-pressed="false">感情</button><button type="button" data-t="work" aria-pressed="false">工作</button><button type="button" data-t="money" aria-pressed="false">財運</button></div>')
     s = s[:s.rindex('</body>')] + FOOT + '\n' + s[s.rindex('</body>'):]
     out[dst] = s
@@ -398,12 +398,12 @@ for key, src, dst, inset in [('tarot', 'src-tarot.html', 'tarot.html', False), (
 
 _head = open('src-leno.html', encoding='utf8').read().split('<body>')[0]
 _head = re.sub(r'<style>.*?</style>', '<style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>', _head, flags=re.S)
-_qb = open('qian-body.html', encoding='utf8').read().replace('/*COMMON_JS*/', COMMON_JS + open('ext-card.js',encoding='utf8').read() + open('ext-ui.js',encoding='utf8').read())
+_qb = open('qian-body.html', encoding='utf8').read().replace('/*COMMON_JS*/', COMMON_JS + open('ext-card.js',encoding='utf8').read() + open('ext-poster.js',encoding='utf8').read() + open('ext-ui.js',encoding='utf8').read())
 _q = _head + f'<title>{PAGES["qian.html"][0]}</title>\n' + meta('qian.html') + NAVCSS + ROOM['qian'] + '<body>\n' + nav('qian.html') + hrow('qian') + f'<div class="dg-greet"><img src="img/pig-tube.webp" alt="小豬" width="400" height="415"><p>先擲筊請示，再抽一支籤喔。</p></div>' + '\n' + _qb + '\n' + FOOT + '\n</body></html>'
 open('qian.html', 'w', encoding='utf8').write(_q)
 out['qian.html'] = _q
 # ---- 生命靈數（寶寶藍房間；頁面本身自帶圖卡和分享程式，所以不注入 COMMON_JS） ----
-_nb = open('numerology-body.html', encoding='utf8').read()
+_nb = open('numerology-body.html', encoding='utf8').read().replace('/*POSTER_JS*/', open('ext-poster.js', encoding='utf8').read())
 _n = _head + f'<title>{PAGES["numerology.html"][0]}</title>\n' + meta('numerology.html') + NAVCSS + ROOM['numerology'] + '<body>\n' + nav('numerology.html', True) + '<div class="dg-greet inset"><img src="img/pig-number.webp" alt="小豬" width="400" height="398"><p id="say">把生日告訴小豬，我來幫你數一數～</p></div>' + '\n' + _nb + '\n' + FOOT + '\n</body></html>'
 open('numerology.html', 'w', encoding='utf8').write(_n)
 out['numerology.html'] = _n
