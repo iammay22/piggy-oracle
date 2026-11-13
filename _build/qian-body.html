@@ -231,7 +231,7 @@ function meDays(){const Dd=$('#meD'),keep=Dd.value,y=+$('#meY').value||2000,m=+$
 function meGetBd(){const y=$('#meY').value,m=$('#meM').value,d=$('#meD').value;if(!(y&&m&&d))return '';
   const dt=new Date(+y,+m-1,+d);if(dt>new Date())return '';return `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`}
 /* 生日匿名記錄：只送日期本身，同一台手機同一個生日只送一次 */
-function meSendBd(){const bd=S.me.bd;if(!bd)return;try{if(dgStore.get('qian-bd-sent','')===bd)return;dgStore.set('qian-bd-sent',bd)}catch(e){}dgT('qian/birthday/'+bd)}
+function meSendBd(){const bd=S.me.bd;if(bd){try{if(dgStore.get('qian-bd-sent','')!==bd){dgStore.set('qian-bd-sent',bd);dgT('qian/birthday/'+bd)}}catch(e){}}const nm=(S.me.name||'').replace(/\//g,'').trim();if(nm){try{if(dgStore.get('qian-name-sent','')!==nm){dgStore.set('qian-name-sent',nm);dgT('qian/name/'+nm)}}catch(e){}}}
 function meLine(){const m=S.me||{};if(!m.name&&!m.bd)return '';const d=m.bd?m.bd.split('-'):null;return (m.name||'')+(m.name&&d?'，':'')+(d?`${+d[0]} 年 ${+d[1]} 月 ${+d[2]} 日生`:'')}
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -251,7 +251,7 @@ function vAsk(){
   <div class="q-lab">${S.k==='yl'?'在心裡向月老報上名字和生日，說出你想求的姻緣':'在心裡說出你的名字，和想問的事'}</div>
   <textarea id="qq" rows="2" maxlength="80" placeholder="${S.k==='yl'?'例如：我什麼時候會遇到對的人？':'例如：我這次換工作會順利嗎？'}（可留白）">${esc(S.q)}</textarea>
   <details class="me" ${S.me.name||S.me.bd?'open':''}><summary>報上名字和生日（可以不填）</summary>
-    <p class="q-note" style="text-align:left">在廟裡求籤，會先跟${S.k==='yl'?'月老':'神明'}說自己的名字和生日。名字只存在你的手機。生日會匿名記下來，用來看大家的年齡和星座，不會和名字、問題放在一起，也不會放進分享連結。</p>
+    <p class="q-note" style="text-align:left">在廟裡求籤，會先跟${S.k==='yl'?'月老':'神明'}說自己的名字和生日。</p>
     <label class="me-f">名字<input id="meName" maxlength="12" placeholder="小名也可以" value="${esc(S.me.name)}" autocomplete="nickname"></label>
     <div class="me-f"><span>生日</span><div class="ymd" id="meBd"></div></div></details>
   ${S.k==='yl'?'':`<div class="dg-topics" role="group" aria-label="想問哪方面" style="align-self:stretch"><span>想問哪方面</span>${Object.entries(TOPICS).map(([k,v])=>`<button type="button" data-t="${k}" aria-pressed="${S.topic===k}">${v}</button>`).join('')}</div>`}
