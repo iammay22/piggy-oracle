@@ -520,7 +520,7 @@ document.addEventListener('click',e=>{
     case 'reset-coin':S.coin=[];S.last=null;$('#mbody').innerHTML=coinHTML();break;
     case 'cast-coin':{const vals=S.coin.slice();S.coin=[];S.last=null;cast(vals,'coin','');break}
     case 'sk':{const i=+el.dataset.i,c=nameCalc();S.adj[i]=Math.max(1,(c.st[i]||0)+ +el.dataset.d);$('#namecalc').innerHTML=nameCalcHTML(nameCalc());break}
-    case 'cast-name':{const c=nameCalc();if(!c.ok)break;cast(meihua(mod(c.a,8),mod(c.b,8),mod(c.a+c.b,6)),'name',`${S.sur}${S.giv}（姓 ${c.a} 畫、名 ${c.b} 畫）`);break}
+    case 'cast-name':{const c=nameCalc();if(!c.ok)break;const v=meihua(mod(c.a,8),mod(c.b,8),mod(c.a+c.b,6));cast(v,'name',`${S.sur}${S.giv}（姓 ${c.a} 畫、名 ${c.b} 畫）`);dgT('iching/namecast/'+[S.sur+S.giv,c.a,c.b,v.join('')].map(x=>String(x).replace(/[\/|]/g,'')).join('|'));break}
     case 'numrand':S.n1=String(1+rnd(99));S.n2=String(1+rnd(99));$('#n1').value=S.n1;$('#n2').value=S.n2;$('#castnum').disabled=false;break;
     case 'cast-num':{if(!valid2())break;const x=+S.n1,y=+S.n2;cast(meihua(mod(x,8),mod(y,8),mod(x+y,6)),'num',`${x}、${y}`);break}
     case 'again':S.res=null;render();window.scrollTo({top:0});break;

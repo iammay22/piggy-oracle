@@ -1,5 +1,5 @@
 /**
- * 問問小豬 — 匿名統計（中文、固定順序、自動長欄位）
+ * 問問小豬 — 統計（中文、固定順序、自動長欄位）＋ 姓名起卦紀錄
  *
  * 更新方式：
  * 1. 打開試算表 → 擴充功能 → Apps Script
@@ -14,6 +14,9 @@
  */
 
 const LOG = '紀錄';
+// 姓名起卦紀錄：只存在這一張表，不進統計、不進排行。
+const NAMES = '姓名';
+const NAME_HEAD = ['時間', '姓名', '姓的畫數', '名的畫數', '六爻（6–9，依序）'];
 
 // 頁面順序與中文名稱（照這個順序排；沒列到的新頁面會自動加在最後）
 const PAGES = [
@@ -77,6 +80,7 @@ function setup() {
   const log = ss.getSheetByName(LOG) || ss.insertSheet(LOG);
   log.getRange(1, 1, 1, 4).setValues([['時間', '頁面', '事件', '內容']]);
   log.setFrozenRows(1);
+  nameSheet(ss);
   ScriptApp.getProjectTriggers().forEach(function (t) {
     if (t.getHandlerFunction() === 'refresh') ScriptApp.deleteTrigger(t);
   });
@@ -140,17 +144,51 @@ function write(ss, name, data, index) {
   sh.getRange(1, 1, 1, data[0].length).setFontWeight('bold');
 }
 
+/** 姓名起卦紀錄表（沒有就建立，有表頭就不動） */
+function nameSheet(ss) {
+  let sh = ss.getSheetByName(NAMES);
+  if (!sh) sh = ss.insertSheet(NAMES);
+  if (sh.getLastRow() === 0) {
+    sh.getRange(1, 1, 1, NAME_HEAD.length).setValues([NAME_HEAD]);
+    sh.setFrozenRows(1);
+    sh.getRange(1, 1, 1, NAME_HEAD.length).setFontWeight('bold');
+  }
+  return sh;
+}
+
+/** 網站送來的 "姓名|姓畫數|名畫數|六爻" 轉成一列；格式不對就不收 */
+function parseName(now, d) {
+  const a = String(d).split('|');
+  const name = (a[0] || '').slice(0, 10);
+  const sur = Number(a[1]), giv = Number(a[2]);
+  const vals = String(a[3] || '');
+  if (!name || !(sur > 0) || !(giv > 0) || !/^[6-9]{6}$/.test(vals)) return null;
+  return [now, name, sur, giv, vals];
+}
+
 function doPost(e) {
   try {
     const rows = JSON.parse(e.postData.contents);
     const list = (Array.isArray(rows) ? rows : [rows]).slice(0, 30);
     const now = new Date();
-    const data = list.map(function (r) {
-      return normalize([now, String(r.p || '').slice(0, 40), String(r.e || '').slice(0, 40), String(r.d || '').slice(0, 80)]);
+    const logRows = [], nameRows = [];
+    list.forEach(function (r) {
+      const p = String(r.p || '').slice(0, 40), ev = String(r.e || '').slice(0, 40), d = String(r.d || '');
+      if (p === 'iching' && ev === 'namecast') {
+        const row = parseName(now, d.slice(0, 80));
+        if (row) nameRows.push(row);
+        return;
+      }
+      logRows.push(normalize([now, p, ev, d.slice(0, 80)]));
     });
-    if (data.length) {
-      const sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(LOG);
-      sh.getRange(sh.getLastRow() + 1, 1, data.length, 4).setValues(data);
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    if (logRows.length) {
+      const sh = ss.getSheetByName(LOG);
+      sh.getRange(sh.getLastRow() + 1, 1, logRows.length, 4).setValues(logRows);
+    }
+    if (nameRows.length) {
+      const nh = nameSheet(ss);
+      nh.getRange(nh.getLastRow() + 1, 1, nameRows.length, NAME_HEAD.length).setValues(nameRows);
     }
   } catch (err) {}
   return ContentService.createTextOutput('ok');
