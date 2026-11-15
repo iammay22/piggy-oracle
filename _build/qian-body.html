@@ -240,7 +240,8 @@ const rnd=n=>{const a=new Uint32Array(1);crypto.getRandomValues(a);return a[0]%n
 const STEPS=[['ask','稟告'],['jiao','擲筊'],['draw','抽籤'],['confirm','確認'],['result','解籤']];
 function steps(){const i=STEPS.findIndex(s=>s[0]===S.step);$('#qsteps').innerHTML=STEPS.map((s,k)=>`<span class="${k===i?'on':k<i?'done':''}">${s[1]}</span>`).join('')}
 function render(){steps();({ask:vAsk,jiao:vJiao,draw:vDraw,confirm:vJiao,result:vResult})[S.step]();}
-function go(s){S.step=s;render();window.scrollTo({top:0,behavior:'smooth'})}
+/* 換步驟時只回到步驟條，不跳回頁面最上面；人已經在步驟條上方就不動 */
+function go(s){S.step=s;render();const el=$('#qsteps');if(!el)return;const y=Math.max(0,el.getBoundingClientRect().top+window.scrollY-12);if(window.scrollY>y)window.scrollTo({top:y,behavior:'smooth'})}
 
 function sitsHTML(){const t=S.k==='yl'?'love':S.topic;if(!SIT[t])return '';
   const cur=SIT[t].find(x=>x[0]===S.sit)||SIT[t][0];S.sit=cur[0];
